@@ -11,7 +11,7 @@
 f_thredds = 'https://oceanmodeling.ucsc.edu/thredds/dodsC/ccsra_2016a_phys_agg_derived_vars/fmrc/CCSRA_2016a_Phys_ROMS_Derived_Variables_Aggregation_best.ncd';
 
 % SST data file
-f_sst = 'github_actions_workshop/MATLAB_example/sst_test.csv';
+f_sst = 'sst_test.csv';
 
 % Spatial bounds for averaging
 lonmin = -120.5;

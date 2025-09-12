@@ -1,0 +1,42 @@
+
+name: MATLAB example
+
+on:
+  # triggered on push to repo
+  # push:
+  #   branches: main
+  # triggered by cron job
+  # schedule:
+    # * is a special character in YAML so you have to quote this string
+    # https://crontab.cronhub.io
+    # - cron:  '30 15 * * *'  #scheduled to run at 3:30 pm UTC every day
+  # triggered by manual activation on GitHub repo website
+  workflow_dispatch:
+
+jobs:
+  matlab_test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+      
+    - name: Set up MATLAB
+      uses: matlab-actions/setup-matlab@v2
+      with:
+        release: R2024a
+    - name: Run script
+      uses: matlab-actions/run-command@v2
+      with:
+        command: MATLAB_example/matlab_example_SoCalSST.m
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+        git add .
+        git commit -m 'Updated CSV file'
+        git push
+

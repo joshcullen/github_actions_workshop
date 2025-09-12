@@ -26,7 +26,7 @@ time = ncread(f_thredds,'time');
 nt = numel(time);
 
 % Get latest data
-sst = ncread(f_thredds,'sst',[1 1 nt],[Inf Inf 10]);
+sst = ncread(f_thredds,'sst',[1 1 nt],[Inf Inf 1]);
 lon = ncread(f_thredds,'lon_rho');
 lat = ncread(f_thredds,'lat_rho');
 [y,m,d] = datevec(datenum([2011 1 2])+time(end)/24);
@@ -47,5 +47,5 @@ old_data = readtable(f_sst);
 combined_data = [old_data;new_data];
 
 % Rewrite file
-writetable(combined_data,f_sst)
+writetable(combined_data,'MATLAB_example/sst_test.csv')
 

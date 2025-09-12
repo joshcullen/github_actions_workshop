@@ -16,6 +16,8 @@ on:
 jobs:
   matlab_test:
     runs-on: windows-latest
+    permissions:
+      contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:

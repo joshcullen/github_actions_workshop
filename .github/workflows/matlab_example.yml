@@ -30,8 +30,7 @@ jobs:
     - name: Run script
       uses: matlab-actions/run-command@v2
       with:
-        startup-options: cd MATLAB_example
-        command: matlab_example_SoCalSST
+        command: addpath("MATLAB_example"), matlab_example_SoCalSST
 
     - name: Commit and Push Changes
       run: |

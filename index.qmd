@@ -1,11 +1,8 @@
 ---
-title: ""
+title: "Automate Tasks with GitHub Actions"
 ---
 
-This is a Quarto website.
+This website provides instructional materials for understanding and implementing GitHub Actions to automate tasks in the cloud across different programming languages.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+*This website is currently under development and will continue to change until the start of the workshop (10/8/25)*
 
-```{r}
-1 + 1
-```

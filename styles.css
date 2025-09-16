@@ -1,1 +1,8 @@
 /* css styles */
+
+/* center all HTML tables created with {DT} */
+.datatables {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 70% !important; /* adjust as needed */
+}

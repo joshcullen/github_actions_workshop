@@ -3,11 +3,13 @@ project:
 
 website:
   title: "GitHub Actions Workshop"
-  navbar:
-    left:
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - example.qmd
 
 format:
   html:
@@ -17,5 +19,8 @@ format:
     css: styles.css
     toc: true
 
-
+execute: 
+  warning: false
+  message: false
+  echo: false
 

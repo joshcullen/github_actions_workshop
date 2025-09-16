@@ -45,6 +45,7 @@ jobs:
 
 
   update-website:
+    needs: matlab_test
     runs-on: ubuntu-latest
     permissions:
       contents: write

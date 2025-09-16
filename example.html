@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-09-16">
 
-<title>Automate Tasks with GitHub Actions – GitHub Actions Workshop</title>
+<title>Example – GitHub Actions Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +69,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -82,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example.html">Example</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,13 +118,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example.html" class="sidebar-item-text sidebar-link">
+  <a href="./example.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Example</span></a>
   </div>
 </li>
@@ -123,15 +133,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Automate Tasks with GitHub Actions</h1>
+<h1 class="title">Example</h1>
 </div>
 
 
@@ -139,7 +156,19 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 16, 2025</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 16, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -148,10 +177,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This website provides instructional materials for understanding and implementing GitHub Actions to automate tasks in the cloud across different programming languages.</p>
-<p><em>This website is currently under development and will continue to change until the start of the workshop (10/8/25)</em></p>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>This page provides a simple example that visualizes the results of a GitHub Actions workflow with a simple set of steps using MATLAB code:</p>
+<ol type="1">
+<li>Access most recent day of ROMS sea surface temperature (SST) data via OpenDAP server</li>
+<li>Calculate the mean value of sea surface temperature for a given region</li>
+<li>Append this mean value to the end of a CSV file and push to the GitHub repo</li>
+</ol>
+<p>Below is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.</p>
+</section>
+<section id="output" class="level1">
+<h1>Output</h1>
+<div class="cell">
+<div id="tbl-sst" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS.
+</figcaption>
+<div aria-describedby="tbl-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="htmlwidget-d98e6e8561572d49d562" style="width:400px;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d98e6e8561572d49d562">{"x":{"filter":"none","vertical":false,"data":[["2025-08-01","2025-08-02","2025-08-03"],[15.23,15.54,18.59]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>sst<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"name":"date","targets":0},{"name":"sst","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><br><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-sst" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="example_files/figure-html/fig-sst-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Time series of daily mean SST for region within Southern California Bight. Data acquired from ROMS.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

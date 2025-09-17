@@ -1,22 +1,21 @@
 ---
 title: "Example"
-date: today
+date: 09-16-2025
 date-modified: last-modified
 format:
-  html:
-    html-table-processing: none
+  html: default
+  pdf: default
 ---
 
 # Background
+
 This page provides a simple example that visualizes the results of a GitHub Actions workflow with a simple set of steps using MATLAB code:
 
-1. Access most recent day of ROMS sea surface temperature (SST) data via OpenDAP server
-2. Calculate the mean value of sea surface temperature for a given region
-3. Append this mean value to the end of a CSV file and push to the GitHub repo
-
+1.  Access most recent day of ROMS sea surface temperature (SST) data via OpenDAP server
+2.  Calculate the mean value of sea surface temperature for a given region
+3.  Append this mean value to the end of a CSV file and push to the GitHub repo
 
 Below is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.
-
 
 # Output
 
@@ -37,9 +36,9 @@ dat2 <- dat |>
 
 ```
 
-
+::: {.content-hidden when-format="pdf"}
 ```{r}
-#| label: tbl-sst
+#| label: tbl-sst-html
 #| tbl-cap: "Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS."
 
 library(DT)
@@ -47,6 +46,19 @@ library(DT)
 datatable(dat2, rownames = FALSE, width = "400px")
 
 ```
+:::
+
+::: {.content-hidden when-format="html"}
+```{r}
+#| label: tbl-sst-pdf
+#| tbl-cap: "Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS."
+
+library(knitr)
+
+kable(dat2, row.names = FALSE)
+
+```
+:::
 
 <br><br>
 
@@ -59,7 +71,5 @@ ggplot(dat2, aes(date, sst)) +
   geom_point(size = 5) +
   labs(x = "Date",
        y = "SST (°C)") +
-  theme_bw(base_size = 16,
-           base_family = "Times New Roman")
+  theme_bw(base_size = 16)
 ```
-

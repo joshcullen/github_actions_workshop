@@ -4,8 +4,7 @@ date: 09-16-2025
 date-modified: last-modified
 format:
   html: default
-  pdf:
-    prefer-html: false
+  pdf: default
 ---
 
 # Background
@@ -37,29 +36,23 @@ dat2 <- dat |>
 
 ```
 
-::: {.content-hidden when-format="pdf"}
+
 ```{r}
-#| label: tbl-sst-html
+#| label: tbl-sst
 #| tbl-cap: "Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS."
 
 library(DT)
-
-datatable(dat2, rownames = FALSE, width = "400px")
-
-```
-:::
-
-::: {.content-hidden when-format="html"}
-```{r}
-#| label: tbl-sst-pdf
-#| tbl-cap: "Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS."
-
 library(knitr)
 
-kable(dat2, row.names = FALSE)
+if (knitr::is_html_output()) {
+  datatable(dat2, rownames = FALSE, width = "400px")
+} else if (knitr::is_latex_output()) {
+  kable(dat2, row.names = FALSE)
+}
+
 
 ```
-:::
+
 
 <br><br>
 

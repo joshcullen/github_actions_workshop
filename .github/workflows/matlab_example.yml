@@ -60,6 +60,11 @@ jobs:
       with:
         r-version: '4.4.3'
 
+    - name: Set up Quarto
+      uses: quarto-dev/quarto-actions/setup@v2
+      with:
+        tinytex: true
+
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:

@@ -4,7 +4,11 @@ date: 09-16-2025
 date-modified: last-modified
 format:
   html: default
-  pdf: default
+  pdf:
+    prefer-html: false
+    mainfont: Times New Roman
+    sansfont: Open Sans
+    monofont: Roboto Mono
 ---
 
 # Background
@@ -71,5 +75,6 @@ ggplot(dat2, aes(date, sst)) +
   geom_point(size = 5) +
   labs(x = "Date",
        y = "SST (°C)") +
-  theme_bw(base_size = 16)
+  theme_bw(base_size = 16,
+           base_family = "Times New Roman")
 ```

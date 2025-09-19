@@ -29,7 +29,7 @@ plt.close()
 # ----------------------------
 # Build ERDDAP griddap URL
 # ----------------------------
-base = "https://coastwatch.pfeg.noaa.gov/erddap/griddap/"
+base = "https://coastwatch.pfeg.noaa.gov/erddap/griddap"
 dataset_id = "erdQCwindproducts3day"   # 3-day composite (daily time steps)
 url = f"{base}/{dataset_id}"
 
@@ -177,17 +177,28 @@ fig.colorbar(sm, ax=axes.tolist(), label="Ekman upwelling (m s$^{-1}$)")
 df2 = df[['time','FishingZone','ekman_upwelling']]
 
 # Write CSV file
-df2.to_csv("Monthly RAMP upwelling.csv", index=False)
+# df2.to_csv("Monthly RAMP upwelling.csv", index=False)
 
 
 # Also export spatial results as GeoJSON
-gpd.GeoDataFrame.to_file(ramp_merge, filename="Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
+# gpd.GeoDataFrame.to_file(ramp_merge, filename="Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
 
 
 # ------------------------------------
 # Append new data to file and export
 # ------------------------------------
 
-# old_df = pd.read_csv("Monthly RAMP upwelling.csv")
-# new_df = pd.concat([df2, old_df])
-# new_df.to_csv("Monthly RAMP upwelling.csv", index=False)
+old_df = pd.read_csv("Monthly RAMP upwelling.csv")
+
+key = ["time", "FishingZone"]
+
+# convert columns for keys to string (to match across dfs)
+df2[key] = df2[key].astype(str)
+
+# rows in df2 that don't exist in old_df on the key
+df2_sub = df2.merge(old_df[key].drop_duplicates(), on=key, how="left", indicator=True)
+df2_sub = df2_sub[df2_sub["_merge"] == "left_only"].drop(columns="_merge")
+
+out = pd.concat([old_df, df2_sub], ignore_index=True)
+
+out.to_csv("Monthly RAMP upwelling.csv", index=False)

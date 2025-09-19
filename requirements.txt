@@ -4,3 +4,6 @@ numpy==2.3.3
 pandas==2.3.2
 regionmask==0.13.0
 xarray==2025.1.1
+datetime
+netcdf4
+pathlib

@@ -37,7 +37,7 @@ jobs:
     #   run: python -m pip install datetime netcdf4 xarray numpy pandas matplotlib geopandas regionmask pathlib
     
     - name: Run Python script
-      run: python Acquire_summarize_and_export_ERDDAP_data.py
+      run: python ERDDAP_example/Acquire_summarize_and_export_ERDDAP_data.py
 
     - name: Commit and Push Changes
       run: |

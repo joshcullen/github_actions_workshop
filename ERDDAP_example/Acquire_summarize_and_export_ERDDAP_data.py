@@ -19,12 +19,12 @@ from pathlib import Path
 # -----------------------------------------
 
 # RAMP vector layer obtained from https://data-cdfw.opendata.arcgis.com/datasets/CDFW::risk-assessment-and-mitigation-program-ramp-fishing-zones-r7-cdfw-ds3120/about
-ramp = gpd.read_file("Risk_Assessment_and_Mitigation_Program_(RAMP)_Fishing_Zones_-_R7_-_CDFW_[ds3120].geojson")
-ramp.plot(alpha=0.4, edgecolor='black')
-plt.close()
+ramp = gpd.read_file("ERDDAP_example/Risk_Assessment_and_Mitigation_Program_(RAMP)_Fishing_Zones_-_R7_-_CDFW_[ds3120].geojson")
+# ramp.plot(alpha=0.4, edgecolor='black')
+# plt.close()
 
-ramp.boundary.plot()
-plt.close()
+# ramp.boundary.plot()
+# plt.close()
 
 # ----------------------------
 # Build ERDDAP griddap URL
@@ -54,8 +54,8 @@ dc = ds['ekman_upwelling'].sel(
 # ----------------------------
 # Plot the most recent map
 # ----------------------------
-dc.sel(time=dc.time.max()).plot()
-plt.close()
+# dc.sel(time=dc.time.max()).plot()
+# plt.close()
 
 
 
@@ -120,51 +120,51 @@ ramp_merge = ramp_small.merge(df, on=name_col, how="right")  # keeps all time×r
 # Viz results
 # ----------------
 
-# Heatmap
-monthly.plot()
-plt.close()
-
-# Line plot
-ax = (monthly
-      .to_series()               # index: time, region
-      .unstack("region")         # columns are regions (in your chosen order)
-      .plot(figsize=(10,5), legend=True))
-ax.set_xlabel("Month")
-ax.set_ylabel("Ekman upwelling (m s$^{-1}$)")
-ax.figure.tight_layout()
-
-# Faceted plot of maps
-ramp_merge[0:7].plot(col='time', col_wrap=3)
-plt.close()
+# # Heatmap
+# monthly.plot()
+# plt.close()
+# 
+# # Line plot
+# ax = (monthly
+#       .to_series()               # index: time, region
+#       .unstack("region")         # columns are regions (in your chosen order)
+#       .plot(figsize=(10,5), legend=True))
+# ax.set_xlabel("Month")
+# ax.set_ylabel("Ekman upwelling (m s$^{-1}$)")
+# ax.figure.tight_layout()
+# 
+# # Faceted plot of maps
+# ramp_merge[0:7].plot(col='time', col_wrap=3)
+# plt.close()
 
 
 
 ### Facet plots across all zones over time
 
-# choose which months to show (e.g., the last 6)
-months = sorted(ramp_merge["time"].unique())
-sel_months = months[-6:] if len(months) > 6 else months
-
-# consistent color scale across facets
-vmin = ramp_merge["ekman_upwelling"].min()
-vmax = ramp_merge["ekman_upwelling"].max()
-
-n = len(sel_months)
-ncols = min(3, n)
-nrows = math.ceil(n / ncols)
-fig, axes = plt.subplots(nrows, ncols, figsize=(4*ncols, 4*nrows), constrained_layout=True)
-
-axes = np.atleast_1d(axes).ravel()
-for ax, t in zip(axes, sel_months):
-    ramp_t = ramp_merge[ramp_merge["time"] == t]
-    ramp_t.plot(column="ekman_upwelling", ax=ax, vmin=vmin, vmax=vmax, legend=False, alpha=0.4, edgecolor='black')
-    ax.set_title(pd.to_datetime(t).strftime("%Y-%m"))
-    ax.axis("off")
-
-# shared colorbar
-sm = plt.cm.ScalarMappable(norm=plt.Normalize(vmin=vmin, vmax=vmax))
-sm.set_array([])
-fig.colorbar(sm, ax=axes.tolist(), label="Ekman upwelling (m s$^{-1}$)")
+# # choose which months to show (e.g., the last 6)
+# months = sorted(ramp_merge["time"].unique())
+# sel_months = months[-6:] if len(months) > 6 else months
+# 
+# # consistent color scale across facets
+# vmin = ramp_merge["ekman_upwelling"].min()
+# vmax = ramp_merge["ekman_upwelling"].max()
+# 
+# n = len(sel_months)
+# ncols = min(3, n)
+# nrows = math.ceil(n / ncols)
+# fig, axes = plt.subplots(nrows, ncols, figsize=(4*ncols, 4*nrows), constrained_layout=True)
+# 
+# axes = np.atleast_1d(axes).ravel()
+# for ax, t in zip(axes, sel_months):
+#     ramp_t = ramp_merge[ramp_merge["time"] == t]
+#     ramp_t.plot(column="ekman_upwelling", ax=ax, vmin=vmin, vmax=vmax, legend=False, alpha=0.4, edgecolor='black')
+#     ax.set_title(pd.to_datetime(t).strftime("%Y-%m"))
+#     ax.axis("off")
+# 
+# # shared colorbar
+# sm = plt.cm.ScalarMappable(norm=plt.Normalize(vmin=vmin, vmax=vmax))
+# sm.set_array([])
+# fig.colorbar(sm, ax=axes.tolist(), label="Ekman upwelling (m s$^{-1}$)")
 # plt.show()
 
 
@@ -188,7 +188,7 @@ df2 = df[['time','FishingZone','ekman_upwelling']]
 # Append new data to file and export
 # ------------------------------------
 
-old_df = pd.read_csv("Monthly RAMP upwelling.csv")
+old_df = pd.read_csv("ERDDAP_example/Monthly RAMP upwelling.csv")
 
 key = ["time", "FishingZone"]
 
@@ -201,4 +201,4 @@ df2_sub = df2_sub[df2_sub["_merge"] == "left_only"].drop(columns="_merge")
 
 out = pd.concat([old_df, df2_sub], ignore_index=True)
 
-out.to_csv("Monthly RAMP upwelling.csv", index=False)
+out.to_csv("ERDDAP_example/Monthly RAMP upwelling.csv", index=False)

@@ -6,7 +6,8 @@
     "section": "",
     "text": "Background\nThis page provides a simple example that visualizes the results of a GitHub Actions workflow with a simple set of steps using MATLAB code:\n\nAccess most recent day of ROMS sea surface temperature (SST) data via OpenDAP server\nCalculate the mean value of sea surface temperature for a given region\nAppend this mean value to the end of a CSV file and push to the GitHub repo\n\nBelow is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.\n\n\nOutput\n\n\n\n\nTable 1: Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Time series of daily mean SST for region within Southern California Bight. Data acquired from ROMS.",
     "crumbs": [
-      "Example"
+      "Examples",
+      "Standard report"
     ]
   },
   {
@@ -24,6 +25,18 @@
     "text": "This website provides instructional materials for understanding and implementing GitHub Actions to automate tasks in the cloud across different programming languages.\nThis website is currently under development and will continue to change until the start of the workshop (10/8/25)",
     "crumbs": [
       "Home"
+    ]
+  },
+  {
+    "objectID": "MATLAB_example/example.html",
+    "href": "MATLAB_example/example.html",
+    "title": "Example",
+    "section": "",
+    "text": "Background\nThis page provides a simple example that visualizes the results of a GitHub Actions workflow with a simple set of steps using MATLAB code:\n\nAccess most recent day of ROMS sea surface temperature (SST) data via OpenDAP server\nCalculate the mean value of sea surface temperature for a given region\nAppend this mean value to the end of a CSV file and push to the GitHub repo\n\nBelow is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.\n\n\nOutput\n\n\n\n\nTable 1: Daily mean SST values for small region in Southern California Bight. Data acquired from ROMS.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Time series of daily mean SST for region within Southern California Bight. Data acquired from ROMS.",
+    "crumbs": [
+      "Home",
+      "MATLAB Example",
+      "Example"
     ]
   }
 ]

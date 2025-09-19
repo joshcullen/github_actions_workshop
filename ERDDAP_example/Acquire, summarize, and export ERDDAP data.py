@@ -115,6 +115,7 @@ ramp_small = ramp[[name_col, "geometry"]].copy()
 ramp_merge = ramp_small.merge(df, on=name_col, how="right")  # keeps all time×region rows
 
 
+
 # ----------------
 # Viz results
 # ----------------
@@ -168,16 +169,19 @@ fig.colorbar(sm, ax=axes.tolist(), label="Ekman upwelling (m s$^{-1}$)")
 
 
 
-# -----------------------
-# Export results as CSV
-# -----------------------
+# ---------------
+# Export results
+# ---------------
 
 # Reduce DF to only necessary columns
 df2 = df[['time','FishingZone','ekman_upwelling']]
 
-# Write file
+# Write CSV file
 df2.to_csv("Monthly RAMP upwelling.csv", index=False)
 
+
+# Also export spatial results as GeoJSON
+gpd.GeoDataFrame.to_file(ramp_merge, filename="Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
 
 
 # ------------------------------------

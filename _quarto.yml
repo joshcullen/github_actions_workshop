@@ -9,7 +9,12 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - example.qmd
+      - section: "Examples"
+        contents:
+        - href: example.qmd
+          text: Standard report
+        - href: RAMP_example_dash.qmd
+          text: Dashboard
 
 format:
   html:

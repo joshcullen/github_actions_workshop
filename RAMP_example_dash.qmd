@@ -1,0 +1,92 @@
+---
+title: "RAMP Upwelling Dashboard"
+date: 09-19-2025
+date-modified: last-modified
+format:
+  dashboard:
+    orientation: columns
+---
+
+This is an example dashboard demonstrating how to acquire, summarize, and visualize environmental data from a [product on ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdQCwindproducts3day). Below are some examples of ways that these results can be visualized through tables and plots.
+
+
+## Column {width=40%}
+
+```{r}
+#| label: tbl
+
+library(tidyverse)
+library(DT)
+library(plotly)
+
+# Load data
+df <- read_csv("ERDDAP_example/Monthly RAMP upwelling.csv")
+
+df |> 
+  mutate(ekman_upwelling = round(ekman_upwelling, 8)) |> 
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                           lengthMenu = list(c(10,25,50,-1),
+                                             c(10,25,50,"All"))))
+```
+
+
+## Column {width=60%}
+
+::: {.card title="Upwelling over Full Time Series"}
+```{r}
+#| label: line-plot
+
+ggplotly(
+  ggplot(df) +
+    geom_hline(yintercept = 0, linewidth = 0.5, color = "grey80") +
+    geom_line(aes(x = time, y = ekman_upwelling, colour = FishingZone), linewidth = 1) +
+    scale_color_brewer("RAMP Zone", palette = "Set2") +
+    labs(x = "Month", y = "Ekman Upwelling (m s-1)") +
+    theme_bw(base_size = 16) +
+    theme(panel.grid = element_blank())
+)
+```
+
+Mean monthly Ekman upwelling per RAMP zone is shown, where data was acquired from an ERDDAP product. The dataset begins in January 2024.
+:::
+
+
+
+::: {.card title="Upwelling over Time and Space"}
+```{r}
+#| label: map
+
+library(sf)
+
+ramp <- st_read("ERDDAP_example/Monthly_RAMP_upwelling.geojson", quiet = TRUE)
+
+last_9_months <- ramp |> 
+  distinct(time) |> 
+  arrange(desc(time)) |> 
+  slice(1:9) |> 
+  pull(time)
+
+ramp |> 
+  filter(time %in% last_9_months,
+         FishingZone != "Zone 7") |> 
+  ggplot(aes(group = FishingZone)) +
+  geom_sf(aes(fill = ekman_upwelling), alpha = 0.7, color = "black") +
+  scale_fill_viridis_c("Ekman\nUpwelling\n(m s-1)") +
+  geom_sf_text(data = ramp |> 
+                 filter(time == last_9_months[9],
+                        FishingZone != "Zone 7"),
+               aes(label = FishingZone)) +
+  guides(fill = guide_colorbar(barheight = 20, barwidth = 1)) +
+  theme_void(base_size = 16) +
+  theme(
+    legend.position = "right",
+    legend.margin = margin(t = 0, r = 10, b = 0, l = 20, unit = "pt") # Adjust as needed
+  ) +
+  facet_wrap(~ time)
+
+```
+
+This plot shows the monthly mean Ekman upwelling values per RAMP zone for the last 9 months. RAMP zones are numbered from North to South (1 to 6). RAMP Zone 7 has be omitted from these maps for easier viewing.
+:::

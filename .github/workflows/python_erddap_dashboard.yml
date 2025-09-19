@@ -6,10 +6,10 @@ on:
   # push:
   #   branches: main
   # triggered by cron job
-  # schedule:
+  schedule:
     # * is a special character in YAML so you have to quote this string
     # https://crontab.cronhub.io
-    # - cron:  '30 10 * * *'  #scheduled to run at 10:30 am UTC every day
+    - cron:  '30 10 2 * *'  #scheduled to run at 10:30 am UTC on 2nd day of month
   # triggered by manual activation on GitHub repo website
   workflow_dispatch:
 
@@ -49,39 +49,40 @@ jobs:
         git push
 
 
-  # update-website:
-  #   needs: python_test
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   env:
-  #     GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-  #   steps:
-  #   - name: Check out repository
-  #     uses: actions/checkout@v4
-  #   
-  #   - name: Install R
-  #     uses: r-lib/actions/setup-r@v2
-  #     with:
-  #       r-version: '4.4.3'
-  # 
-  #   - name: Set up Quarto
-  #     uses: quarto-dev/quarto-actions/setup@v2
-  #     with:
-  #       tinytex: true
-  # 
-  #   - name: Install R packages
-  #     uses: r-lib/actions/setup-r-dependencies@v2
-  #     with:
-  #       cache-version: 4
-  #       extra-packages: |
-  #         any::tidyverse
-  #         any::DT
-  # 
-  #   - name: Render and Publish
-  #     uses: quarto-dev/quarto-actions/publish@v2
-  #     with:
-  #       target: gh-pages
-  #       # path: website
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  update-website:
+    needs: python_test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.4.3'
+
+    - name: Set up Quarto
+      uses: quarto-dev/quarto-actions/setup@v2
+      with:
+        tinytex: true
+
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache-version: 4
+        extra-packages: |
+          any::tidyverse
+          any::DT
+          any::plotly
+
+    - name: Render and Publish
+      uses: quarto-dev/quarto-actions/publish@v2
+      with:
+        target: gh-pages
+        # path: website
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

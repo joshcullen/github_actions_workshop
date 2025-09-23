@@ -208,7 +208,7 @@ out.to_csv("ERDDAP_example/Monthly RAMP upwelling.csv", index=False)
 
 
 ## For GeoJSON file ##
-old_gjson = gpd.read_file("Monthly_RAMP_upwelling.geojson")
+old_gjson = gpd.read_file("ERDDAP_example/Monthly_RAMP_upwelling.geojson")
 
 # rows in ramp_merge that don't exist in old_gjson on the key
 ramp_sub = ramp_merge.merge(old_gjson[key].drop_duplicates(), on=key, how="left", indicator=True)
@@ -216,5 +216,5 @@ ramp_sub = ramp_sub[ramp_sub["_merge"] == "left_only"].drop(columns="_merge")
 
 ramp_out = pd.concat([old_gjson, ramp_sub], ignore_index=True)
 
-gpd.GeoDataFrame.to_file(ramp_out, filename="Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
+gpd.GeoDataFrame.to_file(ramp_out, filename="ERDDAP_example/Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
 

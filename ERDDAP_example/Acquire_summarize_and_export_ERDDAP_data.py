@@ -188,6 +188,7 @@ df2 = df[['time','FishingZone','ekman_upwelling']]
 # Append new data to file and export
 # ------------------------------------
 
+## For CSV file ##
 old_df = pd.read_csv("ERDDAP_example/Monthly RAMP upwelling.csv")
 
 key = ["time", "FishingZone"]
@@ -202,3 +203,18 @@ df2_sub = df2_sub[df2_sub["_merge"] == "left_only"].drop(columns="_merge")
 out = pd.concat([old_df, df2_sub], ignore_index=True)
 
 out.to_csv("ERDDAP_example/Monthly RAMP upwelling.csv", index=False)
+
+
+
+
+## For GeoJSON file ##
+old_gjson = gpd.read_file("Monthly_RAMP_upwelling.geojson")
+
+# rows in ramp_merge that don't exist in old_gjson on the key
+ramp_sub = ramp_merge.merge(old_gjson[key].drop_duplicates(), on=key, how="left", indicator=True)
+ramp_sub = ramp_sub[ramp_sub["_merge"] == "left_only"].drop(columns="_merge")
+
+ramp_out = pd.concat([old_gjson, ramp_sub], ignore_index=True)
+
+gpd.GeoDataFrame.to_file(ramp_out, filename="Monthly_RAMP_upwelling.geojson", driver="GeoJSON")
+

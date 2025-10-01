@@ -1,0 +1,316 @@
+---
+title: "Data validation example"
+date: 10-01-2025
+date-modified: last-modified
+format:
+  html:
+    self-contained: true
+---
+
+# Background
+
+This page provides a simple example that visualizes the results of a GitHub Actions workflow when downloading daily chlorophyll-a (Chla) data from ERDDAP within territorial waters of US states bordering the Gulf of Mexico. Data validation is performed across pixels of the raster product within these waters, as well as for the average values per state. Validation results are summarized in reports based on user-defined conditional statements.
+
+Given the lag in data availability for the [nesdisVHNSQchlaDaily](https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisVHNSQchlaDaily) Chla product (9 days), the data accessed in this example will be accessed from 2 weeks prior (i.e., `r Sys.Date() - 14`).
+
+This example process involves:
+
+1. Approximating territorial waters by buffering a spatial layer of state boundaries
+2. Access the Chla data for the region of interest
+3. Masking the Chla data to territorial state waters in GoM
+4. Calculating mean Chla values per state
+5. Validating pixel-level and state-level Chla data to check for issues
+6. Generate reports from data validation
+
+
+# Report output
+
+```{r}
+#| label: load-data
+
+library(tidyverse)
+library(terra)
+library(sf)
+library(pointblank)
+library(rnaturalearth)
+library(blastula)
+library(glue)
+library(cmocean)
+
+source("Data_validation_example/validation_ex_utils.R")
+
+
+# -----------------------
+# Config
+# -----------------------
+
+# Spatial extent (lon/lat in EPSG:4326)
+xmin <- -97.79166
+xmax <- -80.625
+ymin <-  16.375
+ymax <-  31
+
+# Date(s) to pull (ISO yyyy-mm-dd). Example: latest day by default.
+# You can set a vector like seq(ymd("2025-09-01"), ymd("2025-09-07"), by = "1 day")
+get_date <- Sys.Date() - 14  # 2 weeks ago (this ERDDAP product is heavily lagged)
+
+
+# -----------------------
+# Load U.S. state boundaries and approx terr. waters
+# -----------------------
+
+# Load spatial layers for US states
+us_states <- ne_states(country = "United States of America",
+                                         returnclass = "sf") |>
+  st_transform(3395)  #convert to World Mercator/WGS84 (units = meters)
+```
+
+
+```{r}
+#| label: buffer-state-bounds
+# Keep only GoM states
+gulf_names <- c("Texas","Louisiana","Mississippi","Alabama","Florida")
+
+gulf_states <- us_states |>
+  filter(name %in% gulf_names) |>
+  select(name, abbr = postal)
+
+
+# Create buffer to approximate territorial waters (12 nm = 22224 m)
+gulf_states_buff <- gulf_states |> 
+  st_buffer(dist = 22224) |> 
+  st_transform(4326)  #convert back to WGS84
+```
+
+
+```{r}
+#| label: load-chla
+
+# -----------------------
+# Read in ERDDAP data for CHL
+# -----------------------
+
+# ERDDAP dataset info
+erddap_base <- "https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisVHNSQchlaDaily"
+varname     <- "chlor_a"  # mg m^-3, S-NPP VIIRS, L3, 4 km, Global, daily
+
+# ERDDAP dimension order for this dataset: time, altitude, latitude, longitude
+url <- build_erddap_url(get_date, xmin, xmax, ymin, ymax)
+
+# Read in data as SpatRaster
+r <- rast(url)
+```
+
+
+```{r}
+#| label: extract-vals
+
+# -----------------------
+# Extract CHL values per state for specified date
+# -----------------------
+
+# Extract CHL values within Gulf state waters (per pixel)
+raw_vals <- extract(r, gulf_states_buff, xy = TRUE) |> 
+  rename(state = ID,
+         chla = `chlor_a_altitude=0`) |> 
+  mutate(state = map_chr(state, \(x) gulf_states_buff$name[x]))  #change ID to name
+
+# Extract CHL values within Gulf state waters (and calculate avg per state)
+state_means <- extract(r, gulf_states_buff, fun = mean, na.rm = TRUE) |> 
+  rename(state = ID,
+         chla = `chlor_a_altitude=0`) |> 
+  mutate(state = map_chr(state, \(x) gulf_states_buff$name[x]))  #change ID to name
+```
+
+
+```{r}
+#| label: validate-data
+
+# -----------------------
+# Perform data validation with {pointblank}
+# -----------------------
+
+# Validation thresholds (from dataset metadata)
+# valid_min / valid_max from ERDDAP: ~0.001 to 100 mg m^-3
+valid_min <- 0.001
+valid_max <- 100
+
+# Warn when there are some high values (may be indicative of HABs)
+soft_max  <- 30
+
+# We check:
+# 1) no missing means
+# 2) values in hard-valid range [valid_min, valid_max]
+# 3) values in soft (typical display) range [soft_min, soft_max] -> warning if outside
+al_raw <- action_levels(
+  warn_at   = 0.01,  # warn if ≥1% fail
+  notify_at = 0.05,  # trigger email if ≥5% fail (default email_blast condition uses 'notify')
+  stop_at   = 0.25   # mark 'stop' in report if ≥25% fail
+)
+
+
+# Validate raw (per pixel) values
+raw_val_agent <-
+  create_agent(
+    tbl = raw_vals,
+    tbl_name = "Gulf state daily Chl-a values",
+    actions = al_raw,
+    embed_report = TRUE,
+    # end_fns = list(
+    #   ~ email_blast(
+    #     x,
+    #     to           = c("recipient1@org.org"),
+    #     from         = "you@yourdomain.com",
+    #     credentials  = blastula::creds_key(id = "gom_smtp"),
+    #     msg_subject  = glue("Gulf Chl-a validation — {format(Sys.Date(), '%Y-%m-%d')}"),
+    #     # default is ~ TRUE %in% x$notify; shown here explicitly for clarity
+    #     send_condition = ~ TRUE %in% x$notify
+    #     # If you want to email on *any* failure level, use:
+    #     # send_condition = ~ any(x$warn) || any(x$stop) || any(x$notify)
+    #   )
+    # )
+  ) |>
+  # Check for missing values
+  col_vals_not_null(vars(chla)) |>
+  # Check that values fall between accepted range (based on metadata for product)
+  col_vals_between(vars(chla),
+                   left = valid_min,
+                   right = valid_max,
+                   inclusive = c(TRUE, TRUE),
+                   na_pass = TRUE) |>
+  # Check that values are mostly low (i.e., < 30)
+  col_vals_lt(vars(chla),
+                   value = soft_max,
+              na_pass = TRUE,
+                   step_id = "soft_range_check") |>
+  interrogate()
+
+# Optional: preview what the email would look like (doesn't send)
+# pointblank::email_create(raw_val_agent)
+
+# Print a compact report
+# print(raw_val_agent)
+# get_agent_report(raw_val_agent)
+
+
+
+
+# Validate raw (per pixel) values
+al_mean <- action_levels(
+  warn_at   = 0.2,  # warn if ≥20% fail (i.e., 1 state)
+  notify_at = 0.2,  # trigger email if ≥20% fail (default email_blast condition uses 'notify')
+  stop_at   = 0.25   # mark 'stop' in report if ≥25% fail
+)
+
+state_means_agent <-
+  create_agent(
+    tbl = state_means,
+    tbl_name = "Gulf state means for daily Chl-a data",
+    actions = al_mean,
+    embed_report = TRUE,
+    # end_fns = list(
+    #   ~ email_blast(
+    #     x,
+    #     to           = c("recipient1@org.org"),
+    #     from         = "you@yourdomain.com",
+    #     credentials  = blastula::creds_key(id = "gom_smtp"),
+    #     msg_subject  = glue("Gulf Chl-a validation — {format(Sys.Date(), '%Y-%m-%d')}"),
+    #     # default is ~ TRUE %in% x$notify; shown here explicitly for clarity
+    #     send_condition = ~ TRUE %in% x$notify
+    #     # If you want to email on *any* failure level, use:
+    #     # send_condition = ~ any(x$warn) || any(x$stop) || any(x$notify)
+    #   )
+    # )
+  ) |>
+  # Check for missing values
+  col_vals_not_null(vars(chla)) |>
+  # Check that values fall between accepted range (especially when averaged for each state)
+  col_vals_between(vars(chla),
+                   left = 2,
+                   right = 20,
+                   inclusive = c(TRUE, TRUE),
+                   na_pass = TRUE) |>
+  # Check that values are mostly low (i.e., < 20)
+  col_vals_lt(vars(chla),
+              value = 20,
+              na_pass = TRUE,
+              step_id = "soft_range_check") |>
+  interrogate()
+
+# Optional: preview what the email would look like (doesn't send)
+# pointblank::email_create(state_means_agent)
+
+# Print a compact report
+# print(state_means_agent)
+# get_agent_report(state_means_agent)
+```
+
+## Report for pixel-level data
+```{r}
+#| label: raw-report
+
+# Print a compact report
+get_agent_report(raw_val_agent)
+```
+
+## Report for state-level data
+```{r}
+#| label: state-report
+
+# Print a compact report
+get_agent_report(state_means_agent)
+```
+
+
+# Maps of chl-a data
+
+```{r}
+#| label: fig-bounds-waters
+#| fig-cap: "Boundaries of states and territorial waters (out to 12 nm) for states bordering the Gulf of Mexico."
+
+# Plot state boundaries and territorial waters for reference
+ggplot() +
+  geom_sf(data = gulf_states_buff, fill = "lightblue") +
+  geom_sf(data = gulf_states |>
+            st_transform(4326)) +
+  theme_bw()
+```
+
+
+```{r}
+#| label: fig-pixel-waters
+#| fig-cap: "Masked pixels of chlorophyll-a ERDDAP product within territorial waters. Gray values denote missing values for this dataset."
+
+# Plot state boundaries and territorial waters for reference
+ggplot() +
+  geom_raster(data = raw_vals, aes(x, y, fill = chla)) +
+  cmocean::scale_fill_cmocean(name = "algae") +
+  # geom_sf(data = gulf_states_buff, fill = "transparent") +
+  geom_sf(data = gulf_states |>
+            st_transform(4326)) +
+  labs(title = glue("Chlorophyll-a data accessed for {get_date}")) + 
+  theme_bw() +
+  coord_sf(xlim = c(-98, -81),
+           ylim = c(24, 30.5))
+```
+
+
+```{r}
+#| label: fig-state-waters
+#| fig-cap: "Mean chlorophyll-a per Gulf state within territorial waters."
+
+# Join state means w/ spatial layer
+gulf_states_means <- left_join(gulf_states_buff, state_means, by = c("name"="state"))
+
+# Plot state boundaries and territorial waters for reference
+ggplot() +
+  geom_sf(data = gulf_states_means, aes(fill = chla)) +
+  cmocean::scale_fill_cmocean(name = "algae") +
+  # geom_sf(data = gulf_states_buff, fill = "transparent") +
+  geom_sf(data = gulf_states |>
+            st_transform(4326)) +
+  labs(title = glue("Chlorophyll-a data accessed for {get_date}")) + 
+  theme_bw() +
+  coord_sf(xlim = c(-98, -81),
+           ylim = c(24, 30.5))
+```

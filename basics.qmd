@@ -1,0 +1,113 @@
+---
+title: "Basics"
+format:
+  html:
+    mermaid:
+      theme: forest
+number-sections: true
+---
+
+## Summary
+
+GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.^[More information can be found on [GitHub's website](https://docs.github.com/en/actions/get-started/understand-github-actions).] Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).
+
+## Features
+
+Here's a list of nice features that are available within GitHub Actions that can improve software development (via continuous integration/continuous deployment; CI/CD) but also ensure reproducible and open science:
+
+| **Feature** | **Description** |
+|------------------------------------|------------------------------------|
+| Variety of hosted runners | Linux, Windows, MacOS |
+| Any programming language | R, Python, MATLAB, and many more |
+| Live logs | watch workflows run in realtime with detailed error messages |
+| Access "secrets" | store tokens or credentials so that they're not hard-coded in your workflow |
+| Matrix builds | simultaneously build and test software across different operating systems and versions |
+| Highly affordable | free for public repositories |
+
+## Components of GitHub Actions
+
+### Workflows
+
+Workflows are customizable, automated processes that are capable of running one or more jobs. These workflows are defined through the creation of a YAML file that is stored within the `.github/workflows` directory of your GitHub repo. These workflows will be run once triggered by an event in your repository, through manual triggering, or at a defined schedule. Workflows can be used to trigger other workflows (up to a maximum of 3 chained together) and can also be created into [templates](https://docs.github.com/en/actions/how-tos/reuse-automations/create-workflow-templates).
+
+![Example digram of GitHub Actions process](https://graphite.dev/images/content/guides/github_actions_code_automation_explained/githubActionsComponents.png){#fig-gha-diagram}
+
+
+### Events
+
+An event is a specific activity in a repsoitory that triggers a workflow run. There are a number of different events that can be selected, such as:
+
+- pushing a commit
+- scheduled times (via cron jobs)
+- completion of other jobs in workflow
+
+Additionally, GitHub Actions can be configured so that multiple events may trigger a workflow independently. Moreover, workflows can be triggered conditionally based on the status of the previous workflow in the pipeline (i.e., the workflow can be adjusted based on the success or failure of previous workflow). For a full list and description of events, please refer to this [documentation page](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows) on GitHub.
+
+
+### Jobs
+
+Jobs are comprised of a set of steps in a workflow to perform a task on the same runner. A single job may look something like this:
+
+```{mermaid}
+flowchart LR
+  A(Checkout repo) --> B(Install R)
+  B --> C(Install R packages)
+  C --> D{{Run R scripts}}
+  D --> E{{Commit and push results to repo}}
+style D fill:#F0F8FF,stroke:#008ECC,stroke-width:2px
+style E fill:#F0F8FF,stroke:#008ECC,stroke-width:2px
+click A "https://github.com/actions/checkout"
+click B "https://github.com/r-lib/actions/tree/v2/setup-r"
+click C "https://github.com/r-lib/actions/tree/v2/setup-r-dependencies"
+```
+
+where the green boxes denote actions that can be run with minimal setup, and the blue hexagons represent steps that use lines of code that are run in the terminal. Steps are run in sequential order and therefore are dependent on each other. Data are also naturally shared from one step to the next within a job since they are executed within the same runner (with shared storage on the VM).
+
+Jobs can be configured in a variety of ways, such that multiple jobs may be run simultaneously (i.e., in parallel) on a single runner, or they may be connected to one another. If desired, users can specify job dependencies so that the successful completion of one job can trigger the next job.
+
+From a software development perspective, this can be very useful for checking builds and running unit tests of functions prior to the deployment of a new software release (such as an R package). For example, the use of a matrix strategy (similar to use of `expand.grid()` R function or `itertools.product()` Python function) can be useful to check software across different combinations of operating systems and associated versions, as well as versions of software (such as R, Python). Since this is often required for the submission of R packages on CRAN, these parallelized checks and tests and improve workflows for the release of updated software.
+
+### Runners {#sec-runners}
+
+Runners are servers that host triggered workflows on GitHub's virtual machines (VMs). Runners are available for Ubuntu Linux, Microsoft Windows, and MacOS operating systems, where users can control which type and version that they use. Each workflow is run on a fresh VM instance of the runner, so there is no persistent storage available and all steps to set up the virtual environment, install software, and process data must be performed each time.
+
+::: callout-warning
+## Limits on runner usage
+
+**Users should be aware that there are differences in the amount of time and storage provisioned per GitHub plan.** For example, Free plans allow 2,000 GitHub Actions minutes (*i.e., the number of minutes that GitHub Actions are running*) and 500 MB of storage for artifacts [per month]{.underline}. By comparison, GitHub Enterprise accounts allow up to 50,000 minutes and 50 GB of artifact storage. Another factor influencing the number of Actions minutes used is the "minutes multiplier" that differs by runner, where more time can be used for Ubuntu runners compared to Windows and MacOS. At the start of each new month, minutes and storage are reset to zero. Please see [this page](https://docs.github.com/en/billing/concepts/product-billing/github-actions) (and the tables below) for more details.
+:::
+
+::: {style="width: 60%; margin: auto;"}
+| Operating system | Multiplier |
+|:-----------------|:-----------|
+| Ubuntu           | 1          |
+| Windows          | 2          |
+| MacOS            | 10         |
+
+: Minute multiplier is determined by the operating system and processing power. Multipliers shown here are for baseline runners, but full list can be found [here](https://docs.github.com/en/billing/reference/actions-minute-multipliers). {#tbl-min-mult}
+:::
+
+<br>
+
+| Operating system | Processor (CPU) | Memory (RAM) | Storage (SSD) | Runner label |
+|:-----------------|-----------------|--------------|---------------|--------------|
+| Ubuntu | 4 | 16 GB | 14 GB |`ubuntu-latest`,`ubuntu-22.04` |
+| Windows | 4 | 16 GB | 14 GB | `windows-latest`,`windows-2022` |
+| MacOS | 4 | 14 GB | 14 GB | `macos-latest`,`macos-13` |
+
+: An example of available standard GitHub-hosted runners and associated specifications. A more comprehensive list can be found [here](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#supported-runners-and-hardware-resources). {#tbl-runner-specs tbl-colwidths="[15,15,15,15,30]"}
+
+
+### Actions
+
+Actions are reusable sets of code (similar to a function) that perform particular tasks for a single step of a job. There are wide range of actions available from [GitHub Marketplace](https://github.com/marketplace?type=actions), but some examples of relevant actions include:
+
+- Pulling your Git repository from GitHub (i.e., `git checkout`)
+- Installing R
+- Installing R packages
+- Installing Conda
+- Installing Quarto
+- Publishing a Quarto doc to GitHub Pages (or other host)
+
+Other software (such as Python) are already available on the runner upon starting the workflow. To see the full list of available software installed per runner, please refer to the linked runner labels on this [GitHub reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#supported-runners-and-hardware-resources) as listed in @tbl-runner-specs.
+

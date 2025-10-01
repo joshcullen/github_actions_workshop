@@ -9,12 +9,16 @@ website:
     contents:
       - href: index.qmd
         text: Home
+      - href: basics.qmd
+        text: Basics
       - section: "Examples"
         contents:
         - href: example.qmd
           text: Standard report
         - href: RAMP_example_dash.qmd
           text: Dashboard
+        - href: validate_example.qmd
+          text: Data validation
 
 format:
   html:

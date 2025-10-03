@@ -24,11 +24,11 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v5
       
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
+    # - name: Set up Python
+    #   uses: actions/setup-python@v5
+    #   with:
+    #     python-version: '3.12'
+    #     cache: 'pip'
     
     - name: Install dependencies
       run: pip install -r requirements.txt
@@ -44,6 +44,7 @@ jobs:
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
+        git pull
         git add .
         git commit -m 'Updated CSV file'
         git push
@@ -58,7 +59,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - name: Check out repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Install R
       uses: r-lib/actions/setup-r@v2
@@ -70,16 +71,12 @@ jobs:
       with:
         tinytex: true
 
-    - name: Install rnaturalearthhires R package from GitHub
-      shell: Rscript {0}
-      run: |
-        install.packages("remotes")
-        remotes::install_github("ropensci/rnaturalearthhires")
-
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache-version: 4
+        extra-packages: |
+          ropensci/rnaturalearthhires
     
     - name: Render and Publish
       uses: quarto-dev/quarto-actions/publish@v2

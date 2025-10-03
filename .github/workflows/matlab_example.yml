@@ -77,7 +77,7 @@ jobs:
       with:
         cache-version: 4
         packages: |
-          ropensci/rnaturalearthhires  # Installing package from GitHub (owner/repo)
+          ropensci/rnaturalearthhires
 
     - name: Render and Publish
       uses: quarto-dev/quarto-actions/publish@v2

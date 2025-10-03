@@ -7,10 +7,19 @@ format:
     orientation: columns
 ---
 
+Last updated: **{{< meta date-modified >}}**
+
 This is an example dashboard demonstrating how to acquire, summarize, and visualize environmental data from a [product on ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdQCwindproducts3day). Below are some examples of ways that these results can be visualized through tables and plots.
 
+<!-- Specify card headers as bold -->
+<style>
+.card-header {
+  font-weight: bold;
+}
+</style>
 
-## Column {width=40%}
+
+## Column {width=30%}
 
 ```{r}
 #| label: tbl
@@ -24,8 +33,10 @@ df <- read_csv("ERDDAP_example/Monthly RAMP upwelling.csv")
 
 df |> 
   mutate(ekman_upwelling = round(ekman_upwelling, 8)) |> 
+  arrange(desc(time)) |> 
   datatable(extensions = 'Buttons',
             options = list(dom = 'Blfrtip',
+                           bPaginate = TRUE, # Enable pagination
                            buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
                            lengthMenu = list(c(10,25,50,-1),
                                              c(10,25,50,"All"))))
@@ -34,9 +45,22 @@ df |>
 
 ## Column {width=60%}
 
-::: {.card title="Upwelling over Full Time Series"}
 ```{r}
-#| label: line-plot
+#| content: card-toolbar
+
+library(bslib)
+library(bsicons)
+
+tooltip(
+  bs_icon("info-circle"),
+  "Mean monthly Ekman upwelling per RAMP zone is shown, where data was acquired from an ERDDAP product. The dataset begins in January 2024.",
+  placement = "left"
+)
+```
+
+```{r}
+#| title: Upwelling over time
+#| label: ts-plot
 
 ggplotly(
   ggplot(df) +
@@ -49,13 +73,21 @@ ggplotly(
 )
 ```
 
-Mean monthly Ekman upwelling per RAMP zone is shown, where data was acquired from an ERDDAP product. The dataset begins in January 2024.
-:::
 
 
 
-::: {.card title="Upwelling over Time and Space"}
 ```{r}
+#| content: card-toolbar
+
+tooltip(
+  bs_icon("info-circle"),
+  "This plot shows the monthly mean Ekman upwelling values per RAMP zone for the last 9 months. RAMP zones are numbered from North to South (1 to 6). RAMP Zone 7 has be omitted from these maps for easier viewing.",
+  placement = "left"
+)
+```
+
+```{r}
+#| title: Upwelling over time and space
 #| label: map
 
 library(sf)
@@ -88,5 +120,24 @@ ramp |>
 
 ```
 
-This plot shows the monthly mean Ekman upwelling values per RAMP zone for the last 9 months. RAMP zones are numbered from North to South (1 to 6). RAMP Zone 7 has be omitted from these maps for easier viewing.
+
+
+## Column {width=10%}
+
+::: {.valuebox icon="calendar-event" color="blue"}
+Latest data
+
+`r last(df$time)`
+:::
+
+::: {.valuebox icon="tsunami" color="warning"}
+Latest min upwelling
+
+`r df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> min(na.rm = TRUE)`
+:::
+
+::: {.valuebox icon="tsunami" color="danger"}
+Latest min upwelling
+
+`r df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> max(na.rm = TRUE)`
 :::

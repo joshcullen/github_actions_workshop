@@ -6,3 +6,8 @@
   margin-right: auto !important;
   width: 70% !important; /* adjust as needed */
 }
+
+/* make card headers bold */
+.card-header {
+  font-weight: bold !important;
+}

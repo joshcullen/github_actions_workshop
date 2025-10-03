@@ -39,6 +39,7 @@ jobs:
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
+        git pull
         git add .
         git commit -m 'Updated CSV file'
         git push
@@ -65,16 +66,18 @@ jobs:
       with:
         tinytex: true
 
-    - name: Install rnaturalearthhires R package from GitHub
-      shell: Rscript {0}
-      run: |
-        install.packages("remotes")
-        remotes::install_github("ropensci/rnaturalearthhires")
+    # - name: Install rnaturalearthhires R package from GitHub
+    #   shell: Rscript {0}
+    #   run: |
+    #     install.packages("remotes")
+    #     remotes::install_github("ropensci/rnaturalearthhires")
 
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache-version: 4
+        packages: |
+          ropensci/rnaturalearthhires  # Installing package from GitHub (owner/repo)
 
     - name: Render and Publish
       uses: quarto-dev/quarto-actions/publish@v2

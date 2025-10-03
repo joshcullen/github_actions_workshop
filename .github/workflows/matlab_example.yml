@@ -76,7 +76,7 @@ jobs:
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache-version: 4
-        packages: |
+        extra-packages: |
           ropensci/rnaturalearthhires
 
     - name: Render and Publish

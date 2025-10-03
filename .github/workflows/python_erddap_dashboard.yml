@@ -70,21 +70,17 @@ jobs:
       with:
         tinytex: true
 
-    - name: Install R packages
-      uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        cache-version: 4
-        extra-packages: |
-          any::tidyverse
-          any::DT
-          any::plotly
-    
     - name: Install rnaturalearthhires R package from GitHub
       shell: Rscript {0}
       run: |
         install.packages("remotes")
         remotes::install_github("ropensci/rnaturalearthhires")
 
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache-version: 4
+    
     - name: Render and Publish
       uses: quarto-dev/quarto-actions/publish@v2
       with:

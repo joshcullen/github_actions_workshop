@@ -19,10 +19,10 @@ Here's a list of nice features that are available within GitHub Actions that can
 |------------------------------------|------------------------------------|
 | Variety of hosted runners | Linux, Windows, MacOS |
 | Any programming language | R, Python, MATLAB, and many more |
-| Live logs | watch workflows run in realtime with detailed error messages |
-| Access "secrets" | store tokens or credentials so that they're not hard-coded in your workflow |
-| Matrix builds | simultaneously build and test software across different operating systems and versions |
-| Highly affordable | free for public repositories |
+| Live logs | Watch workflows run in realtime with detailed error messages |
+| Access "secrets" | Store tokens or credentials so that they're not hard-coded in your workflow |
+| Matrix builds | Simultaneously build and test software across different operating systems and versions |
+| Highly affordable | Free for public repositories |
 
 ## Components of GitHub Actions
 
@@ -30,7 +30,7 @@ Here's a list of nice features that are available within GitHub Actions that can
 
 Workflows are customizable, automated processes that are capable of running one or more jobs. These workflows are defined through the creation of a YAML file that is stored within the `.github/workflows` directory of your GitHub repo. These workflows will be run once triggered by an event in your repository, through manual triggering, or at a defined schedule. Workflows can be used to trigger other workflows (up to a maximum of 3 chained together) and can also be created into [templates](https://docs.github.com/en/actions/how-tos/reuse-automations/create-workflow-templates).
 
-![Example digram of GitHub Actions process](https://graphite.dev/images/content/guides/github_actions_code_automation_explained/githubActionsComponents.png){#fig-gha-diagram}
+![Example digram of GitHub Actions process](https://graphite.dev/images/content/guides/github_actions_code_automation_explained/githubActionsComponents.png){#fig-gha-diagram width=66%}
 
 
 ### Events

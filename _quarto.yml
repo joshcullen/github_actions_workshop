@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+    - basics.qmd
+    - Simple_GHAs/Anatomy_of_GHA_YAML.qmd
 
 website:
   title: "GitHub Actions Workshop"
@@ -11,6 +14,11 @@ website:
         text: Home
       - href: basics.qmd
         text: Basics
+      - section: "Simple GitHub Actions"
+        contents:
+        - href: Simple_GHAs/Anatomy_of_GHA_YAML.qmd
+          text: Anatomy of a GitHub Actions YAML
+      - section: "Complex GitHub Actions"
       - section: "Examples"
         contents:
         - href: example.qmd
@@ -23,7 +31,7 @@ website:
 format:
   html:
     theme:
-      - sandstone
+      - cosmo
       - brand
     css: styles.css
     toc: true

@@ -1,0 +1,48 @@
+---
+title: "Anatomy of a GitHub Actions YAML"
+format:
+  html:
+    code-annotations: below
+    css: ../styles.css
+number-sections: true
+---
+
+# Background
+
+All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (*such as for configuring this Quarto website*). These files contain the different elements that were covered on the [Basics](../basics.qmd) page, such as jobs, steps, actions, and triggers.
+
+Below is a simple YAML that lists all files stored in the GitHub Repository (repo):
+
+::: {.annot-2col}
+```yaml
+name: Test GHA  # <1>
+on: push  # <2>
+
+jobs:  
+  test_job:  # <3>
+    runs-on: ubuntu-latest  # <4>
+    steps:  
+    - name: Check out repository  # <5>
+      uses: actions/checkout@v5  # <6>
+
+    - name: List files in repo  
+      run: ls  # <7>
+```
+
+1. (Optional) name provided to the workflow
+2. Syntax used for defining which trigger(s) to use. Here, we specify that the GitHub Action YAML will be run on `push` to this repo.
+3. Custom name given to `job` of workflow. I used `test_job` as the name, but this can be anything (as long as spaces and special characters aren't used).
+4. This is where you define the `runner` to use. Unless there's a specific reason to use an earlier version, best practice is to stick with the `-latest` version of the different operating systems.
+5. (Optional) name of the first step
+6. Example of `uses` syntax for using a pre-made action. In this case, the `checkout` action is selected since this is typically the first step of any workflow. You should typically specify the version of the action you'll be using (i.e., `@v5`), of which version 5 is the latest available.
+7. Example of `run` syntax for running code directly in the YAML file. In this case, the `ls` command is used to list all files in the root directory of the repo.
+:::
+
+
+As also mentioned on the [Basics](../basics.qmd) page, these YAML files need to be stored within the `.github/workflows` directory of your repo. If you don't currently have this directory, you'll need to create this manually. And since file paths that begin with a period (`.`) at the beginning are considered hidden files, this may require adjusting settings for your file explorer/finder application, or through use of the terminal.
+
+For example, if the above YAML code was stored in a file named `simple.yml`, then you would run the following command to move this file from your root directory to the correct `.github/workflows` directory:
+
+```bash
+mv simple.yml .github/workflows
+```

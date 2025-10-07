@@ -295,6 +295,7 @@ In some instances, the manual installation of software may be necessary if not p
 
 Below, I'll show how to install these different sources of software and check that they have installed properly. Please refer to **XXX** for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.
 
+### Copernicus Marine Toolbox
 ::: {.annot-2col}
 ```{.yaml filename="copernicusmarine_install.yml"}
 name: Install Copernicus Marine Toolbox
@@ -335,6 +336,8 @@ jobs:
 <br>
 While we haven't run any analyses or performed unit testing on code, this 4-step GitHub Actions workflow provides a relevant proof-of-concept to set up a relevant workflow by cloning the repository and installing software necessary to use `copernicusmarine` to access a large variety of oceanographic products.
 
+
+### GDAL, CDO, and other geospatial tools
 In the next example, I'll show how to install useful geospatial libraries and the `cdo` tool:
 
 ::: {.annot-2col}
@@ -355,10 +358,11 @@ jobs:
 
     - name: Install geospatial libraries
       run: |
-        sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev  # <2>
+        sudo apt-get update  # <2>
+        sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev  # <3>
     
     - name: Install CDO
-      run: sudo apt-get install cdo  # <3>
+      run: sudo apt-get install cdo  # <4>
       
     - name: Check software versions
       run: |
@@ -366,6 +370,57 @@ jobs:
         cdo -V  #check CDO version
 ```
 1. Instead of defining the shell for each step, you can also specify the default
-2. Command to install all relevant geospatial libraries
-3. Command to install `cdo`
+2. Update other necessary software on `runner`
+3. Command to install all relevant geospatial libraries
+4. Command to install `cdo`
 :::
+
+<br>
+Here, we saw that a large amount of different software were installed as dependencies of the libraries we're interested in. Additionally, we needed to use the `sudo apt-get install` syntax for installing this software. **The inclusion of `sudo` (i.e., "superuser do") at the front of these commands is important because without it, you will likely not have sufficient permissions to install the software listed.**
+
+
+### INLA
+
+Now, let's see how we can install the INLA R package that isn't available on typical repositories available from standard `actions`:
+
+::: {.annot-2col}
+```{.yaml filename="inla_install.yml"}
+name: Install INLA
+
+on: workflow_dispatch
+
+jobs:  
+  install_inla: 
+    runs-on: macos-latest  # <1>
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+      with:
+        r-version: '4.5.1'  # <2>
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        extra-packages: |
+          any::remotes  # <3>
+      
+    - name: Install INLA
+      shell: Rscript {0}  # <4>
+      run: |
+        remotes::install_version("INLA", version = "25.06.13", repos = c(getOption("repos"), INLA = "https://inla.r-inla-download.org/R/testing"), dep = TRUE)  # <5>
+    
+    - name: Check INLA version
+      shell: Rscript {0}
+      run: INLA::inla.version()  # <6>
+```
+1. Now using `macos-latest` runner (as different example)
+2. Needs to be compatible w/ selected INLA version
+3. Need to install `remotes` R package to help with installation of `INLA`
+4. Specifying the shell as R code, which allows me to directly run R code (or scripts)
+5. Function from [INLA](https://www.r-inla.org/download-install) for package installation
+6. Check that INLA was succesfully installed by checking version with built-in function (in R)
+:::
+

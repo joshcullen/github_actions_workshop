@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash  # <1>
+        shell: bash
     steps:  
     - name: Check out repository  
       uses: actions/checkout@v5  
@@ -15,10 +15,10 @@ jobs:
     - name: Install geospatial libraries
       run: |
         sudo apt-get update
-        sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev  # <2>
+        sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev
     
     - name: Install CDO
-      run: sudo apt-get install cdo  # <3>
+      run: sudo apt-get install cdo
       
     - name: Check software versions
       run: |

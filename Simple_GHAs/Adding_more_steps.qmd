@@ -5,9 +5,13 @@ format:
     code-annotations: below
     css: ../styles.css
 number-sections: true
+execute:
+  echo: true
+  eval: false
 ---
 
 # Background
+
 In the previous section, we only ran two `steps` within a single `job` on a single `runner` to list all files within the repository. While this was a simple example, we can build additional steps into this workflow that allow us to do a variety of things using 1) pre-made `actions` (e.g., `actions/checkout@v5`), 2) code that is written directly in the YAML, or 3) custom scripts from a variety of programming languages (e.g., R, Python, MATLAB). Depending on the task at hand, this may require the installation of additional software not already included on the `runner`. Additionally, users may be interested in committing files created in the GitHub Actions `job` to the repo, or may want to build, test, and release software. 
 
 
@@ -17,10 +21,10 @@ Although Python comes pre-installed on the `runners`, common scientific language
 
 Below are a few simple examples of installing the aforementioned software:
 
-::: {.panel-tabset}
+::: {.panel-tabset group="language"}
 ## R
 
-```yaml
+```{.yaml filename="r_install.yml"}
 name: R installation 
 on:
   # triggered on push to repo (specifically the 'main' branch)
@@ -41,9 +45,9 @@ jobs:
 ```
 1. [`Action`](https://github.com/r-lib/actions) provided to install R regardless of operating system
 
-## Conda
+## Python
 
-```yaml
+```{.yaml filename="conda_install.yml"}
 name: Conda installation 
 on:
   # triggered on push to repo (specifically the 'main' branch)
@@ -67,7 +71,7 @@ jobs:
 
 ## MATLAB
 
-```yaml
+```{.yaml filename="matlab_install.yml"}
 name: MATLAB installation 
 on:
   # triggered on push to repo (specifically the 'main' branch)
@@ -96,4 +100,110 @@ Installation of this software defaults to the latest release (available for the 
 ## For MATLAB users
 
 It should be noted that the available `actions` for setting up and using MATLAB within a GitHub Actions workflow are only available for **public** repos. If have wish to use a **private** repo, you may be able to request a [MATLAB batch processing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) to pursue this further. More information on the options available can be found on the [page for the MATLAB setup `action`](https://github.com/matlab-actions/setup-matlab?tab=readme-ov-file).
+:::
+
+
+# Using `actions` to install dependencies
+
+Once the software has been installed (if not already available) to use your programming language of choice, there are typically a set of packages that are needed to use certain functions within scripts. For example, users interested in performing geospatial analyses in R or Python may want to install the `terra` or `xarray` packages for handling raster files and `sf` or `geopandas` for handling vector layers. Since these packages are not installed by default, we need to provide some instructions to the virtual machine in order to install these packages prior to running any code.
+
+There a few different ways to approach this, which varies per programming language. So this description is by no means comprehensive. Below are a list of different options for specifying dependencies prior to installation on a GitHub Actions `runner`.
+
+::: {.panel-tabset group="language"}
+## R
+
+1. Listing all packages within a [DESCRIPTION](https://r-pkgs.org/description.html) file
+2. Using [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) to create a lockfile on your local computer that is passed to GitHub Actions
+3. Manual package installation via running `install.packages()` function instead of using `actions`
+4. Specification of packages using the `packages` and `extra-packages` arguments of the `setup-r-dependencies` action
+5. Allow the `setup-r-dependencies` action to auto-detect which packages (and versions) to install from the R scripts (or Quarto docs) that are included in subsequent steps
+
+The use of `renv` to create a lockfile to track packages (and versions) associated with a project is generally considered best practice given improvements to reproducibility, but there can be issues when installing geospatial packages and associated base libraries on a virtual machine. A DESCRIPTION file is most common when building R packages, but can also be used for standard repositories as well and may help avoid some of the drawbacks of using `renv` while maintaining greater reproducibility. The simplest ways to install a relatively large number of packages across files is to allows manual detection of package installation by the `action`, but this is generally less reproducible since the package versions are subject to change upon new releases, which may break your code.
+
+## Python
+
+1. Create a `requirements.txt` file that stores a list of all dependencies associated with project
+2. Use the [Poetry](https://python-poetry.org) tool for automatic dependency management and lockfile creation
+
+The creation and use of a `requirements.txt` file seems to be the most widely used (and simplest) method. However, Poetry seems to potentially improve reproducibility through lockfile creation on local computer.
+:::
+
+
+As an example for R projects, a simple DESCRIPTION file may look something like this:
+
+```{.txt filename="DESCRIPTION"}
+Package: CEG_operationalization
+Title: Cyberinfrastructure for Tool Operationalization
+Version: 0.1
+Authors@R: 
+    person(
+    "Josh", "Cullen", "josh.cullen@noaa.gov",
+    role = c("aut", "cre"))
+Description: This code provides cyberinfrastructure to automate operational tools related to species distribution models of marine megafauna.
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr,
+    readr,
+    purrr,
+    glue,
+    terra,
+    ncdf4
+```
+
+where the simplest way to initialize the file to ensure success is through the use of the `usethis::use_description()` function and then manually editing the file as needed.
+
+<br>
+By comparison, the simplest way to create a `requirements.txt` file for Python projects is through a simple `pip freeze > requirements.txt` command run from your root directory. This will then create a `.txt` file that may look something like this:
+
+```{.txt filename="requirements.txt"}
+geopandas==1.1.1
+matplotlib==3.10.6
+numpy==2.3.3
+pandas==2.3.2
+regionmask==0.13.0
+xarray==2025.1.1
+datetime
+netcdf4
+pathlib
+```
+
+where the `==` syntax is used to specify the exact package version that is used. If no version is specified, the latest version will be installed. If not all relevant packages are listed, you can easily edit this file and continue to add necessary packages.
+
+
+::: {.panel-tabset group="language"}
+## R
+
+```{.yaml filename="r_dep.yml"}
+name: Include R dependencies 
+on:
+  push:
+    branches: main
+
+jobs:  
+  r_deps: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        extra-repositories: "https://ianjonsen.r-universe.dev"  # <1>
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2  # <2>
+      with:
+        extra-packages: |  # <3>
+          ropensci/rnaturalearthhires  #install package for hi-res land layers  # <4>  
+```
+1. Option for specifying additional CRAN-like repos that your packages should be installed from (e.g., R-Universe).
+2. [`Action`](https://github.com/r-lib/actions) provided to download, build, and install R dependencies. Defaults to caching these compiled packages after first successful workflow run, which will speed workflows up on subsequent runs.
+3. Users may wish to use the `extra-packages` argument to specify additional R packages not available for download from CRAN. This includes locations such as GitHub or R-Universe repositories. The vertical bar (`|`) symbol denotes that code (one or more lines) is included on the line(s) below (and indented).
+4. For package installation from GitHub repos (as shown here), the `owner/repo` syntax should be used. For R-Universe packages, the associated R-Universe URL should be listed under the `setup-r` action instead of `setup-r-dependencies`.
+
+## Python
+
 :::

@@ -2,8 +2,7 @@ project:
   type: website
   render:
     - basics.qmd
-    - Simple_GHAs/Anatomy_of_GHA_YAML.qmd
-    - Simple_GHAs/Adding_more_steps.qmd
+    - Simple_GHAs/*.qmd
 
 website:
   title: "GitHub Actions Workshop"

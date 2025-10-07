@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6b720150091f318d6cf992af91509446.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c30451789a0a2bcd5e941535c675cd30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -125,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Examples</span></a>
+ <span class="menu-text">Simple GitHub Actions</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -133,19 +133,40 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example.html" class="sidebar-item-text sidebar-link">
+  <a href="./Simple_GHAs/Anatomy_of_GHA_YAML.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anatomy of a GitHub Actions YAML</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Complex GitHub Actions</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Examples</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./example.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Standard report</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./RAMP_example_dash.html" class="sidebar-item-text sidebar-link">
+  <a href="./RAMP_example_dash.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dashboard</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./validate_example.html" class="sidebar-item-text sidebar-link">
+  <a href="./validate_example.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data validation</span></a>
   </div>
 </li>
@@ -225,19 +246,19 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>Live logs</td>
-<td>watch workflows run in realtime with detailed error messages</td>
+<td>Watch workflows run in realtime with detailed error messages</td>
 </tr>
 <tr class="even">
 <td>Access “secrets”</td>
-<td>store tokens or credentials so that they’re not hard-coded in your workflow</td>
+<td>Store tokens or credentials so that they’re not hard-coded in your workflow</td>
 </tr>
 <tr class="odd">
 <td>Matrix builds</td>
-<td>simultaneously build and test software across different operating systems and versions</td>
+<td>Simultaneously build and test software across different operating systems and versions</td>
 </tr>
 <tr class="even">
 <td>Highly affordable</td>
-<td>free for public repositories</td>
+<td>Free for public repositories</td>
 </tr>
 </tbody>
 </table>
@@ -250,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-gha-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gha-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://graphite.dev/images/content/guides/github_actions_code_automation_explained/githubActionsComponents.png" class="img-fluid figure-img">
+<img src="https://graphite.dev/images/content/guides/github_actions_code_automation_explained/githubActionsComponents.png" class="img-fluid figure-img" style="width:66.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gha-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Example digram of GitHub Actions process

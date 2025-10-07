@@ -1,8 +1,8 @@
 project:
   type: website
-  render:
-    - basics.qmd
-    - Simple_GHAs/*.qmd
+  # render:
+  #   - basics.qmd
+  #   - Simple_GHAs/*.qmd
 
 website:
   title: "GitHub Actions Workshop"

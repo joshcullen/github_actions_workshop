@@ -117,9 +117,9 @@ There a few different ways to approach this, which varies per programming langua
 2. Using [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) to create a lockfile on your local computer that is passed to GitHub Actions
 3. Manual package installation via running `install.packages()` function instead of using `actions`
 4. Specification of packages using the `packages` and `extra-packages` arguments of the `setup-r-dependencies` action
-5. Allow the `setup-r-dependencies` action to auto-detect which packages (and versions) to install from the R scripts (or Quarto docs) that are included in subsequent steps
+5. Allow the `setup-r-dependencies` action to auto-detect which packages (and versions) to install from the R scripts (or Quarto docs) that are included in your directory
 
-The use of `renv` to create a lockfile to track packages (and versions) associated with a project is generally considered best practice given improvements to reproducibility, but there can be issues when installing geospatial packages and associated base libraries on a virtual machine. A DESCRIPTION file is most common when building R packages, but can also be used for standard repositories as well and may help avoid some of the drawbacks of using `renv` while maintaining greater reproducibility. The simplest ways to install a relatively large number of packages across files is to allows manual detection of package installation by the `action`, but this is generally less reproducible since the package versions are subject to change upon new releases, which may break your code.
+The use of `renv` to create a lockfile to track packages (and versions) associated with a project is generally considered best practice given improvements to reproducibility, but there can be issues when installing geospatial packages and associated base libraries on a virtual machine. A DESCRIPTION file is most common when building R packages, but can also be used for standard repositories as well and may help avoid some of the drawbacks of using `renv` while maintaining greater reproducibility. The simplest ways to install a relatively large number of packages across files is to allow auto-detection of packages for installation by the `action`, but this is generally less reproducible since the package versions are subject to change upon new releases, which may break your code.
 
 ## Python
 
@@ -404,7 +404,7 @@ jobs:
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
-        extra-packages: |
+        packages: |
           any::remotes  # <3>
       
     - name: Install INLA
@@ -418,7 +418,7 @@ jobs:
 ```
 1. Now using `macos-latest` runner (as different example)
 2. Needs to be compatible w/ selected INLA version
-3. Need to install `remotes` R package to help with installation of `INLA`
+3. Need to install `remotes` R package to help with installation of `INLA`. The `any::` syntax is used to specify packages to download from CRAN.
 4. Specifying the shell as R code, which allows me to directly run R code (or scripts)
 5. Function from [INLA](https://www.r-inla.org/download-install) for package installation
 6. Check that INLA was succesfully installed by checking version with built-in function (in R)

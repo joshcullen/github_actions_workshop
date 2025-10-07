@@ -21,3 +21,6 @@ jobs:
       run: |
         conda install -c conda-forge copernicusmarine
         conda install scipy
+    
+    - name: Check copernicusmarine version
+      run: copernicusmarine --version

@@ -1,0 +1,16 @@
+name: Check repo size and structure
+
+on: workflow_dispatch
+
+jobs:  
+  debug: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Print dir tree and check disk space
+      shell: bash {0}
+      run: |
+        tree
+        df -h

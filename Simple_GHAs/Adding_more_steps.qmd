@@ -62,12 +62,12 @@ jobs:
       uses: actions/checkout@v5  
 
     - name: Install Conda
-      uses: conda-incubator/setup-miniconda@v3  # <2>
+      uses: conda-incubator/setup-miniconda@v3  # <1>
       with:
         auto-update-conda: true
         python-version: 3.12  #(optional) specification of version
 ```
-2. [`Action`](https://github.com/conda-incubator/setup-miniconda) provided to install Conda regardless of operating system (for both Conda and Mamba)
+1. [`Action`](https://github.com/conda-incubator/setup-miniconda) provided to install Conda regardless of operating system (for both Conda and Mamba)
 
 ## MATLAB
 
@@ -86,11 +86,11 @@ jobs:
       uses: actions/checkout@v5  
 
     - name: Set up MATLAB
-      uses: matlab-actions/setup-matlab@v2  # <3>
+      uses: matlab-actions/setup-matlab@v2  # <1>
       with:
         release: R2024a  #(optional) specification of version
 ```
-3. [`Action`](https://github.com/matlab-actions) provided to install MATLAB regardless of operating system
+1. [`Action`](https://github.com/matlab-actions) provided to install MATLAB regardless of operating system
 :::
 
 <br>
@@ -171,6 +171,9 @@ pathlib
 
 where the `==` syntax is used to specify the exact package version that is used. If no version is specified, the latest version will be installed. If not all relevant packages are listed, you can easily edit this file and continue to add necessary packages.
 
+<br>
+Below are a couple examples showing how to install dependencies for R and Python. For the R example, this workflow assumes that a subsequent step would be to run one or more R scripts or Quarto docs (although not included here).
+
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -191,13 +194,13 @@ jobs:
     - name: Install R
       uses: r-lib/actions/setup-r@v2
       with:
-        extra-repositories: "https://ianjonsen.r-universe.dev"  # <1>
+        extra-repositories: "https://ianjonsen.r-universe.dev"  #define R-Universe repo  # <1>
     
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2  # <2>
       with:
         extra-packages: |  # <3>
-          ropensci/rnaturalearthhires  #install package for hi-res land layers  # <4>  
+          ropensci/rnaturalearthhires  #install package from GitHub  # <4>  
 ```
 1. Option for specifying additional CRAN-like repos that your packages should be installed from (e.g., R-Universe).
 2. [`Action`](https://github.com/r-lib/actions) provided to download, build, and install R dependencies. Defaults to caching these compiled packages after first successful workflow run, which will speed workflows up on subsequent runs.
@@ -206,4 +209,64 @@ jobs:
 
 ## Python
 
+```{.yaml filename="py_dep.yml"}
+name: Include Python dependencies
+on:
+  push:
+    branches: main
+
+jobs:  
+  py_deps: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+    
+    - name: Install Python packages
+      run: pip install -r requirements.txt  # <1>
+```
+1. Command to install Python packages listed in the `requirements.txt` file stored in the root directory.
 :::
+
+
+# Running commands and functions from shell
+
+While this may not be as common for certain workflows, there may be some instances where certain steps of a operational workflow will need to be run from the shell instead of within a script. This includes tasks such as debugging issues occuring on the virtual machine (especially on an OS different from your computer), installing software that doesn't have an existing `action`, and running simple commands where a full script is not needed.
+
+There are a variety of different types of [shell environments](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#defaultsrunshell) that can be used from the terminal, but perhaps the most common on Unix systems (Linux/MacOS) is `bash` (Bourne-Again SHell). Likewise, `pwsh` (Powershell Core) is the most common on Windows systems. **Given the differences in operating systems, the `runners` each have different default shells on launch, which could have impacts on whether a command is interpreted correctly or not. So users are cautioned on the commands used across operating systems and shell types.** Beyond standard shell commands, R and Python can both be used as well (as long as R has been installed first).
+
+Below, I'll show several examples of how this may be useful for R and Python.
+
+
+## Checking directory structure and storage
+
+While likely not necessary for simple GitHub repos, users may be interested in printing a directory tree that shows the structure of their repo if they're having issues with reading/writing of files. Additionally, users may eventually run into storage issues on the virtual machine if they are checking out a large repo, which would prevent the GitHub Action from proceeding further. Here is an example of a simple workflow that could be used to check both of these things (on an `ubuntu-latest` runner).
+
+```{.yaml filename="bash_debug.yml"}
+name: Check repo size and structure
+
+on: workflow_dispatch  # <1>
+
+jobs:  
+  debug: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Print dir tree and check disk space
+      shell: bash {0}  # <2>
+      run: |
+        tree  # <3>
+        df -h  # <4>
+```
+1. Specifies manual trigger of GitHub Action (need to click button on repo website)
+2. Specification of shell type. The `{0}` is the placeholder for the commands listed under the `run` argument.
+3. Command to print directory tree
+4. Command to print storage summary for directory

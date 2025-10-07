@@ -3,6 +3,7 @@ project:
   render:
     - basics.qmd
     - Simple_GHAs/Anatomy_of_GHA_YAML.qmd
+    - Simple_GHAs/Adding_more_steps.qmd
 
 website:
   title: "GitHub Actions Workshop"
@@ -18,6 +19,8 @@ website:
         contents:
         - href: Simple_GHAs/Anatomy_of_GHA_YAML.qmd
           text: Anatomy of a GitHub Actions YAML
+        - href: Simple_GHAs/Adding_more_steps.qmd
+          text: Adding more `steps`
       - section: "Complex GitHub Actions"
       - section: "Examples"
         contents:

@@ -7,11 +7,9 @@ format:
 number-sections: true
 ---
 
-# Background
-
 All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (*such as for configuring this Quarto website*). These files contain the different elements that were covered on the [Basics](../basics.qmd) page, such as jobs, steps, actions, and triggers.
 
-Below is a simple YAML that lists all files stored in the GitHub Repository (repo):
+Below is a simple YAML that lists all files stored in the GitHub Repository (repo) after pushing a commit to this repo:
 
 ::: {.annot-2col}
 ```yaml
@@ -38,7 +36,7 @@ jobs:
 7. Example of `run` syntax for running code directly in the YAML file. In this case, the `ls` command is used to list all files in the root directory of the repo.
 :::
 
-
+<br>
 As also mentioned on the [Basics](../basics.qmd) page, these YAML files need to be stored within the `.github/workflows` directory of your repo. If you don't currently have this directory, you'll need to create this manually. And since file paths that begin with a period (`.`) at the beginning are considered hidden files, this may require adjusting settings for your file explorer/finder application, or through use of the terminal.
 
 For example, if the above YAML code was stored in a file named `simple.yml`, then you would run the following command to move this file from your root directory to the correct `.github/workflows` directory:
@@ -46,3 +44,6 @@ For example, if the above YAML code was stored in a file named `simple.yml`, the
 ```bash
 mv simple.yml .github/workflows
 ```
+
+<br>
+In subsequent examples, we will build in increasing components and complexity that are more likely to reflect GitHub Actions workflows that are expected to be more useful in tasks for both software development and scientific research.

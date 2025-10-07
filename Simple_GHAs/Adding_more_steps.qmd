@@ -1,0 +1,99 @@
+---
+title: "Adding more `steps` to a `job`"
+format:
+  html:
+    code-annotations: below
+    css: ../styles.css
+number-sections: true
+---
+
+# Background
+In the previous section, we only ran two `steps` within a single `job` on a single `runner` to list all files within the repository. While this was a simple example, we can build additional steps into this workflow that allow us to do a variety of things using 1) pre-made `actions` (e.g., `actions/checkout@v5`), 2) code that is written directly in the YAML, or 3) custom scripts from a variety of programming languages (e.g., R, Python, MATLAB). Depending on the task at hand, this may require the installation of additional software not already included on the `runner`. Additionally, users may be interested in committing files created in the GitHub Actions `job` to the repo, or may want to build, test, and release software. 
+
+
+# Using `actions` to install software
+
+Although Python comes pre-installed on the `runners`, common scientific languages such as R and MATLAB are not immediately available and require some extra steps. Additionally, Conda software for Python needs to be installed if creating a virtual environment since this is also not readily available out-of-the-box.
+
+Below are a few simple examples of installing the aforementioned software:
+
+::: {.panel-tabset}
+## R
+
+```yaml
+name: R installation 
+on:
+  # triggered on push to repo (specifically the 'main' branch)
+  push:
+    branches: main
+
+jobs:  
+  r_install: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  # <1>
+      with:
+        r-version: '4.4.3'  #(optional) specification of version and other settings
+```
+1. [`Action`](https://github.com/r-lib/actions) provided to install R regardless of operating system
+
+## Conda
+
+```yaml
+name: Conda installation 
+on:
+  # triggered on push to repo (specifically the 'main' branch)
+  push:
+    branches: main
+
+jobs:  
+  conda_install: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3  # <2>
+      with:
+        auto-update-conda: true
+        python-version: 3.12  #(optional) specification of version
+```
+2. [`Action`](https://github.com/conda-incubator/setup-miniconda) provided to install Conda regardless of operating system (for both Conda and Mamba)
+
+## MATLAB
+
+```yaml
+name: MATLAB installation 
+on:
+  # triggered on push to repo (specifically the 'main' branch)
+  push:
+    branches: main
+
+jobs:  
+  matlab_install: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Set up MATLAB
+      uses: matlab-actions/setup-matlab@v2  # <3>
+      with:
+        release: R2024a  #(optional) specification of version
+```
+3. [`Action`](https://github.com/matlab-actions) provided to install MATLAB regardless of operating system
+:::
+
+<br>
+Installation of this software defaults to the latest release (available for the GitHub Action). If an older version is desired, this would need to be explicitly specified to take effect. Many more settings are typically available for specification in each `action`, and these can be referenced from the associated GitHub repos that store these `actions`.
+
+:::{.callout-note}
+## For MATLAB users
+
+It should be noted that the available `actions` for setting up and using MATLAB within a GitHub Actions workflow are only available for **public** repos. If have wish to use a **private** repo, you may be able to request a [MATLAB batch processing token](https://github.com/mathworks-ref-arch/matlab-dockerfile/blob/main/alternates/non-interactive/MATLAB-BATCH.md#matlab-batch-licensing-token) to pursue this further. More information on the options available can be found on the [page for the MATLAB setup `action`](https://github.com/matlab-actions/setup-matlab?tab=readme-ov-file).
+:::

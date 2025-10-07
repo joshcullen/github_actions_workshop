@@ -14,6 +14,7 @@ jobs:
 
     - name: Install geospatial libraries
       run: |
+        apt-get update
         sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev  # <2>
     
     - name: Install CDO

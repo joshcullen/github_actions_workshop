@@ -1,0 +1,23 @@
+name: Install Copernicus Marine Toolbox
+
+on: workflow_dispatch
+
+jobs:  
+  install_ex: 
+    runs-on: windows-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+        channels: conda-forge,defaults
+
+    - name: Install copernicusmarine
+      shell: bash -el {0}
+      run: |
+        conda install -c conda-forge copernicusmarine
+        conda install scipy

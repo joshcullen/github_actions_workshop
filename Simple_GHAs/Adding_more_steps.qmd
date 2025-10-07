@@ -248,6 +248,7 @@ Below, I'll show several examples of how this may be useful for R and Python.
 
 While likely not necessary for simple GitHub repos, users may be interested in printing a directory tree that shows the structure of their repo if they're having issues with reading/writing of files. Additionally, users may eventually run into storage issues on the virtual machine if they are checking out a large repo, which would prevent the GitHub Action from proceeding further. Here is an example of a simple workflow that could be used to check both of these things (on an `ubuntu-latest` runner).
 
+::: {.annot-2col}
 ```{.yaml filename="bash_debug.yml"}
 name: Check repo size and structure
 
@@ -270,3 +271,56 @@ jobs:
 2. Specification of shell type. The `{0}` is the placeholder for the commands listed under the `run` argument.
 3. Command to print directory tree
 4. Command to print storage summary for directory
+:::
+
+<br>
+When viewed in the *live log* on the "{{< bi play-circle >}} Actions" tab for the GitHub repo (example [here](https://github.com/joshcullen/github_actions_workshop/actions/runs/18322509573/job/52178847669)), you'll see the directory tree printed as it would be if using the Terminal or Powershell command line on your own computer (but now in the cloud).
+
+![Screenshot showing part of printed directory tree for the [github_actions_workshop repo](https://github.com/joshcullen/github_actions_workshop).](img/ubuntu_dir_tree.png){#fig-dir_tree}
+
+![Screenshot showing a summary of file storage for used and available disk space on the virtual machine for the [github_actions_workshop repo](https://github.com/joshcullen/github_actions_workshop).](img/ubuntu_storage.png){#fig-dir_storage}
+
+<br>
+Based on these print outs, it appears that there's a relatively large number of files (48) and folders (17), where there's ~23 GB still available (i.e., 70% full) on the `runner` after checking out the full repo. So while there isn't currently an issue for this particular repo state, this may need to be revisited as more files are added over time.
+
+:::{.callout-warning}
+Be aware that these specific commands should work for both Linux and MacOS runners when using `bash`, but that different commands will likely be needed for different shells and when using a Windows `runner`.
+:::
+
+
+## Installing additional software
+
+In some instances, the manual installation of software may be necessary if not provided by an available `action`. For example, users may be interested in installing geospatial libraries (e.g., GDAL, PROJ, GEOS) that may not be included when installing R or Python packages. Alternatively, some R packages (such as `INLA`) are not available from CRAN, GitHub, or R-Universe. Another example for users of Copernicus Marine Evironmental Monitoring Service (CMEMS) [data products](https://data.marine.copernicus.eu/products?pk_vid=5838aa2a5768fa0b1759864407364837) is the installation of the [Copernicus Marine Toolbox](https://help.marine.copernicus.eu/en/articles/7970514-copernicus-marine-toolbox-installation) (`copernicusmarine`), which they may then want to process netCDF data using the [Climate Data Operator](https://code.mpimet.mpg.de/projects/cdo/wiki) (`cdo`) software.
+
+Below, I'll show how to install these different sources of software and check that they have installed properly. Please refer to XXX for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.
+
+```{.yaml filename="copernicusmarine_install.yml"}
+name: Install Copernicus Marine Toolbox
+
+on: workflow_dispatch
+
+jobs:  
+  install_ex: 
+    runs-on: windows-latest  # <1>
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+        channels: conda-forge,defaults  # <2>
+
+    - name: Install copernicusmarine
+      shell: bash -el {0}  # <3>
+      run: |
+        conda install -c conda-forge copernicusmarine  # <4>
+        conda install scipy  # <5>
+```
+1. Now using the `windows-latest` runner to show different example
+2. Explictly listing the different Conda channels to check for package installation
+3. Defining the shell for `copernicusmarine` installation
+4. Conda command to install `copernicusmarine`. Other install options include Mamba, pip, and Docker
+5. The `scipy` Python package is also needed for `copernicusmarine`, but isn't available on `runner` by default

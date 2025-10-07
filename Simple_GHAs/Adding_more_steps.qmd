@@ -3,6 +3,7 @@ title: "Adding more `steps` to a `job`"
 format:
   html:
     code-annotations: below
+    code-overflow: wrap
     css: ../styles.css
 number-sections: true
 execute:
@@ -292,8 +293,9 @@ Be aware that these specific commands should work for both Linux and MacOS runne
 
 In some instances, the manual installation of software may be necessary if not provided by an available `action`. For example, users may be interested in installing geospatial libraries (e.g., GDAL, PROJ, GEOS) that may not be included when installing R or Python packages. Alternatively, some R packages (such as `INLA`) are not available from CRAN, GitHub, or R-Universe. Another example for users of Copernicus Marine Evironmental Monitoring Service (CMEMS) [data products](https://data.marine.copernicus.eu/products?pk_vid=5838aa2a5768fa0b1759864407364837) is the installation of the [Copernicus Marine Toolbox](https://help.marine.copernicus.eu/en/articles/7970514-copernicus-marine-toolbox-installation) (`copernicusmarine`), which they may then want to process netCDF data using the [Climate Data Operator](https://code.mpimet.mpg.de/projects/cdo/wiki) (`cdo`) software.
 
-Below, I'll show how to install these different sources of software and check that they have installed properly. Please refer to XXX for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.
+Below, I'll show how to install these different sources of software and check that they have installed properly. Please refer to **XXX** for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.
 
+::: {.annot-2col}
 ```{.yaml filename="copernicusmarine_install.yml"}
 name: Install Copernicus Marine Toolbox
 
@@ -318,9 +320,52 @@ jobs:
       run: |
         conda install -c conda-forge copernicusmarine  # <4>
         conda install scipy  # <5>
+    
+    - name: Check copernicusmarine version
+      run: copernicusmarine --version  # <6>
 ```
 1. Now using the `windows-latest` runner to show different example
 2. Explictly listing the different Conda channels to check for package installation
 3. Defining the shell for `copernicusmarine` installation
 4. Conda command to install `copernicusmarine`. Other install options include Mamba, pip, and Docker
 5. The `scipy` Python package is also needed for `copernicusmarine`, but isn't available on `runner` by default
+6. Check that `copernicusmarine` is installed and commands can be accessed from this tool (such as using `--version`)
+:::
+
+<br>
+While we haven't run any analyses or performed unit testing on code, this 4-step GitHub Actions workflow provides a relevant proof-of-concept to set up a relevant workflow by cloning the repository and installing software necessary to use `copernicusmarine` to access a large variety of oceanographic products.
+
+In the next example, I'll show how to install useful geospatial libraries and the `cdo` tool:
+
+::: {.annot-2col}
+```{.yaml filename="gdal_cdo_install.yml"}
+name: Install GDAL and CDO
+
+on: workflow_dispatch
+
+jobs:  
+  install_gdal_cdo: 
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash  # <1>
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install geospatial libraries
+      run: |
+        sudo apt-get install libudunits2-dev gdal-bin libgdal-dev libgeos-dev libproj-dev libsqlite3-dev  # <2>
+    
+    - name: Install CDO
+      run: sudo apt-get install cdo  # <3>
+      
+    - name: Check software versions
+      run: |
+        gdalinfo --version  #check GDAL version
+        cdo -V  #check CDO version
+```
+1. Instead of defining the shell for each step, you can also specify the default
+2. Command to install all relevant geospatial libraries
+3. Command to install `cdo`
+:::

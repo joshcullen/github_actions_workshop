@@ -15,7 +15,7 @@
 /* Make code + its following annotation list render in two columns */
 .annot-2col {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* equal widths */
+  grid-template-columns: 1.5fr 1fr; /* code col is 50% wider */
   gap: 1.5rem;                    /* optional spacing */
   align-items: start;             /* align text to top */
 }

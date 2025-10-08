@@ -111,3 +111,7 @@ Actions are reusable sets of code (similar to a function) that perform particula
 
 Other software (such as Python) are already available on the runner upon starting the workflow. To see the full list of available software installed per runner, please refer to the linked runner labels on this [GitHub reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#supported-runners-and-hardware-resources) as listed in @tbl-runner-specs.
 
+
+## High-performance computing
+
+**ADD TEXT HERE DISCUSSING EXAMPLES OF DIFFERENT OPTIONS, FROM THE USER OF DIFFERENT RUNNERS, INCREASING NUMBER OF CORES, AND USING GPUS. ADD REFS FOR PPL TO LOOK INTO IF INTERESTED. Also mention that this is essentially just doing cloud computing, but in a different format from say Google Cloud or AWS, so same ideas generally apply**

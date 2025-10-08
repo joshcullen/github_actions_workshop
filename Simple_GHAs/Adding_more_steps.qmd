@@ -427,3 +427,9 @@ jobs:
 7. Check that INLA was succesfully installed by checking version with built-in function (in R)
 :::
 
+
+# Takeaways
+
+In this section, we covered how to write steps to install software and run commands through the use of both pre-made `actions` as well as custom code on the command line. This includes the installation of programming languages that are not available on the `runners` by default, such as R and MATLAB. Additionally, a number of options for installing necessary dependencies for running R and Python scripts, geospatial libraries, and checking properties of the repository and virtual machine were also covered.
+
+The next section will cover `events` that trigger workflows more in-depth and provide examples on ways these can be used to automate GitHub Actions.

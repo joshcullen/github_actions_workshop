@@ -19,6 +19,8 @@ jobs:
       with:
         packages: |
           any::remotes
+          any::sf
+          any::terra
       
     - name: Install INLA
       shell: Rscript {0}

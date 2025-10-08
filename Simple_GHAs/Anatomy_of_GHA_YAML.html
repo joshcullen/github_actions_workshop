@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -168,6 +168,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Anatomy of a GitHub Actions YAML</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Simple_GHAs/Adding_more_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Adding more <code>steps</code></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -185,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../example.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../example.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Standard report</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../RAMP_example_dash.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../RAMP_example_dash.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dashboard</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../validate_example.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../validate_example.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data validation</span></a>
   </div>
 </li>
@@ -208,14 +214,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><span class="header-section-number">1</span> Background</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -239,10 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="background" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Background</h1>
 <p>All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (<em>such as for configuring this Quarto website</em>). These files contain the different elements that were covered on the <a href="../basics.html">Basics</a> page, such as jobs, steps, actions, and triggers.</p>
-<p>Below is a simple YAML that lists all files stored in the GitHub Repository (repo):</p>
+<p>Below is a simple YAML that lists all files stored in the GitHub Repository (repo) after pushing a commit to this repo:</p>
 <div class="annot-2col">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Test GHA</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> push</span></span>
@@ -287,12 +285,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 </dl>
 </div>
-<p>As also mentioned on the <a href="../basics.html">Basics</a> page, these YAML files need to be stored within the <code>.github/workflows</code> directory of your repo. If you don’t currently have this directory, you’ll need to create this manually. And since file paths that begin with a period (<code>.</code>) at the beginning are considered hidden files, this may require adjusting settings for your file explorer/finder application, or through use of the terminal.</p>
+<p><br> As also mentioned on the <a href="../basics.html">Basics</a> page, these YAML files need to be stored within the <code>.github/workflows</code> directory of your repo. If you don’t currently have this directory, you’ll need to create this manually. And since file paths that begin with a period (<code>.</code>) at the beginning are considered hidden files, this may require adjusting settings for your file explorer/finder application, or through use of the terminal.</p>
 <p>For example, if the above YAML code was stored in a file named <code>simple.yml</code>, then you would run the following command to move this file from your root directory to the correct <code>.github/workflows</code> directory:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simple.yml .github/workflows</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br> In subsequent examples, we will build in increasing components and complexity that are more likely to reflect GitHub Actions workflows that are expected to be more useful in tasks for both software development and scientific research.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

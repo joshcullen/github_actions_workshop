@@ -2,34 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/RAMP_example_dash.html</loc>
-    <lastmod>2025-10-08T14:14:58.193Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Anatomy_of_GHA_YAML.html</loc>
-    <lastmod>2025-10-08T14:14:58.193Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/index.html</loc>
-    <lastmod>2025-10-08T14:14:58.203Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/validate_example.html</loc>
-    <lastmod>2025-10-08T14:14:58.203Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/example.html</loc>
-    <lastmod>2025-10-08T14:14:58.203Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/LICENSE.html</loc>
-    <lastmod>2025-10-08T14:14:58.192Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/basics.html</loc>
-    <lastmod>2025-10-08T14:14:58.203Z</lastmod>
+    <lastmod>2025-10-03T19:34:58.095Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Adding_more_steps.html</loc>
-    <lastmod>2025-10-08T14:14:58.193Z</lastmod>
+    <lastmod>2025-10-08T14:52:15.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/basics.html</loc>
+    <lastmod>2025-10-08T14:44:19.508Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Anatomy_of_GHA_YAML.html</loc>
+    <lastmod>2025-10-06T21:44:35.734Z</lastmod>
   </url>
 </urlset>

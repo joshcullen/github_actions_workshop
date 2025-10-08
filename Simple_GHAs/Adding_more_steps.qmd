@@ -406,21 +406,24 @@ jobs:
       with:
         packages: |
           any::remotes  # <3>
+          any::sf  # <4>
+          any::terra
       
     - name: Install INLA
-      shell: Rscript {0}  # <4>
+      shell: Rscript {0}  # <5>
       run: |
-        remotes::install_version("INLA", version = "25.06.13", repos = c(getOption("repos"), INLA = "https://inla.r-inla-download.org/R/testing"), dep = TRUE)  # <5>
+        remotes::install_version("INLA", version = "25.06.13", repos = c(getOption("repos"), INLA = "https://inla.r-inla-download.org/R/testing"), dep = TRUE)  # <6>
     
     - name: Check INLA version
       shell: Rscript {0}
-      run: INLA::inla.version()  # <6>
+      run: INLA::inla.version()  # <7>
 ```
 1. Now using `macos-latest` runner (as different example)
 2. Needs to be compatible w/ selected INLA version
 3. Need to install `remotes` R package to help with installation of `INLA`. The `any::` syntax is used to specify packages to download from CRAN.
-4. Specifying the shell as R code, which allows me to directly run R code (or scripts)
-5. Function from [INLA](https://www.r-inla.org/download-install) for package installation
-6. Check that INLA was succesfully installed by checking version with built-in function (in R)
+4. Also need to install `sf` and `terra` as dependencies for `INLA`
+5. Specifying the shell as R code, which allows me to directly run R code (or scripts)
+6. Function from [INLA](https://www.r-inla.org/download-install) for package installation
+7. Check that INLA was succesfully installed by checking version with built-in function (in R)
 :::
 

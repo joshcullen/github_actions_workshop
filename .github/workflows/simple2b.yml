@@ -1,7 +1,7 @@
 name: Push or Pull Request
 on:
-  push
-  pull_request
+  push:
+  pull_request:
 
 jobs:  
   ci_cd:

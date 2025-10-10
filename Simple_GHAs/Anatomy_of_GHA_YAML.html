@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-c30451789a0a2bcd5e941535c675cd30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/bootstrap-icons-1.13.1/bootstrap-icons.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -214,8 +215,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started"><span class="header-section-number">1</span> Getting started</a></li>
+  <li><a href="#viewing-workflows-in-action" id="toc-viewing-workflows-in-action" class="nav-link" data-scroll-target="#viewing-workflows-in-action"><span class="header-section-number">2</span> Viewing workflows in action</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -239,10 +247,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (<em>such as for configuring this Quarto website</em>). These files contain the different elements that were covered on the <a href="../basics.html">Basics</a> page, such as jobs, steps, actions, and triggers.</p>
+<section id="getting-started" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Getting started</h1>
+<p>All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (<em>such as for configuring this Quarto website</em>). These files contain the different elements that were covered on the <a href="../basics.html">Basics</a> page, such as jobs, steps, actions, and events.</p>
 <p>Below is a simple YAML that lists all files stored in the GitHub Repository (repo) after pushing a commit to this repo:</p>
 <div class="annot-2col">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Test GHA</span></span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>simple.yml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2" data-filename="simple.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Test GHA</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> push</span></span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
@@ -254,6 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> List files in repo  </span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-2-12" class="code-annotation-target"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ls</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
@@ -261,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="2">Syntax used for defining which trigger(s) to use. Here, we specify that the GitHub Action YAML will be run on <code>push</code> to this repo.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="2">Syntax used for defining which event(s) to use to trigger workflow. Here, we specify that the GitHub Action YAML will be run on <code>push</code> to this repo.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
 <dd>
@@ -277,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="6">Example of <code>uses</code> syntax for using a pre-made action. In this case, the <code>checkout</code> action is selected since this is typically the first step of any workflow. You should typically specify the version of the action you’ll be using (i.e., <code>@v5</code>), of which version 5 is the latest available.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="6">Example of <code>uses</code> syntax for using a pre-made action. In this case, the <code>checkout</code> action is selected since this is typically the first step of any workflow. You need to specify the version of the action you’ll be using (i.e., <code>@v5</code>), of which version 5 is the latest available.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="7">7</dt>
 <dd>
@@ -289,8 +304,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For example, if the above YAML code was stored in a file named <code>simple.yml</code>, then you would run the following command to move this file from your root directory to the correct <code>.github/workflows</code> directory:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> simple.yml .github/workflows</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br> In subsequent examples, we will build in increasing components and complexity that are more likely to reflect GitHub Actions workflows that are expected to be more useful in tasks for both software development and scientific research.</p>
+</section>
+<section id="viewing-workflows-in-action" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Viewing workflows in action</h1>
+<p>Once you’ve created your workflow YAML file for GitHub Actions, you’ll need to commit and push this file to your <code>remote</code> (i.e., the version of your repo that lives in the cloud via the GitHub website). This will then allow the action to be used whenever a triggering event occurs.</p>
+<p>The repo should now resemble something like this, where you see the folders and files listed (including the new <code>.github/workflows</code> directory with the <code>simple.yml</code> file), as well as different tabs above the title of your repo (including the “<i class="bi-play-circle " style="" role="img" aria-hidden="true"></i> Actions” tab):</p>
+<div id="fig-gh-repo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gh-repo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gh_repo_landing.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gh-repo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The tabs are highlighted (red outline) above the repo directory, where the Actions tab is outlined in blue.
+</figcaption>
+</figure>
+</div>
+<p><br> If we click on this “<i class="bi-play-circle " style="" role="img" aria-hidden="true"></i> Actions” tab, you’ll see a page that generally looks like this but will essentially be empty if you haven’t run any GitHub Actions for this repo:</p>
+<div id="fig-gh-actions-page" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gh-actions-page-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gh_actions_page.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gh-actions-page-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The page for exploring your GitHub Actions. The list outlined in blue represents all of the different actions you’ve created for your repo. The list outline in orange shows different properties and metrics associated with your workflows. The main list outlined in green displays the chronological list of all workflows that have been run, starting with the most recent.
+</figcaption>
+</figure>
+</div>
+<p><br> This page shows your full GitHub Actions history, which can be explored in more detail to examine what’s happening in each step and identify where problems may be occurring. On the left side of each workflow, there will be a symbol denoting its status, which can either be a successful completion (<i class="bi-check-circle-fill " style="color: green;" role="img" aria-hidden="true"></i>), failed run (<i class="bi-x-circle-fill " style="color: red;" role="img" aria-hidden="true"></i>), or in-progress (<i class="bi-circle-fill " style="color: #FFBF00;" role="img" aria-hidden="true"></i>).</p>
+<p>If we click on one of these recently run workflows, such as “MATLAB example”, we can dig in a bit more to see which jobs were run and the output of the different actions and commands we used:</p>
+<div id="fig-gha-workflow-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gha-workflow-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gha_workflow_summary.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gha-workflow-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: View of the summary page of a workflow with multiple jobs (named “matlab_test” and “update-website” )
+</figcaption>
+</figure>
+</div>
+<p><br> Here we see that there were two jobs included in this workflow file, and we can see their status and duration, as well as the relationship between jobs (since this can get quite complex for some workflows). In this case, we see that the “matlab_test” job is on the left side and directly connected to the “update-website” job on the right, indicating that “matlab_test” is run first and then triggers “update-website”. We can even take another look at our <code>simple.yml</code> workflow file by clicking the corresponding link in the sidebar to double-check what it’s doing if the file isn’t handy on our computer:</p>
+<div id="fig-gha-workflow-file" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gha-workflow-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gha_workflow_file.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gha-workflow-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: GitHub Actions workflow YAML for “MATLAB example” workflow.
+</figcaption>
+</figure>
+</div>
+<p><br> If we were to click on one of the jobs shown in <a href="#fig-gha-workflow-summary" class="quarto-xref">Figure&nbsp;3</a>, such as “matlab_test”, then we can view the logs from this workflow. Additionally, these can inspected as the workflow runs in real-time for active troubleshooting of developing a GitHub Action workflow.</p>
+<div id="fig-gha-log1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gha-log1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gha_log1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gha-log1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: View of beginning of workflow log, showing runner setup and repo checkout for virtual machine.
+</figcaption>
+</figure>
+</div>
+<div id="fig-gha-log2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gha-log2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/gha_log2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gha-log2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: View of end of workflow log, showing steps to set up MATLAB on the runner, run the MATLAB script, and then push the exported files to this repo for later use.
+</figcaption>
+</figure>
+</div>
+<p><br> With this orientation to how GitHub Action workflows are configured via YAML files and how to explore these workflows on the GitHub website, we’re ready to start building on top of this by adding more steps to our workflow.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

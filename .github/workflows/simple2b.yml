@@ -1,0 +1,14 @@
+name: Push or Pull Request
+on:
+  push
+  pull_request
+
+jobs:  
+  ci_cd:
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository
+      uses: actions/checkout@v5 
+
+    - name: Print directory tree of repo  
+      run: tree

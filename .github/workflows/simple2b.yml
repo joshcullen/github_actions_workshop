@@ -1,4 +1,4 @@
-name: Push or Pull Request
+name: Push or Pull Request2
 on:
   push:
   pull_request:

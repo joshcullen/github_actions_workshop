@@ -24,6 +24,8 @@ Here's a list of nice features that are available within GitHub Actions that can
 | Matrix builds | Simultaneously build and test software across different operating systems and versions |
 | Highly affordable | Free for public repositories |
 
+Additionally, you'll receive an automated email if a GitHub Action run fails and it will direct you to the location in the GitHub Action log where the error occurred. These many different features make it much easier for automating tasks and fixing issues as part of your research or software development workflow.
+
 ## Components of GitHub Actions
 
 ### Workflows

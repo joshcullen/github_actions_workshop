@@ -21,6 +21,8 @@ website:
           text: Anatomy of a GitHub Actions YAML
         - href: Simple_GHAs/Adding_more_steps.qmd
           text: Adding more `steps`
+        - href: Simple_GHAs/Config_events.qmd
+          text: Configuring `events`
       - section: "Complex GitHub Actions"
       - section: "Examples"
         contents:

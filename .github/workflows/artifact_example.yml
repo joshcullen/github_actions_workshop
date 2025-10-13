@@ -33,9 +33,9 @@ jobs:
         name: erddap_sst
         path: mab_sst.tif
         retention-days: 1
-        
-        
-jobs:  
+ 
+ 
+
   mean_sst: 
     runs-on: ubuntu-latest
     needs: dl_sst

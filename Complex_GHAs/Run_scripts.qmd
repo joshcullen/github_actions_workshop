@@ -1,0 +1,86 @@
+---
+title: "Run scripts for your analysis"
+format:
+  html:
+    code-annotations: below
+    code-overflow: wrap
+    css: ../styles.css
+number-sections: true
+execute:
+  echo: true
+  eval: false
+---
+
+# Background
+
+Building upon the [Simple GitHub Actions](Simple_GHAs/index.qmd) topics, we can now start adding more pieces to our workflows, such as running scripts in R, Python, or MATLAB. Since the purpose and components of scripts can be highly varied, I'll only cover a few examples here in each programming language. Depending on your needs and your entire analysis workflow, you may be able to accomplish all steps in a single scripts, or may need multiple scripts across multiple jobs and even workflows.
+
+This section will also introduce the use of "*secrets*" when applying tokens or log-in credentials that are needed within workflows, which ensures a more secure working environment without these tokens or credentials hard-coded into the workflow YAML. But for now, let's get started on covering how to run custom scripts to perform tasks and analyses.
+
+
+# R
+
+While we've already covered how to set up a virtual machine (VM) to run R scripts, we haven't gotten to arguably the most important step, which is running your code. This process is quite simple and represents only a small extension beyond the work to set up the VM. Below is an example showing how to run a single R scripts stored in your repo:
+
+```{.yaml filename="complex_r_script.yml"}
+name: Run R script
+
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_r: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        extra-packages: |
+          ropensci/rnaturalearthhires  #install package from GitHub
+      
+    - name: Download and export SST
+      shell: Rscript {0}  # <1>
+      run: source("Complex_GHAs/R/download_export_sst.R")  # <2>
+```
+1. Need to specify the R shell to run R code
+2. Use `source()` function to 'source' (i.e., run) the R script listed. **Need to make sure to specify the full file path from the root directory in quotes**
+
+<br>
+If we wanted to run multiple R scripts at a time, we could either run them in the same `step`, or as different steps. The example below demonstrates how to run two scripts within a single `step`:
+
+```{.yaml filename="complex_r_script2.yml"}
+name: Run R script
+
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_r: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        extra-packages: |
+          ropensci/rnaturalearthhires  #install package from GitHub
+      
+    - name: Download and export SST
+      shell: Rscript {0}
+      run: |
+        source("Complex_GHAs/R/download_export_sst.R")
+        source("Complex_GHAs/R/summarize_sst.R")
+```

@@ -1,0 +1,13 @@
+---
+title: "Complex GitHub Actions"
+format: html
+---
+
+The topics covered here introduce more advanced concepts and components to extending GitHub Actions for use in automating real workflows in scientific research and software development. After going through these sections, users will:
+
+1. Know how to run scripts in R, Python, and MATLAB from GitHub Actions
+2. Know how to securely store credentials via GitHub "*secrets*" for steps requiring these sensitive values
+3. Know how to run multiple jobs within a single workflow
+4. Know how to commit and push files used or created in a GitHub Actions workflow back to the repo
+5. Know how to share and store files across `jobs` within a workflow
+6. Know how to run checks and tests during R package development

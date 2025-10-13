@@ -1,0 +1,10 @@
+---
+title: "Simple GitHub Actions"
+format: html
+---
+
+The topics covered here introduce the basic concepts to building a GitHub Actions YAML and how to deploy these workflows to automate tasks of interest. After going through these sections, users will:
+
+1. Know the different components comprising a GitHub Actions YAML
+2. Learn how to add multiple different steps to a workflow, whether through use of pre-made `actions` or through custom commands
+3. Learn how to define different `event` triggers to automate when their workflow will be run

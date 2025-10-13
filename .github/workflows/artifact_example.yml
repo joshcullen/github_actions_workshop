@@ -49,8 +49,8 @@ jobs:
         name: erddap_sst
         path: .
 
-    - name: Install xarray
-      run: pip install xarray rasterio
+    - name: Install xarray and other deps from existing reqs file
+      run:  pip install -r requirements.txt
     
     - name: Calculate mean SST
       run: python Complex_GHAs/R/summarize_sst.py

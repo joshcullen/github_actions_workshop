@@ -18,6 +18,7 @@ jobs:
       with:
         cache: always
         extra-packages: |
+          any::ncdf4
           ropensci/rnaturalearthhires
       
     - name: Download and summarize SST

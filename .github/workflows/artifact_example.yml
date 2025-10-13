@@ -22,6 +22,7 @@ jobs:
         packages: |
           any::glue
           any::terra
+          any::ncdf4
       
     - name: Download and export SST
       shell: Rscript {0}

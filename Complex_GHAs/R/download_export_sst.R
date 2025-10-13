@@ -13,4 +13,4 @@ mab <- rast(url)
 
 
 # Export raster as GeoTIFF to root dir
-writeRaster(mab, "mab_sst.tif")
+writeRaster(mab, "mab_sst.nc")

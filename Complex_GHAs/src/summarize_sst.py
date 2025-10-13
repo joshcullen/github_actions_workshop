@@ -7,6 +7,6 @@ import xarray as xr
 # Open raster file
 ds = xr.open_dataset('mab_sst.nc')
 
-# Calc mean from 'Band1' layer storing SST data
-mean_sst = ds['Band1'].mean().item()
-print(mean_sst)
+# Summarize SST values stored in band named 'Band1'
+summ_sst = ds['Band1'].to_series().describe()
+print(summ_sst)

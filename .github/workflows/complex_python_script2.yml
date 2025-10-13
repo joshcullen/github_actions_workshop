@@ -13,10 +13,13 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
+        channels: conda-forge,defaults
         python-version: 3.12
     
     - name: Install Python packages
       run: pip install -r requirements.txt
     
     - name: Download and export SST
-      run: python Complex_GHAs/src/download_export_sst.py
+      run: |
+        python Complex_GHAs/src/download_export_sst.py
+        python Complex_GHAs/src/summarize_sst.py

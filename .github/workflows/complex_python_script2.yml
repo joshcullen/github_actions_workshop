@@ -19,7 +19,7 @@ jobs:
     - name: Install Python packages
       run: pip install -r requirements.txt
     
-    - name: Download and export SST
+    - name: Download and summarize SST
       run: |
         python Complex_GHAs/src/download_export_sst.py
         python Complex_GHAs/src/summarize_sst.py

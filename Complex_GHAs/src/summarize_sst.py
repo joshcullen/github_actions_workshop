@@ -7,6 +7,6 @@ import xarray as xr
 # Open raster file
 ds = xr.open_dataset('mab_sst.nc')
 
-# Summarize SST values stored in band named 'Band1'
-summ_sst = ds['Band1'].to_series().describe()
+# Summarize SST values stored in band named 'analysed_sst'
+summ_sst = ds['analysed_sst'].to_series().describe()
 print(summ_sst)

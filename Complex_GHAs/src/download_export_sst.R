@@ -13,4 +13,4 @@ mab <- rast(url)
 
 
 # Export raster as netCDF to root dir
-writeRaster(mab, "mab_sst.nc")
+writeCDF(mab, "mab_sst.nc", varname = "analysed_sst")

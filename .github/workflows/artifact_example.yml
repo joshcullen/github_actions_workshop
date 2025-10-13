@@ -53,5 +53,4 @@ jobs:
       run: pip install xarray 
     
     - name: Calculate mean SST
-      shell: python {0}
-      run: Complex_GHAs/R/summarize_sst.py
+      run: python Complex_GHAs/R/summarize_sst.py

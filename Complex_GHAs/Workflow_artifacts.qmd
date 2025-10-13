@@ -37,11 +37,12 @@ As briefly mentioned on the [Basics](../basics.qmd) page, your total monthly ava
 Artifacts are used within a workflow by specifying which file(s) or directory you'd like to store, uploading them to GitHub using an `action`, and then downloading these files in the next `job` using another `action`. We'll cover these steps in greater detail over the next couple of sections.
 
 
-# Artifact upload
+# Upload artifact
 
-Once the `job` you've run in the workflow has performed all of the steps of interest, you will add one more step that uses the [`upload-artifact`](https://github.com/actions/upload-artifact) action. This `action` includes a number of different options that can be specified by the user or left at their defaults. Below is a simple example showing how this `action` may be used:
+Once the `job` you've run in the workflow has performed all of the steps of interest, you will add one more step that uses the [`upload-artifact`](https://github.com/actions/upload-artifact) action. This `action` includes a number of different options that can be specified by the user or left at their defaults. Below is an example showing how this `action` may be used:
 
-```{.yaml filename="artifact_example_a.yml"}
+::: {.annot-2col}
+```{.yaml filename="artifact_example.yml"}
 name: Share data with artifacts
 
 on:
@@ -62,6 +63,101 @@ jobs:
     - name: Install R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
+        packages: |  # <1>
+          any::glue
+          any::terra
+      
+    - name: Download and export SST
+      shell: Rscript {0}
+      run: source("Complex_GHAs/R/download_export_sst.R")  # <2>
+    
+    - name: Upload SST artifact
+      uses: actions/upload-artifact@v4  # <3>
+      with:
+        name: erddap_sst    # <4>
+        path: mab_sst.tif  # <5>
+        retention-days: 1  # <6>
+```
+1. Only need a couple packages for this job
+2. Short R script to download and export SST data
+3. `Action` for uploading an artifact
+4. The name we want to label the artifact object
+5. The path to the file (or directory) thta we'd like to store in the artifact
+6. The number of days we want this artifact to be retained by GitHub (default is 90 days)
+:::
+
+<br>
+If this workflow YAML runs successfully, it will complete by storing the `mab_sst.tif` file with our data in the `erddap_sst` artifact. With an artifact now available for later use, we can then download this object in subsequent `jobs`.
+
+
+# Download artifact
+
+Now we will do the converse of the previous `job`, where the artifact will be downloaded toward the beginning of this next `job` right after checking out the repo. This will be performed using the [`download-artifact`](https://github.com/actions/download-artifact) action, which also includes a number of different options that may be specified during use. Use of this `action` is demonstrated in an example below:
+
+::: {.annot-2col}
+```{.yaml filename="artifact_example.yml"}
+
+  mean_sst:  # <1>
+    runs-on: ubuntu-latest
+    needs: dl_sst  # <2>
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+    
+    - name: Download artifact w SST data
+      uses: actions/download-artifact@v5  # <3>
+      with:
+        name: erddap_sst  # <4>
+        path: .  # <5>
+
+    - name: Install geospatial dependencies (e.g., GDAL)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgdal-dev gdal-bin
+    
+    - name: Install xarray and other deps from existing reqs file
+      run: pip install -r requirements.txt  # <6>
+    
+    - name: Calculate mean SST
+      run: python Complex_GHAs/R/summarize_sst.py  # <7>
+
+```
+1. Name given to second `job`
+2. Syntax for specifying that the `mean_sst` job needs to wait for the `dl_sst` job to successfully complete before this `job` starts
+3. `Action` for downloading an artifact
+4. Name of the artifact we defined in the previous `job`
+5. (optional) Specify the path where you'd like the files from the artifact to be added. In this case, I'm using the period (`.`) syntax to refer to the current directory (which is also the root dir)
+6. Command to install `xarray` and other Python packages for handling netCDF file
+7. Command to run Python script to calculate mean SST from the raster file
+:::
+
+
+# Putting it all together
+
+Now that we know how to both upload and download artifacts, as well as how to properly choose which files are stored within the artifact and where this artifact is downloaded to on the `runner`, we can expand this out to a number of different interconnected jobs within a single workflow if we wanted. For this simpler example, we just focused on two jobs. The full, single workflow YAML would therefore look like this:
+
+```{.yaml filename="artifact_example.yml"}
+name: Share data with artifacts
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  #run daily at 6 am EDT (UTC-04:00)
+  workflow_dispatch:
+
+jobs:  
+  dl_sst: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
         packages: |
           any::glue
           any::terra
@@ -69,11 +165,43 @@ jobs:
     - name: Download and export SST
       shell: Rscript {0}
       run: source("Complex_GHAs/R/download_export_sst.R")
-    
+      
     - name: Upload SST artifact
       uses: actions/upload-artifact@v4
       with:
         name: erddap_sst
-        path: mab_sst.tif
+        path: mab_sst.nc
         retention-days: 1
+ 
+ 
+
+  mean_sst: 
+    runs-on: ubuntu-latest
+    needs: dl_sst
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+    
+    - name: Download artifact w SST data
+      uses: actions/download-artifact@v5
+      with:
+        name: erddap_sst
+        path: .
+
+    - name: Install geospatial dependencies (e.g., GDAL)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgdal-dev gdal-bin
+    
+    - name: Install xarray and other deps from existing reqs file
+      run:  pip install -r requirements.txt
+    
+    - name: Calculate mean SST
+      run: python Complex_GHAs/R/summarize_sst.py
+
 ```
+
+
+# Takeaways
+
+In this section, we covered another example of how data can be shared across `jobs` of a single workflow. This can be helpful by reducing the number of files committed to your repo, and thereby keeping it decluttered of intermediate files that aren't needed. Additionally, it also provides a useful mechanism to specify the minimum set of files needed within a workflow for a very large repo where a normal `checkout` step would overload the `runner`.

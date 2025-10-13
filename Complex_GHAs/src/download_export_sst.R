@@ -12,5 +12,5 @@ url <- glue("https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.nc?anal
 mab <- rast(url)
 
 
-# Export raster as GeoTIFF to root dir
+# Export raster as netCDF to root dir
 writeRaster(mab, "mab_sst.nc")

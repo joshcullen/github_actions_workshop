@@ -20,8 +20,8 @@ jobs:
         extra-packages: |
           ropensci/rnaturalearthhires
       
-    - name: Download and export SST
+    - name: Download and summarize SST
       shell: Rscript {0}
       run: |
-        source("Complex_GHAs/R/download_export_sst.R")
-        source("Complex_GHAs/R/summarize_sst.R")
+        source("Complex_GHAs/src/download_export_sst.R")
+        source("Complex_GHAs/src/summarize_sst.R")

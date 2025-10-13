@@ -25,7 +25,7 @@ jobs:
       
     - name: Download and export SST
       shell: Rscript {0}
-      run: source("Complex_GHAs/R/download_export_sst.R")
+      run: source("Complex_GHAs/src/download_export_sst.R")
       
     - name: Upload SST artifact
       uses: actions/upload-artifact@v4
@@ -58,4 +58,4 @@ jobs:
       run:  pip install -r requirements.txt
     
     - name: Calculate mean SST
-      run: python Complex_GHAs/R/summarize_sst.py
+      run: python Complex_GHAs/src/summarize_sst.py

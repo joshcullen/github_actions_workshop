@@ -1,5 +1,5 @@
 ---
-title: "Run scripts for your analysis"
+title: "Run scripts and use secrets"
 format:
   html:
     code-annotations: below
@@ -18,10 +18,12 @@ Building upon the [Simple GitHub Actions](Simple_GHAs/index.qmd) topics, we can 
 This section will also introduce the use of "*secrets*" when applying tokens or log-in credentials that are needed within workflows, which ensures a more secure working environment without these tokens or credentials hard-coded into the workflow YAML. But for now, let's get started on covering how to run custom scripts to perform tasks and analyses.
 
 
-# R
+# Run scripts
 
-While we've already covered how to set up a virtual machine (VM) to run R scripts, we haven't gotten to arguably the most important step, which is running your code. This process is quite simple and represents only a small extension beyond the work to set up the VM. Below is an example showing how to run a single R scripts stored in your repo:
+While we've already covered how to set up a virtual machine (VM) to run R scripts, we have yet to cover how to run your code. This process is quite simple and represents only a small extension beyond the work to set up the VM. Below is an example showing how to run scripts stored in your repo:
 
+::: {.panel-tabset group="language"}
+## R
 ```{.yaml filename="complex_r_script.yml"}
 name: Run R script
 
@@ -47,7 +49,7 @@ jobs:
       
     - name: Download and export SST
       shell: Rscript {0}  # <1>
-      run: source("Complex_GHAs/R/download_export_sst.R")  # <2>
+      run: source("Complex_GHAs/src/download_export_sst.R")  # <2>
 ```
 1. Need to specify the R shell to run R code
 2. Use `source()` function to 'source' (i.e., run) the R script listed. **Need to make sure to specify the full file path from the root directory in quotes**
@@ -81,6 +83,65 @@ jobs:
     - name: Download and export SST
       shell: Rscript {0}
       run: |
-        source("Complex_GHAs/R/download_export_sst.R")
-        source("Complex_GHAs/R/summarize_sst.R")
+        source("Complex_GHAs/src/download_export_sst.R")
+        source("Complex_GHAs/src/summarize_sst.R")
 ```
+
+
+## Python
+```{.yaml filename="complex_python_script.yml"}
+name: Run Python script
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_python: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+    
+    - name: Install Python packages
+      run: pip install -r requirements.txt
+    
+    - name: Download and export SST
+      run: python Complex_GHAs/src/download_export_sst.py  # <1>
+```
+1. Use this command to run a Python script from shell. **Make sure you specify the full file path with respect to the root directory.**
+
+<br>
+If we wanted to run multiple Python scripts at a time, we could either run them in the same `step`, or as different steps. The example below demonstrates how to run two scripts within a single `step`:
+```{.yaml filename="complex_python_script2.yml"}
+name: Run Python script
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_python: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+    
+    - name: Install Python packages
+      run: pip install -r requirements.txt
+    
+    - name: Download and export SST
+      run: python Complex_GHAs/src/download_export_sst.py  # <1>
+```
+
+## MATLAB
+
+:::

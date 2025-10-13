@@ -8,4 +8,5 @@ import xarray as xr
 ds = xr.open_dataset('mab_sst.nc')
 
 # Calc mean from 'Band1' layer storing SST data
-ds['Band1'].mean().item()
+mean_sst = ds['Band1'].mean().item()
+print(mean_sst)

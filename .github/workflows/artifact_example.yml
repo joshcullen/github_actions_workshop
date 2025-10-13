@@ -50,7 +50,7 @@ jobs:
         path: .
 
     - name: Install xarray
-      run: pip install xarray 
+      run: pip install xarray rasterio
     
     - name: Calculate mean SST
       run: python Complex_GHAs/R/summarize_sst.py

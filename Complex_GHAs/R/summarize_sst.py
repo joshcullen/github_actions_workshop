@@ -7,5 +7,5 @@ import xarray as xr
 # Open raster file
 ds = xr.open_dataset('mab_sst.nc')
 
-# Calc mean from 'analysed_sst' layer
-ds['analysed_sst'].mean().item()
+# Calc mean from 'Band1' layer storing SST data
+ds['Band1'].mean().item()

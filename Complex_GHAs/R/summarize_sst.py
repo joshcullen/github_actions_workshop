@@ -5,7 +5,7 @@ import xarray as xr
 
 
 # Open raster file
-ds = xr.open_dataset('mab_sst.tif')
+ds = xr.open_dataset('mab_sst.tif', engine='rasterio')
 
 # Calc mean
 ds.mean()

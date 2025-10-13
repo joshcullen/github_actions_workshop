@@ -1,0 +1,79 @@
+---
+title: "Share data across `jobs` with artifacts"
+format:
+  html:
+    code-annotations: below
+    code-overflow: wrap
+    css: ../styles.css
+number-sections: true
+execute:
+  echo: true
+  eval: false
+---
+
+# Background
+
+Now that we've covered how to add multiple steps to a single job, how to run multiple jobs within a single workflow, and how to trigger a job based on the successful completion of another, we can build on additional features that may be helpful. If you're using multiple jobs within a workflow, this likely entails the use of data from one job to the next. While one option is to commit these data files to the repo **\[ADD CROSS-REF TO SECTION COVERING THIS PROCESS\]** and then pull them into the new job during the `checkout` step, you may either a) not want to keep these intermediate or raw data in your repo or b) want to limit the number of files loaded onto the `runner` during the next job (especially if your full repo size may exceed the disk storage of the `runner`). A helpful option for passing data across `jobs` and storing it is through the use of [artifacts](https://docs.github.com/en/actions/tutorials/store-and-share-data). Artifacts can be retained between 1 and 90 days and provide a useful solution for temporary storage of data for `jobs`.
+
+::: callout-warning
+## Limits on artifact storage
+
+As briefly mentioned on the [Basics](../basics.qmd) page, your total monthly available artifact storage space is dictated by the type of GitHub account you have. Although this could potentially impose constraints on your ability to have your workflow run over the course of a month before the storage quota resets, see this [blog post](https://thomasbillington.co.uk/2023/03/05/github-actions-storage-limits.html) about a potential solution for cleaning up artifacts to prevent running into this problem and disrupting your workflow.
+:::
+
+<br>
+
+::: {style="width: 60%; margin: auto;"}
+| Plan             | Storage |
+|------------------|---------|
+| Free             | 500 MB  |
+| Pro              | 2 GB    |
+| Enterprise Cloud | 50 GB   |
+
+: Monthly artifact storage limits by GitHub plan. {#tbl-artifact-lims}
+:::
+
+<br>
+Artifacts are used within a workflow by specifying which file(s) or directory you'd like to store, uploading them to GitHub using an `action`, and then downloading these files in the next `job` using another `action`. We'll cover these steps in greater detail over the next couple of sections.
+
+
+# Artifact upload
+
+Once the `job` you've run in the workflow has performed all of the steps of interest, you will add one more step that uses the [`upload-artifact`](https://github.com/actions/upload-artifact) action. This `action` includes a number of different options that can be specified by the user or left at their defaults. Below is a simple example showing how this `action` may be used:
+
+```{.yaml filename="artifact_example_a.yml"}
+name: Share data with artifacts
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  #run daily at 6 am EDT (UTC-04:00)
+  workflow_dispatch:
+
+jobs:  
+  dl_sst: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        packages: |
+          any::glue
+          any::terra
+      
+    - name: Download and export SST
+      shell: Rscript {0}
+      run: source("Complex_GHAs/R/download_export_sst.R")
+    
+    - name: Upload SST artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: erddap_sst
+        path: mab_sst.tif
+        retention-days: 1
+```

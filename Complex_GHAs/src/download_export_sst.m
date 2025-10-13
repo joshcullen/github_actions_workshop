@@ -13,13 +13,12 @@ get_date = char(yesterday_date); % 'YYYY-MM-DD' format
 %%% Read in data from coastal Mid-Atlantic Bight
 
 % Define url
-url_template = 'https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.nc?analysed_sst[(%sT09:00:00Z)][(35.0):(40.0)][(-78.0):(-74.0)]';
-final_url = sprintf(url_template, get_date);
+url = 'https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.nc;
 
 
-% Read the data from the downloaded NetCDF file
-% MATLAB ncread is OPeNDAP-compatible and will handle the download and slicing
-sst_data = ncread(final_url, 'analysed_sst');
+
+% # Subset data over time and space
+sst_data = ncread(url, 'analysed_sst');
 lat = ncread(final_url, 'latitude');
 lon = ncread(final_url, 'longitude');
 

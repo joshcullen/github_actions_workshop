@@ -24,6 +24,7 @@ jobs:
       
     - name: Download and export SST
       shell: Rscript {0}
+      working-directory: ${{ github.workspace }}
       run: source("Complex_GHAs/R/download_export_sst.R")
     
     - name: Upload SST artifact

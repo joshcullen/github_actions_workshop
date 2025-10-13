@@ -54,4 +54,4 @@ jobs:
     
     - name: Calculate mean SST
       shell: python {0}
-      run: summarize_sst.py
+      run: Complex_GHAs/R/summarize_sst.py

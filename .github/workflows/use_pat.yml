@@ -5,6 +5,8 @@ on:
 jobs:  
   run_python: 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:  

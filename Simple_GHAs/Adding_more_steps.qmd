@@ -293,7 +293,7 @@ Be aware that these specific commands should work for both Linux and MacOS runne
 
 In some instances, the manual installation of software may be necessary if not provided by an available `action`. For example, users may be interested in installing geospatial libraries (e.g., GDAL, PROJ, GEOS) that may not be included when installing R or Python packages. Alternatively, some R packages (such as `INLA`) are not available from CRAN, GitHub, or R-Universe. Another example for users of Copernicus Marine Evironmental Monitoring Service (CMEMS) [data products](https://data.marine.copernicus.eu/products?pk_vid=5838aa2a5768fa0b1759864407364837) is the installation of the [Copernicus Marine Toolbox](https://help.marine.copernicus.eu/en/articles/7970514-copernicus-marine-toolbox-installation) (`copernicusmarine`), which they may then want to process netCDF data using the [Climate Data Operator](https://code.mpimet.mpg.de/projects/cdo/wiki) (`cdo`) software.
 
-Below, I'll show how to install these different sources of software and check that they have installed properly. Please refer to **XXX** for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.
+Below, I'll show how to install these different sources of software and check that they have installed properly. **Please refer to the "[Use secrets in a workflow](../Complex_GHAs/Run_scripts.qmd#use-secrets-in-a-workflow)" section for examples showing how to use these tools within a GitHub Actions workflow since this section is focusing on the basics of setting up a virtual machine to perform tasks.**
 
 ### Copernicus Marine Toolbox
 ::: {.annot-2col}

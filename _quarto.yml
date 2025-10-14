@@ -16,6 +16,7 @@ website:
       - href: basics.qmd
         text: Basics
       - section: "Simple GitHub Actions"
+        href: Simple_GHAs/index.qmd
         contents:
         - href: Simple_GHAs/Anatomy_of_GHA_YAML.qmd
           text: Anatomy of a GitHub Actions YAML
@@ -24,6 +25,12 @@ website:
         - href: Simple_GHAs/Config_events.qmd
           text: Configuring `events`
       - section: "Complex GitHub Actions"
+        href: Complex_GHAs/index.qmd
+        contents:
+        - href: Complex_GHAs/Run_scripts.qmd
+          text: Run scripts and use secrets
+        - href: Complex_GHAs/Workflow_artifacts.qmd
+          text: Store and share data with artifacts
       - section: "Examples"
         contents:
         - href: example.qmd

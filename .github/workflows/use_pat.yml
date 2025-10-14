@@ -1,0 +1,33 @@
+name: Download and push ERDDAP data
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_python: 
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+    
+    - name: Install Python packages
+      run: pip install -r requirements.txt
+    
+    - name: Download and export SST
+      run: python Complex_GHAs/src/download_export_sst2.py
+    
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+        git add .
+        git commit -m 'Added new ERDDAP SST file'
+        git push

@@ -2,7 +2,7 @@ name: Share data with artifacts
 
 on:
   schedule:
-    - cron: '0 10 * * *'  #run daily at 6 am EDT (UTC-04:00)
+    - cron: '0 12 * * *'  #run daily at 8 am EDT (UTC-04:00)
   workflow_dispatch:
 
 jobs:  

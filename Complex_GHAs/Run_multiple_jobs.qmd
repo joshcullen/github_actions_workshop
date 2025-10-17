@@ -162,7 +162,7 @@ jobs:
 
   mean_sst: 
     runs-on: ubuntu-latest
-    needs: dl_sst
+    needs: dl_sst  # <1>
     steps:  
     - name: Check out repository  
       uses: actions/checkout@v5  

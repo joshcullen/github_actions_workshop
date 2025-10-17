@@ -33,10 +33,10 @@ style D fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
 style E fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
 ```
 
-However, certain scripts may have different computation needs that require the use of switching among different `runners`, you may want to have some scripts only run after the successful completion of one or more initial scripts, or you may want to have multiple types of jobs running concurrently to speed up the workflow. In these cases, it may make sense to use multiple `jobs` within a single workflow. However, users will need to decide whether to run actions within a separate `job` or as a separate workflow as covered in the [section on `events`](../Simple_GHAs/Config_events.qmd#workflow_run). In the following examples, we'll cover how to 1) run multiple `jobs` concurrently, 2) run `jobs` sequentially in conditional manner, and 3) to condition the trigger of a 3rd `job` on the completion of one of the first two.
+However, certain scripts may have different computation needs that require the use of switching among different `runners`, you may want to have some scripts only run after the successful completion of one or more initial scripts, or you may want to have multiple types of jobs running concurrently to speed up the workflow. In these cases, it may make sense to use multiple `jobs` within a single workflow. However, users will need to decide whether to run actions within a separate `job` or as a separate workflow as covered in the [section on `events`](../Simple_GHAs/Config_events.qmd#workflow_run). In the following examples, we'll cover how to 1) run multiple `jobs` concurrently, and 2) run `jobs` sequentially.
 
 
-# Concurrent jobs
+# Concurrent `jobs`
 
 In this example, let's say we're interested in obtaining environmental data from different sources (e.g., CMEMS, ROMS) that will serve as input for different ecological or ecosystem models. Since we may need multiple environmental variables from each data source, it would make sense that we would likely use different scripts to access these data. **Additionally, I have previously experienced issues trying to access ROMS data via OPeNDAP on an `ubuntu` runner, but these issues go away when using a `windows` runner.** So let's run two separate jobs concurrently using two types of `runners`:
 
@@ -111,3 +111,83 @@ jobs:
       run: |
         source("Complex_GHAs/src/acquire_roms.R")
 ```
+
+<br>
+As you can see in the workflow YAML, we really haven't done anything new other than adding a second job to the workflow. So in this example, we have separate jobs nmaed `download_cmems` and `download_roms` that are each working on different `runners` (`ubuntu` and `windows`). In this example, running these jobs concurrently makes sense since they are not dependent on one another. This may not be the case for all workflows, however.
+
+
+# Sequential `jobs`
+
+If we wanted to download environmental data and then transform or summarize them, this would require that we have the `jobs` run sequentially. Luckily, this new workflow pattern only requires the addition of a single line of code to the YAML. The below example shows how to download sea surface temperature data from ERDDAP, push this netCDF file to the repo, and then summarize these data:
+
+```{.yaml filename="sequential_jobs.yml"}
+name: Run jobs sequentially
+
+on:
+  workflow_dispatch:
+
+jobs:  
+  dl_sst: 
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: 3.12
+    
+    - name: Install Python packages
+      run: pip install -r requirements.txt
+    
+    - name: Download and export SST
+      run: python Complex_GHAs/src/download_export_sst2.py
+      
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+        git add .
+        git commit -m 'Added new ERDDAP SST file'
+        git push
+ 
+ 
+
+  mean_sst: 
+    runs-on: ubuntu-latest
+    needs: dl_sst
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2  
+    
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        packages: |
+          any::ncdf4
+          any::terra
+      
+    - name: Calculate mean SST
+      shell: Rscript {0}
+      run: source("Complex_GHAs/src/summarize_sst2.R")
+```
+1. Using the `needs` argument at the same indent level as `runs-on` and `steps`, we specify the name of the `job` (i.e., `dl_sst`) that this new `job` (i.e., `mean_sst`) depends on.
+
+<br>
+Although both of these `jobs` used the same `ubuntu` runner, they separate different components of the workflow that modularizes how it runs. This is particularly useful for debugging issues with workflows and makes them generally easier to follow compared to running all scripts within a single `step`.
+
+
+# Takeaways
+
+In this section, we covered how to extend workflow running scripts in a single job, to running multiple jobs in a workflow concurrently or sequentially. Separating tasks of a workflow into separate `jobs` [instead of]{.underline} `steps` may make GitHub Actions workflows more modular and easier to update and debug over time. In the example shown on running sequential `jobs`, we demonstrated how files could be `pushed` to the repo in Job 1 and then read into Job 2 during the `checkout` step. Alternatively, we may not want to `push` any intermediate files to the repo, but use another method of bundling certain files from Job 1 to be used in Job 2. This method of creating `artifacts` to be used across `jobs` will be covered in the next section.

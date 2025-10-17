@@ -1,0 +1,113 @@
+---
+title: "Run multiple `jobs` in a single workflow"
+format:
+  html:
+    code-annotations: below
+    code-overflow: wrap
+    css: ../styles.css
+number-sections: true
+execute:
+  echo: true
+  eval: false
+---
+
+# Background
+
+The next logical extension of running a set of scripts and producing new outputs within a `job` is to string together multiple `jobs` that represent different steps of your workflow. While we just covered an example in the [previous section](Run_scripts.qmd#run-scripts) to run multiple scripts within a single `step` of a `job`, there may be instances where it makes more sense to distribute certain scripts across separate `jobs` (similar to how code is organized into separate scripts).
+
+For example, you may have a set of R/Python/MATLAB scripts (in one or more languages) that each perform a major task within your workflow:
+
+```{mermaid}
+%%| eval: true
+%%| echo: false
+
+flowchart LR
+  A(Download raw data) --> B(Process data)
+  B --> C(Make model predictions)
+  C --> D(Create output products)
+  D --> E(Update report or website)
+style A fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+style B fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+style C fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+style D fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+style E fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+```
+
+However, certain scripts may have different computation needs that require the use of switching among different `runners`, you may want to have some scripts only run after the successful completion of one or more initial scripts, or you may want to have multiple types of jobs running concurrently to speed up the workflow. In these cases, it may make sense to use multiple `jobs` within a single workflow. However, users will need to decide whether to run actions within a separate `job` or as a separate workflow as covered in the [section on `events`](../Simple_GHAs/Config_events.qmd#workflow_run). In the following examples, we'll cover how to 1) run multiple `jobs` concurrently, 2) run `jobs` sequentially in conditional manner, and 3) to condition the trigger of a 3rd `job` on the completion of one of the first two.
+
+
+# Concurrent jobs
+
+In this example, let's say we're interested in obtaining environmental data from different sources (e.g., CMEMS, ROMS) that will serve as input for different ecological or ecosystem models. Since we may need multiple environmental variables from each data source, it would make sense that we would likely use different scripts to access these data. **Additionally, I have previously experienced issues trying to access ROMS data via OPeNDAP on an `ubuntu` runner, but these issues go away when using a `windows` runner.** So let's run two separate jobs concurrently using two types of `runners`:
+
+```{.yaml filename="concurrent_jobs.yml"}
+name: Run jobs concurrently
+
+on:
+  workflow_dispatch:
+
+jobs:  
+  download_cmems:
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository
+      uses: actions/checkout@v5 
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        channels: conda-forge,defaults
+        python-version: 3.12
+
+    - name: Install Copernicus Marine Toolbox
+      shell: bash -el {0}
+      run: |
+        conda install -c conda-forge copernicusmarine
+        conda install scipy
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        packages:
+          any::glue
+
+    - name: Download CMEMS data
+      env:
+        COPERNICUSMARINE_SERVICE_USERNAME: ${{ secrets.COPERNICUSMARINE_SERVICE_USERNAME }}
+        COPERNICUSMARINE_SERVICE_PASSWORD: ${{ secrets.COPERNICUSMARINE_SERVICE_PASSWORD }}
+      shell: Rscript {0}
+      run: |
+        source("Complex_GHAs/src/acquire_cmems.R")
+  
+  
+  download_roms:
+    runs-on: windows-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        packages:
+          any::glue
+          any::ncdf4
+          any::terra
+          any::lubridate
+
+    - name: Download ROMS data
+      shell: Rscript {0}
+      run: |
+        source("Complex_GHAs/src/acquire_roms.R")
+```

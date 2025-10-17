@@ -1,0 +1,69 @@
+name: Run jobs concurrently
+
+on:
+  workflow_dispatch:
+
+jobs:  
+  download_cmems:
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository
+      uses: actions/checkout@v5 
+
+    - name: Install Conda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        channels: conda-forge,defaults
+        python-version: 3.12
+
+    - name: Install Copernicus Marine Toolbox
+      shell: bash -el {0}
+      run: |
+        conda install -c conda-forge copernicusmarine
+        conda install scipy
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        packages:
+          any::glue
+
+    - name: Download CMEMS data
+      env:
+        COPERNICUSMARINE_SERVICE_USERNAME: ${{ secrets.COPERNICUSMARINE_SERVICE_USERNAME }}
+        COPERNICUSMARINE_SERVICE_PASSWORD: ${{ secrets.COPERNICUSMARINE_SERVICE_PASSWORD }}
+      shell: Rscript {0}
+      run: |
+        source("Complex_GHAs/src/acquire_cmems.R")
+  
+  
+  download_roms:
+    runs-on: windows-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+
+    - name: Install R
+      uses: r-lib/actions/setup-r@v2
+
+    - name: Install R packages
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: always
+        packages:
+          any::glue
+          any::ncdf4
+          any::terra
+          any::lubridate
+
+    - name: Download ROMS data
+      shell: Rscript {0}
+      run: |
+        source("Complex_GHAs/src/acquire_roms.R")

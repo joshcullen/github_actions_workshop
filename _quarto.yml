@@ -29,6 +29,8 @@ website:
         contents:
         - href: Complex_GHAs/Run_scripts.qmd
           text: Run scripts and use secrets
+        - href: Complex_GHAs/Run_multiple_jobs.qmd
+          text: Run multiple `jobs` in a workflow
         - href: Complex_GHAs/Workflow_artifacts.qmd
           text: Store and share data with artifacts
       - section: "Examples"

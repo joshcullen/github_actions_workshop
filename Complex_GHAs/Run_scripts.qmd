@@ -341,4 +341,4 @@ jobs:
 
 # Takeaways
 
-In this section, we covered the last major pieces to construct a complete GitHub Actions workflow that goes from VM setup to running scripts and pushing these resulting to your repo. These components likely cover the uses for a wide range of standard use cases of GitHub Actions in scientific research. However, there may be other use cases of interest and some more advanced topics that have not been covered so far (such as running multiple jobs in a single workflow, or performing R package checks and tests for CI/CD).
+In this section, we covered the last major pieces to construct a complete GitHub Actions workflow that goes from VM setup to running scripts and pushing these resulting files to your repo. These components likely cover a wide range of standard use cases of GitHub Actions in scientific research. However, there may be other use cases of interest or more advanced topics that have not been covered so far (such as running multiple jobs in a single workflow, or performing R package checks and tests for CI/CD) but will be introduced in subsequent sections.

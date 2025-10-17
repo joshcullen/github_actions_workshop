@@ -13,7 +13,7 @@ execute:
 
 # Background
 
-Building upon the [Simple GitHub Actions](Simple_GHAs/index.qmd) topics, we can now start adding more pieces to our workflows, such as running scripts in R, Python, or MATLAB. Since the purpose and components of scripts can be highly varied, I'll only cover a few examples here in each programming language. Depending on your needs and your entire analysis workflow, you may be able to accomplish all steps in a single scripts, or may need multiple scripts across multiple jobs and even workflows.
+Building upon the [Simple GitHub Actions](../Simple_GHAs/index.qmd) topics, we can now start adding more pieces to our workflows, such as running scripts in R, Python, or MATLAB. Since the purpose and components of scripts can be highly varied, I'll only cover a few examples here in each programming language. Depending on your needs and your entire analysis workflow, you may be able to accomplish all steps in a single scripts, or may need multiple scripts across multiple jobs and even workflows.
 
 This section will also introduce the use of "*secrets*" when applying tokens or log-in credentials that are needed within workflows, which ensures a more secure working environment without these tokens or credentials hard-coded into the workflow YAML. But for now, let's get started on covering how to run custom scripts to perform tasks and analyses.
 

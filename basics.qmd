@@ -116,4 +116,16 @@ Other software (such as Python) are already available on the runner upon startin
 
 ## High-performance computing
 
-**ADD TEXT HERE DISCUSSING EXAMPLES OF DIFFERENT OPTIONS, FROM THE USER OF DIFFERENT RUNNERS, INCREASING NUMBER OF CORES, AND USING GPUS. ADD REFS FOR PPL TO LOOK INTO IF INTERESTED. Also mention that this is essentially just doing cloud computing, but in a different format from say Google Cloud or AWS, so same ideas generally apply**
+While not covered in during this workshop, it is also worth mentioning that users with a GitHub Enterprise Cloud plan can use what are called **large runners**, which provide a much wider range of high-performance features compared to standard GitHub runners. Some relevant features provided by **large runners** include:
+
+- More memory, cores, and storage
+- Autoscaling to support concurrent workflows
+- GPU-powered runners
+
+Different features and sizes for these runners are available depending on the selected operating system, where macOS **large runners** generally have more limitations than Linux or Windows.
+
+:::{.callout-note}
+For both private and public repositories, when larger runners are in use, they will always be billed at the per-minute rate. However, there is no cost associated with creating a larger runner that is not being used by a workflow.
+:::
+
+For more information on **large runners**, please refer to these GitHub [documentation](https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/runners/larger-runners) and [reference](https://docs.github.com/en/enterprise-cloud@latest/actions/reference/runners/larger-runners) pages.

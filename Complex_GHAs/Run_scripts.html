@@ -200,6 +200,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../Complex_GHAs/Run_multiple_jobs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run multiple <code>jobs</code> in a workflow</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../Complex_GHAs/Workflow_artifacts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Store and share data with artifacts</span></a>
   </div>
@@ -288,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="background" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Background</h1>
-<p>Building upon the <a href="Simple_GHAs/index.qmd">Simple GitHub Actions</a> topics, we can now start adding more pieces to our workflows, such as running scripts in R, Python, or MATLAB. Since the purpose and components of scripts can be highly varied, I’ll only cover a few examples here in each programming language. Depending on your needs and your entire analysis workflow, you may be able to accomplish all steps in a single scripts, or may need multiple scripts across multiple jobs and even workflows.</p>
+<p>Building upon the <a href="../Simple_GHAs/index.html">Simple GitHub Actions</a> topics, we can now start adding more pieces to our workflows, such as running scripts in R, Python, or MATLAB. Since the purpose and components of scripts can be highly varied, I’ll only cover a few examples here in each programming language. Depending on your needs and your entire analysis workflow, you may be able to accomplish all steps in a single scripts, or may need multiple scripts across multiple jobs and even workflows.</p>
 <p>This section will also introduce the use of “<em>secrets</em>” when applying tokens or log-in credentials that are needed within workflows, which ensures a more secure working environment without these tokens or credentials hard-coded into the workflow YAML. But for now, let’s get started on covering how to run custom scripts to perform tasks and analyses.</p>
 </section>
 <section id="run-scripts" class="level1" data-number="2">
@@ -748,7 +754,7 @@ Figure&nbsp;9: Screenshot showing that the PAT value is no longer visible, but e
 </section>
 <section id="takeaways" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Takeaways</h1>
-<p>In this section, we covered the last major pieces to construct a complete GitHub Actions workflow that goes from VM setup to running scripts and pushing these resulting to your repo. These components likely cover the uses for a wide range of standard use cases of GitHub Actions in scientific research. However, there may be other use cases of interest and some more advanced topics that have not been covered so far (such as running multiple jobs in a single workflow, or performing R package checks and tests for CI/CD).</p>
+<p>In this section, we covered the last major pieces to construct a complete GitHub Actions workflow that goes from VM setup to running scripts and pushing these resulting files to your repo. These components likely cover a wide range of standard use cases of GitHub Actions in scientific research. However, there may be other use cases of interest or more advanced topics that have not been covered so far (such as running multiple jobs in a single workflow, or performing R package checks and tests for CI/CD) but will be introduced in subsequent sections.</p>
 
 
 </section>

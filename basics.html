@@ -168,6 +168,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Complex_GHAs/Run_multiple_jobs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run multiple <code>jobs</code> in a workflow</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Complex_GHAs/Workflow_artifacts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Store and share data with artifacts</span></a>
   </div>
@@ -467,7 +473,27 @@ Table&nbsp;2: An example of available standard GitHub-hosted runners and associa
 </section>
 <section id="high-performance-computing" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="high-performance-computing"><span class="header-section-number">4</span> High-performance computing</h2>
-<p><strong>ADD TEXT HERE DISCUSSING EXAMPLES OF DIFFERENT OPTIONS, FROM THE USER OF DIFFERENT RUNNERS, INCREASING NUMBER OF CORES, AND USING GPUS. ADD REFS FOR PPL TO LOOK INTO IF INTERESTED. Also mention that this is essentially just doing cloud computing, but in a different format from say Google Cloud or AWS, so same ideas generally apply</strong></p>
+<p>While not covered in during this workshop, it is also worth mentioning that users with a GitHub Enterprise Cloud plan can use what are called <strong>large runners</strong>, which provide a much wider range of high-performance features compared to standard GitHub runners. Some relevant features provided by <strong>large runners</strong> include:</p>
+<ul>
+<li>More memory, cores, and storage</li>
+<li>Autoscaling to support concurrent workflows</li>
+<li>GPU-powered runners</li>
+</ul>
+<p>Different features and sizes for these runners are available depending on the selected operating system, where macOS <strong>large runners</strong> generally have more limitations than Linux or Windows.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For both private and public repositories, when larger runners are in use, they will always be billed at the per-minute rate. However, there is no cost associated with creating a larger runner that is not being used by a workflow.</p>
+</div>
+</div>
+<p>For more information on <strong>large runners</strong>, please refer to these GitHub <a href="https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/runners/larger-runners">documentation</a> and <a href="https://docs.github.com/en/enterprise-cloud@latest/actions/reference/runners/larger-runners">reference</a> pages.</p>
 
 
 </section>

@@ -41,6 +41,8 @@ website:
           text: Dashboard
         - href: validate_example.qmd
           text: Data validation
+        - href: https://joshcullen.github.io/CEG_operationalization/lbst_cmems
+          text: Operationalized species distribution model
 
 format:
   html:

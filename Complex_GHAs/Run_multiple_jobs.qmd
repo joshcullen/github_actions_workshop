@@ -9,6 +9,28 @@ number-sections: true
 execute:
   echo: true
   eval: false
+other-links:
+  - text: "concurrent_jobs.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/concurrent_jobs.yml"
+    icon: "github"
+  - text: "acquire_cmems.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/acquire_cmems.R"
+    icon: "file-earmark-code"
+  - text: "acquire_roms.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/acquire_roms.R"
+    icon: "file-earmark-code"
+  - text: "acquire_utils.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/acquire_utils.R"
+    icon: "file-earmark-code"
+  - text: "sequential_jobs.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/sequential_jobs.yml"
+    icon: "github"
+  - text: "download_export_sst2.py"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst2.py"
+    icon: "file-earmark-code"
+  - text: "summarize_sst2.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst2.R"
+    icon: "file-earmark-code"
 ---
 
 # Background

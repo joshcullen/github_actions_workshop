@@ -9,6 +9,13 @@ number-sections: true
 execute:
   echo: true
   eval: false
+other-links:
+  - text: "simple2a.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/simple2a.yml"
+    icon: "github"
+  - text: "simple2b.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/simple2b.yml"
+    icon: "github"
 ---
 
 # Background

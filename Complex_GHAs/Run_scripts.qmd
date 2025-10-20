@@ -9,6 +9,40 @@ number-sections: true
 execute:
   echo: true
   eval: false
+other-links:
+  - text: "complex_r_script2.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/complex_r_script2.yml"
+    icon: "github"
+  - text: "download_export_sst.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst.R"
+    icon: "file-earmark-code"
+  - text: "summarize_sst.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst.R"
+    icon: "file-earmark-code"
+  - text: "complex_python_script2.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/complex_python_script2.yml"
+    icon: "github"
+  - text: "download_export_sst.py"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst.py"
+    icon: "file-earmark-code"
+  - text: "summarize_sst.py"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst.py"
+    icon: "file-earmark-code"
+  - text: "use_cmems_secrets.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/use_cmems_secrets.yml"
+    icon: "github"
+  - text: "acquire_cmems.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/acquire_cmems.R"
+    icon: "file-earmark-code"
+  - text: "acquire_utils.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/acquire_utils.R"
+    icon: "file-earmark-code"
+  - text: "use_pat.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/use_pat.yml"
+    icon: "github"
+  - text: "download_export_sst2.py"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst2.py"
+    icon: "file-earmark-code"
 ---
 
 # Background

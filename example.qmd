@@ -1,5 +1,5 @@
 ---
-title: "Example"
+title: "Standard Report"
 date: 09-16-2025
 date-modified: last-modified
 format:

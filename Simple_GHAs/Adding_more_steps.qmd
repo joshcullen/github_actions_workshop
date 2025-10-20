@@ -9,6 +9,19 @@ number-sections: true
 execute:
   echo: true
   eval: false
+other-links:
+  - text: "bash_debug.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/bash_debug.yml"
+    icon: "github"
+  - text: "copernicusmarine_install.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/copernicusmarine_install.yml"
+    icon: "github"
+  - text: "gdal_cdo_install.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/gdal_cdo_install.yml"
+    icon: "github"
+  - text: "inla_install.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/inla_install.yml"
+    icon: "github"
 ---
 
 # Background

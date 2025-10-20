@@ -5,6 +5,10 @@ format:
     code-annotations: below
     css: ../styles.css
 number-sections: true
+other-links:
+  - text: "simple.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/simple.yml"
+    icon: "github"
 ---
 
 # Getting started {#getting-started}

@@ -9,6 +9,16 @@ number-sections: true
 execute:
   echo: true
   eval: false
+other-links:
+  - text: "artifact_example.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/artifact_example.yml"
+    icon: "github"
+  - text: "download_export_sst.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst.R"
+    icon: "file-earmark-code"
+  - text: "summarize_sst.py"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst.py"
+    icon: "file-earmark-code"
 ---
 
 # Background

@@ -5,11 +5,19 @@ date-modified: last-modified
 format:
   html:
     self-contained: true
+other-links:
+  - text: "GOM_CHL_validation_example.R"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Data_validation_example/GOM_CHL_validation_example.R"
+    icon: "file-earmark-code"
 ---
 
 # Background
 
 This page provides a simple example that visualizes the results of a GitHub Actions workflow when downloading daily chlorophyll-a (Chla) data from ERDDAP within territorial waters of US states bordering the Gulf of Mexico. Data validation is performed across pixels of the raster product within these waters, as well as for the average values per state. Validation results are summarized in reports based on user-defined conditional statements.
+
+:::{.callout-note}
+You can find the R script for this analysis linked on the right side of this page.
+:::
 
 Given the lag in data availability for the [nesdisVHNSQchlaDaily](https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisVHNSQchlaDaily) Chla product (9 days), the data accessed in this example will be accessed from 2 weeks prior (i.e., `r Sys.Date() - 14`).
 

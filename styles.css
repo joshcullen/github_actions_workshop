@@ -38,3 +38,14 @@
     display: block;
   }
 }
+
+
+/* Define light text class for value boxes w/ dark background */
+.light-text {
+          color: #ffffff !important;
+}
+
+/* Specify card headers as bold */
+.card-header {
+  font-weight: bold !important;
+}

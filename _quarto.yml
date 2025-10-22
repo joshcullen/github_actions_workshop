@@ -1,12 +1,10 @@
 project:
   type: website
-  # render:
-  #   - basics.qmd
-  #   - Simple_GHAs/*.qmd
-  #   - RAMP_example_dash.qmd
 
 website:
   title: "GitHub Actions Workshop"
+  repo-url: https://github.com/joshcullen/github_actions_workshop
+  repo-actions: [issue, source]
   sidebar:
     style: "docked"
     search: true
@@ -33,9 +31,11 @@ website:
           text: Run multiple `jobs` in a workflow
         - href: Complex_GHAs/Workflow_artifacts.qmd
           text: Store and share data with artifacts
+        - href: Complex_GHAs/R_pkg_check.qmd
+          text: Check and test R packages
       - section: "Examples"
         contents:
-        - href: example.qmd
+        - href: std_report.qmd
           text: Standard report
         - href: RAMP_example_dash.qmd
           text: Dashboard
@@ -43,9 +43,16 @@ website:
           text: Data validation
         - href: https://joshcullen.github.io/CEG_operationalization/lbst_cmems
           text: Operationalized species distribution model
+  back-to-top-navigation: true
+  page-footer:
+    left: |
+      &copy; 2025 Josh Cullen
+    right: |
+      This page is built with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)
 
 format:
   html:
+    link-external-newwindow: true
     theme:
       - cosmo
       - brand

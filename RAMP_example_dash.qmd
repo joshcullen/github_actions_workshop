@@ -5,18 +5,35 @@ date-modified: last-modified
 format:
   dashboard:
     orientation: columns
+    nav-buttons:
+      - href: https://github.com/joshcullen/github_actions_workshop/blob/main/.github/workflows/python_erddap_dashboard.yml
+        text: Workflow YAML
+        icon: github
+      - href: https://github.com/joshcullen/github_actions_workshop/blob/main/ERDDAP_example/Acquire_summarize_and_export_ERDDAP_data.py
+        text: Python script
+        icon: file-earmark-code
+      - href: https://github.com/joshcullen/github_actions_workshop/blob/main/ERDDAP_example/Monthly%20RAMP%20upwelling.csv
+        text: CSV file
+        icon: filetype-csv
+      - href: https://github.com/joshcullen/github_actions_workshop/blob/main/ERDDAP_example/Monthly_RAMP_upwelling.geojson
+        text: RAMP Zone layer
+        icon: filetype-json
+include-in-header: 
+  - text: |
+      <style>
+      .light-text {
+        color: #ffffff !important; /* Forces all text/icons inside to be white */
+      }
+      .card-header {
+        font-weight: bold !important; /* Forces card to be bold */
+      }
+      </style>
 ---
 
 Last updated: **{{< meta date-modified >}}**
 
 This is an example dashboard demonstrating how to acquire, summarize, and visualize environmental data from a [product on ERDDAP](https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdQCwindproducts3day). Below are some examples of ways that these results can be visualized through tables and plots.
 
-<!-- Specify card headers as bold -->
-<style>
-.card-header {
-  font-weight: bold;
-}
-</style>
 
 
 ## Column {width=30%}
@@ -124,20 +141,36 @@ ramp |>
 
 ## Column {width=10%}
 
-::: {.valuebox icon="calendar-event" color="blue"}
-Latest data
+```{r}
+#| content: valuebox
+#| title: Latest data
 
-`r last(df$time)`
-:::
+list(
+  icon="calendar-event",
+  color="blue",
+  value=last(df$time)
+)
+```
 
-::: {.valuebox icon="tsunami" color="warning"}
-Latest min upwelling
+```{r}
+#| content: valuebox
+#| title: Latest min upwelling
 
-`r df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> min(na.rm = TRUE)`
-:::
+list(
+  icon="tsunami",
+  color="#A8FFE5",
+  value=df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> min(na.rm = TRUE)
+)
+```
 
-::: {.valuebox icon="tsunami" color="danger"}
-Latest min upwelling
+```{r}
+#| content: valuebox
+#| title: Latest max upwelling
+#| classes: "light-text"
 
-`r df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> max(na.rm = TRUE)`
-:::
+list(
+  icon="tsunami",
+  color="#011C4B",
+  value=df |> filter(time == last(df$time)) |> pull(ekman_upwelling) |> max(na.rm = TRUE)
+)
+```

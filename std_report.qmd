@@ -5,6 +5,16 @@ date-modified: last-modified
 format:
   html: default
   pdf: default
+other-links:
+  - text: "matlab_example.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/.github/workflows/matlab_example.yml"
+    icon: "github"
+  - text: "matlab_example_SoCalSST.m"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/MATLAB_example/matlab_example_SoCalSST.m"
+    icon: "file-earmark-code"
+  - text: "sst_test.csv"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/MATLAB_example/sst_test.csv"
+    icon: "filetype-csv"
 ---
 
 # Background
@@ -16,6 +26,11 @@ This page provides a simple example that visualizes the results of a GitHub Acti
 3.  Append this mean value to the end of a CSV file and push to the GitHub repo
 
 Below is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.
+
+:::{.callout-note}
+You can find the MATLAB script, CSV file, and GitHub Actions workflow YAML linked on the right side of this page.
+:::
+
 
 # Output
 

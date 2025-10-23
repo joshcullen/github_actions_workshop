@@ -49,6 +49,9 @@ website:
       &copy; 2025 Josh Cullen
     right: |
       This page is built with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)
+  google-analytics: 
+    tracking-id: "G-MVQW3P92B4"
+    storage: "none"
 
 format:
   html:

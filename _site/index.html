@@ -68,6 +68,20 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MVQW3P92B4"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+ 
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied'
+  });
+gtag('config', 'G-MVQW3P92B4', { 'anonymize_ip': true});
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -248,12 +262,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This website provides instructional materials for understanding and implementing GitHub Actions to automate tasks in the cloud across different programming languages.</p>
-<p><em>This website is currently under development and will continue to change until the start of the workshop (10/8/25)</em></p>
+<p>This website provides instructional materials for understanding and implementing GitHub Actions workflows to automate tasks in the cloud across different programming languages.</p>
+<p><img src="GitHub Actions diagram.png" class="img-fluid"></p>
+<p>This workshop assumes (at minimum):</p>
+<ol type="1">
+<li>you have basic coding experience (regardless of programming language)</li>
+<li>you’ve already created a GitHub account</li>
+<li>you have basic experience using Git and GitHub for version control</li>
+</ol>
+<p>For more information on using Git and GitHub (particularly for R users), I recommend the <a href="https://happygitwithr.com">Happy Git and GitHub for the useR</a> e-book created by Jenny Bryan. While there are R-specific suggestions for using Git from RStudio, much of the material is agnostic of programming language. Additionally, you may refer to this recording of a <a href="https://www.youtube.com/watch?v=6TTo6CAx7mk">Git and GitHub with RStudio workshop</a> I led in 2022.</p>
+<p>Please submit any questions on the <a href="https://github.com/joshcullen/github_actions_workshop/discussions">Discussions</a> page of the GitHub repo hosting this website and associated materials, which may serve as a forum to ask questions not covered in these materials.</p>
 
 
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -358,6 +380,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

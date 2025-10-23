@@ -41,7 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c30451789a0a2bcd5e941535c675cd30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5dcfcf7f8d229c93d75c4165c3ff646b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -92,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example.html">Examples</a></li><li class="breadcrumb-item"><a href="./example.html">Standard report</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./std_report.html">Examples</a></li><li class="breadcrumb-item"><a href="./std_report.html">Standard report</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,6 +186,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Store and share data with artifacts</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Complex_GHAs/R_pkg_check.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Check and test R packages</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -197,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./example.html" class="sidebar-item-text sidebar-link active">
+  <a href="./std_report.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Standard report</span></a>
   </div>
 </li>
@@ -234,12 +242,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
   <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="example.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/joshcullen/github_actions_workshop/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/joshcullen/github_actions_workshop/blob/main/std_report.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="std_report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://github.com/joshcullen/github_actions_workshop/blob/main/.github/workflows/matlab_example.yml"><i class="bi bi-github"></i>matlab_example.yml</a></li><li><a href="https://github.com/joshcullen/github_actions_workshop/blob/main/MATLAB_example/matlab_example_SoCalSST.m"><i class="bi bi-file-earmark-code"></i>matlab_example_SoCalSST.m</a></li><li><a href="https://github.com/joshcullen/github_actions_workshop/blob/main/MATLAB_example/sst_test.csv"><i class="bi bi-filetype-csv"></i>sst_test.csv</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./example.html">Examples</a></li><li class="breadcrumb-item"><a href="./example.html">Standard report</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./std_report.html">Examples</a></li><li class="breadcrumb-item"><a href="./std_report.html">Standard report</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Standard Report</h1>
 </div>
@@ -259,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 22, 2025</p>
+      <p class="date-modified">October 23, 2025</p>
     </div>
   </div>
     
@@ -279,6 +287,19 @@ ul.task-list li input[type="checkbox"] {
 <li>Append this mean value to the end of a CSV file and push to the GitHub repo</li>
 </ol>
 <p>Below is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can find the MATLAB script, CSV file, and GitHub Actions workflow YAML linked on the right side of this page.</p>
+</div>
+</div>
 </section>
 <section id="output" class="level1">
 <h1>Output</h1>
@@ -290,8 +311,8 @@ Table&nbsp;1: Daily mean SST values for small region in Southern California Bigh
 </figcaption>
 <div aria-describedby="tbl-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="htmlwidget-ef8c6de0e13c0e57cb31" style="width:400px;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef8c6de0e13c0e57cb31">{"x":{"filter":"none","vertical":false,"data":[["2025-08-01","2025-08-02","2025-08-03"],[15.23,15.54,18.59]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>sst<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"name":"date","targets":0},{"name":"sst","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-49ce5c80585810a8891a" style="width:400px;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-49ce5c80585810a8891a">{"x":{"filter":"none","vertical":false,"data":[["2025-08-01","2025-08-02","2025-08-03"],[15.23,15.54,18.59]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>sst<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"name":"date","targets":0},{"name":"sst","targets":1}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -303,7 +324,7 @@ Table&nbsp;1: Daily mean SST values for small region in Southern California Bigh
 <div id="fig-sst" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="example_files/figure-html/fig-sst-1.png" class="img-fluid figure-img" width="672">
+<img src="std_report_files/figure-html/fig-sst-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Time series of daily mean SST for region within Southern California Bight. Data acquired from ROMS.
@@ -316,7 +337,7 @@ Figure&nbsp;1: Time series of daily mean SST for region within Southern Californ
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -404,6 +425,11 @@ Figure&nbsp;1: Time series of daily mean SST for region within Southern Californ
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -718,6 +744,19 @@ Figure&nbsp;1: Time series of daily mean SST for region within Southern Californ
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Josh Cullen</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/joshcullen/github_actions_workshop/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/joshcullen/github_actions_workshop/blob/main/std_report.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This page is built with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
 

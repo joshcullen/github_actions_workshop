@@ -9,7 +9,7 @@ This website provides instructional materials for understanding and implementing
 This workshop assumes (at minimum): 
 
 1. you have basic coding experience (regardless of programming language)
-2. you've already created a GitHub account
+2. you have already created a GitHub account
 3. you have basic experience using Git and GitHub for version control
 
 For more information on using Git and GitHub (particularly for R users), I recommend the [Happy Git and GitHub for the useR](https://happygitwithr.com) e-book created by Jenny Bryan. While there are R-specific suggestions for using Git from RStudio, much of the material is agnostic of programming language. Additionally, you may refer to this recording of a [Git and GitHub with RStudio workshop](https://www.youtube.com/watch?v=6TTo6CAx7mk) I led in 2022.

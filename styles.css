@@ -49,3 +49,11 @@
 .card-header {
   font-weight: bold !important;
 }
+
+
+/* Target the 'code' element only inside elements with the 'sidebar' class */
+.sidebar code {
+  color: #e95420 !important; /* Set your desired color (e.g., Quarto orange) */
+  background-color: transparent !important; /* Optional: Remove the grey background if it exists */
+}
+

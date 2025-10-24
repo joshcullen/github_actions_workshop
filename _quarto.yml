@@ -5,6 +5,12 @@ website:
   title: "GitHub Actions Workshop"
   repo-url: https://github.com/joshcullen/github_actions_workshop
   repo-actions: [issue, source]
+  announcement: 
+    icon: info-circle
+    dismissable: true
+    content: "⚠️**Note** - this workshop will be rescheduled once the government shutdown ends⚠️"
+    type: danger
+    position: below-navbar
   sidebar:
     style: "docked"
     search: true
@@ -51,14 +57,18 @@ website:
       This page is built with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)
   google-analytics: 
     tracking-id: "G-MVQW3P92B4"
-    storage: "none"
+  cookie-consent:
+    type: implied
+    style: simple
+    palette: light
 
 format:
   html:
     link-external-newwindow: true
+    respect-user-color-scheme: true
     theme:
-      - cosmo
-      - brand
+      light: [flatly, theme-light.scss]
+      dark: [darkly, theme-dark.scss]
     css: styles.css
     toc: true
 

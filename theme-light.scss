@@ -1,0 +1,17 @@
+
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display');
+
+
+/*--scss:rules--*/
+
+#title-block-header.quarto-title-block.default .quarto-title .title {
+  font-family: "Red Hat Display", $headings-font-family;
+  font-size: 3rem;
+}
+
+h1, h2, h3 {
+  font-family: "Noto Sans Mono";
+}

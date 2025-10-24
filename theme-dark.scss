@@ -1,0 +1,33 @@
+
+/*-- scss:defaults --*/
+// Base document colors
+$body-bg: #181818;
+$body-color: #ccc;
+$link-color: #75AADB;
+
+// Code blocks
+$code-block-bg-alpha: 0.9;
+$code-bg: #bcebc8;
+$sidebar-inline-code-color: #e95420 !important;
+$announcement-text-color: #ffffff; // White text
+
+// Target the text inside the announcement bar
+.quarto-announcement-content {
+  // Use !important if the theme's colors are overriding
+  color: $announcement-text-color !important;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display');
+
+
+/*--scss:rules--*/
+
+#title-block-header.quarto-title-block.default .quarto-title .title {
+  font-family: "Red Hat Display", $headings-font-family;
+  font-size: 3rem;
+}
+
+h1, h2, h3 {
+  font-family: "Noto Sans Mono";
+}

@@ -1,0 +1,26 @@
+---
+title: "Anatomy of a GitHub Actions YAML"
+format: html
+number-sections: true
+---
+
+# Background
+
+All of the instructions that dictate the configuration of GitHub Actions are stored within YAML files, where YAML files and syntax are used in a wide variety of applications (*such as for configuring this Quarto website*). These files contain the different elements that were covered on the [Basics](basics.qmd) page, such as jobs, steps, actions, and triggers.
+
+
+```yaml
+name: Test GHA
+on: push
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+
+    - name: List files in repo
+      run: ls
+```
+

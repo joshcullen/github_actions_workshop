@@ -27,9 +27,13 @@ This page provides a simple example that visualizes the results of a GitHub Acti
 
 Below is a table showing these results, as well as a simple plot showing these values over time. Although the code used to access and summarize these data in the GitHub Actions workflow was written in MATLAB, the code to visualize these results from the CSV file are written in R for this Quarto website.
 
+:::: {.content-visible unless-format="pdf"}
+
 :::{.callout-note}
 You can find the MATLAB script, CSV file, and GitHub Actions workflow YAML linked on the right side of this page.
 :::
+
+::::
 
 
 # Output

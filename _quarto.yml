@@ -1,8 +1,6 @@
 project:
   type: website
 
-url: https://joshcullen.github.io/github_actions_workshop/
-
 website:
   title: "GitHub Actions Workshop"
   repo-url: https://github.com/joshcullen/github_actions_workshop

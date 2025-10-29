@@ -71,6 +71,7 @@ format:
       dark: [darkly, theme-dark.scss]
     css: styles.css
     toc: true
+    axe: true
 
 execute: 
   warning: false

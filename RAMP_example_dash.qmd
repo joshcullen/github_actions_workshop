@@ -52,6 +52,7 @@ df |>
   mutate(ekman_upwelling = round(ekman_upwelling, 8)) |> 
   arrange(desc(time)) |> 
   datatable(extensions = 'Buttons',
+            style = "bootstrap4",
             options = list(dom = 'Blfrtip',
                            bPaginate = TRUE, # Enable pagination
                            buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),

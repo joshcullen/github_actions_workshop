@@ -53,6 +53,7 @@ style B fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
 style C fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
 style D fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
 style E fill:#F0F8FF,stroke:#008ECC,stroke-width:2px,font-size:16pt
+linkStyle 0,1,2,3 stroke:grey
 ```
 
 However, certain scripts may have different computation needs that require the use of switching among different `runners`, you may want to have some scripts only run after the successful completion of one or more initial scripts, or you may want to have multiple types of jobs running concurrently to speed up the workflow. In these cases, it may make sense to use multiple `jobs` within a single workflow. However, users will need to decide whether to run actions within a separate `job` or as a separate workflow as covered in the [section on `events`](../Simple_GHAs/Config_events.qmd#workflow_run). In the following examples, we'll cover how to 1) run multiple `jobs` concurrently, and 2) run `jobs` sequentially.

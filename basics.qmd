@@ -61,6 +61,7 @@ style E fill:#F0F8FF,stroke:#008ECC,stroke-width:2px
 click A "https://github.com/actions/checkout"
 click B "https://github.com/r-lib/actions/tree/v2/setup-r"
 click C "https://github.com/r-lib/actions/tree/v2/setup-r-dependencies"
+linkStyle 0,1,2,3 stroke:grey
 ```
 
 where the [**green boxes**]{style="color: green;"} denote actions that can be run with minimal setup, and the [**blue hexagons**]{style="color: #008ECC;"} represent steps that use lines of code that are run in the terminal. Steps are run in sequential order and therefore are dependent on each other. Data are also naturally shared from one step to the next within a job since they are executed within the same runner (with shared storage on the VM).

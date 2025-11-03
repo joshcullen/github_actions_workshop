@@ -17,5 +17,4 @@ jobs:
     - name: Download and export SST
       uses: matlab-actions/run-command@v2
       with:
-        command:| 
-          addpath("Complex_GHAs/src"), download_export_sst, summarize_sst
+        command: addpath("Complex_GHAs/src"), download_export_sst, summarize_sst

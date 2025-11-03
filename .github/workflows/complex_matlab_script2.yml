@@ -18,5 +18,4 @@ jobs:
       uses: matlab-actions/run-command@v2
       with:
         command:| 
-          addpath("Complex_GHAs/src"), download_export_sst;
-          addpath("Complex_GHAs/src"), summarize_sst;
+          addpath("Complex_GHAs/src"), download_export_sst, summarize_sst

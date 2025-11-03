@@ -198,9 +198,37 @@ jobs:
         release: R2024a
     
     - name: Download and export SST
-      uses: matlab-actions/run-command@v2
+      uses: matlab-actions/run-command@v2  # <1>
       with:
-        command: addpath("Complex_GHAs/src"), download_export_sst  # <1>
+        command: addpath("Complex_GHAs/src"), download_export_sst  # <2>
+```
+1. Need to use an `action` to run MATLAB code (since uses proprietary software via license)
+2. There are a [couple ways](https://github.com/matlab-actions/run-command/) that MATLAB scripts can be run using GitHub Actions. This example shows one way to run a script that is stored in a directory different from the root (i.e., directory named `Complex_GHAs/src`). **Make sure to leave the file extension (`.m`) off of the provided script name.**
+
+<br>
+If we wanted to run multiple MATLAB scripts at a time, we could either run them in the same `step`, or as different steps. The example below demonstrates how to run two scripts within a single `step`:
+
+```{.yaml filename="complex_matlab_script2.yml"}
+name: Run MATLAB script
+on:
+  workflow_dispatch:
+
+jobs:  
+  run_matlab: 
+    runs-on: ubuntu-latest
+    steps:  
+    - name: Check out repository  
+      uses: actions/checkout@v5  
+
+    - name: Set up MATLAB
+      uses: matlab-actions/setup-matlab@v2
+      with:
+        release: R2024a
+    
+    - name: Download and export SST
+      uses: matlab-actions/run-command@v2  # <1>
+      with:
+        command: addpath("Complex_GHAs/src"), download_export_sst  # <2>
 ```
 :::
 

@@ -226,9 +226,9 @@ jobs:
         release: R2024a
     
     - name: Download and export SST
-      uses: matlab-actions/run-command@v2  # <1>
+      uses: matlab-actions/run-command@v2
       with:
-        command: addpath("Complex_GHAs/src"), download_export_sst  # <2>
+        command: addpath("Complex_GHAs/src"), download_export_sst, summarize_sst
 ```
 :::
 

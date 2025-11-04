@@ -676,7 +676,7 @@ cookieconsent.run({
 <div class="code-with-filename-file">
 <pre><strong>complex_matlab_script.yml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7" data-filename="complex_matlab_script.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy"><code class="sourceCode yaml"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Run MATLAB script</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7" data-filename="complex_matlab_script.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Run MATLAB script</span></span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
 <span id="annotated-cell-7-3"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
 <span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -693,9 +693,43 @@ cookieconsent.run({
 <span id="annotated-cell-7-15"><a href="#annotated-cell-7-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">release</span><span class="kw">:</span><span class="at"> R2024a</span></span>
 <span id="annotated-cell-7-16"><a href="#annotated-cell-7-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
 <span id="annotated-cell-7-17"><a href="#annotated-cell-7-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and export SST</span></span>
-<span id="annotated-cell-7-18"><a href="#annotated-cell-7-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> matlab-actions/run-command@v2</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-18" class="code-annotation-target"><a href="#annotated-cell-7-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> matlab-actions/run-command@v2</span></span>
 <span id="annotated-cell-7-19"><a href="#annotated-cell-7-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="annotated-cell-7-20"><a href="#annotated-cell-7-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">command</span><span class="kw">:</span><span class="at"> addpath("Complex_GHAs/src"), download_export_sst</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-20" class="code-annotation-target"><a href="#annotated-cell-7-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">command</span><span class="kw">:</span><span class="at"> addpath("Complex_GHAs/src"), download_export_sst</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="18" data-code-annotation="1">Need to use an <code>action</code> to run MATLAB code (since uses proprietary software via license)</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="20" data-code-annotation="2">There are a <a href="https://github.com/matlab-actions/run-command/">couple ways</a> that MATLAB scripts can be run using GitHub Actions. This example shows one way to run a script that is stored in a directory different from the root (i.e., directory named <code>Complex_GHAs/src</code>). <strong>Make sure to leave the file extension (<code>.m</code>) off of the provided script name.</strong></span>
+</dd>
+</dl>
+<p><br> If we wanted to run multiple MATLAB scripts at a time, we could either run them in the same <code>step</code>, or as different steps. The example below demonstrates how to run two scripts within a single <code>step</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>complex_matlab_script2.yml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="complex_matlab_script2.yml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Run MATLAB script</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_matlab</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository  </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v5  </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up MATLAB</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> matlab-actions/setup-matlab@v2</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and export SST</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> matlab-actions/run-command@v2</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">command</span><span class="kw">:</span><span class="at"> addpath("Complex_GHAs/src"), download_export_sst, summarize_sst</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -772,72 +806,72 @@ Figure&nbsp;5
 <div class="code-with-filename-file">
 <pre><strong>use_cmems_secrets.yml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8" data-filename="use_cmems_secrets.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Access CMEMS data</span></span>
-<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
-<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">download_cmems</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span><span class="at">  </span></span>
-<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository</span></span>
-<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v5 </span></span>
-<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Conda</span></span>
-<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> conda-incubator/setup-miniconda@v3</span></span>
-<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-15"><a href="#annotated-cell-8-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">auto-update-conda</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="annotated-cell-8-16"><a href="#annotated-cell-8-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">channels</span><span class="kw">:</span><span class="at"> conda-forge,defaults</span></span>
-<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="fl">3.12</span></span>
-<span id="annotated-cell-8-18"><a href="#annotated-cell-8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-19"><a href="#annotated-cell-8-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Copernicus Marine Toolbox</span></span>
-<span id="annotated-cell-8-20"><a href="#annotated-cell-8-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> bash -el {0}</span></span>
-<span id="annotated-cell-8-21"><a href="#annotated-cell-8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-22" class="code-annotation-target"><a href="#annotated-cell-8-22" aria-hidden="true" tabindex="-1"></a>        conda install -c conda-forge copernicusmarine</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-23" class="code-annotation-target"><a href="#annotated-cell-8-23" aria-hidden="true" tabindex="-1"></a>        conda install scipy</span>
-<span id="annotated-cell-8-24"><a href="#annotated-cell-8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-25"><a href="#annotated-cell-8-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install R</span></span>
-<span id="annotated-cell-8-26"><a href="#annotated-cell-8-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v2</span></span>
-<span id="annotated-cell-8-27"><a href="#annotated-cell-8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-28"><a href="#annotated-cell-8-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install R packages</span></span>
-<span id="annotated-cell-8-29"><a href="#annotated-cell-8-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r-dependencies@v2</span></span>
-<span id="annotated-cell-8-30"><a href="#annotated-cell-8-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-31"><a href="#annotated-cell-8-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">cache</span><span class="kw">:</span><span class="at"> always</span></span>
-<span id="annotated-cell-8-32"><a href="#annotated-cell-8-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span></span>
-<span id="annotated-cell-8-33"><a href="#annotated-cell-8-33" aria-hidden="true" tabindex="-1"></a><span class="at">          any::glue</span></span>
-<span id="annotated-cell-8-34"><a href="#annotated-cell-8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-8-35"><a href="#annotated-cell-8-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download CMEMS data</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-8-36" class="code-annotation-target"><a href="#annotated-cell-8-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">env</span><span class="kw">:</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-8-37" class="code-annotation-target"><a href="#annotated-cell-8-37" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">COPERNICUSMARINE_SERVICE_USERNAME</span><span class="kw">:</span><span class="at"> ${{ secrets.COPERNICUSMARINE_SERVICE_USERNAME }}</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-8-38" class="code-annotation-target"><a href="#annotated-cell-8-38" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">COPERNICUSMARINE_SERVICE_PASSWORD</span><span class="kw">:</span><span class="at"> ${{ secrets.COPERNICUSMARINE_SERVICE_PASSWORD }}</span></span>
-<span id="annotated-cell-8-39"><a href="#annotated-cell-8-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
-<span id="annotated-cell-8-40"><a href="#annotated-cell-8-40" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-8-41" class="code-annotation-target"><a href="#annotated-cell-8-41" aria-hidden="true" tabindex="-1"></a>        source("Complex_GHAs/src/acquire_cmems.R")</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-10" data-filename="use_cmems_secrets.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Access CMEMS data</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">download_cmems</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="annotated-cell-10-9"><a href="#annotated-cell-10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository</span></span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v5 </span></span>
+<span id="annotated-cell-10-11"><a href="#annotated-cell-10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-12"><a href="#annotated-cell-10-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Conda</span></span>
+<span id="annotated-cell-10-13"><a href="#annotated-cell-10-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> conda-incubator/setup-miniconda@v3</span></span>
+<span id="annotated-cell-10-14"><a href="#annotated-cell-10-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-15"><a href="#annotated-cell-10-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">auto-update-conda</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="annotated-cell-10-16"><a href="#annotated-cell-10-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">channels</span><span class="kw">:</span><span class="at"> conda-forge,defaults</span></span>
+<span id="annotated-cell-10-17"><a href="#annotated-cell-10-17" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="fl">3.12</span></span>
+<span id="annotated-cell-10-18"><a href="#annotated-cell-10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-19"><a href="#annotated-cell-10-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Copernicus Marine Toolbox</span></span>
+<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> bash -el {0}</span></span>
+<span id="annotated-cell-10-21"><a href="#annotated-cell-10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-22" class="code-annotation-target"><a href="#annotated-cell-10-22" aria-hidden="true" tabindex="-1"></a>        conda install -c conda-forge copernicusmarine</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-23" class="code-annotation-target"><a href="#annotated-cell-10-23" aria-hidden="true" tabindex="-1"></a>        conda install scipy</span>
+<span id="annotated-cell-10-24"><a href="#annotated-cell-10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-25"><a href="#annotated-cell-10-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install R</span></span>
+<span id="annotated-cell-10-26"><a href="#annotated-cell-10-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v2</span></span>
+<span id="annotated-cell-10-27"><a href="#annotated-cell-10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-28"><a href="#annotated-cell-10-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install R packages</span></span>
+<span id="annotated-cell-10-29"><a href="#annotated-cell-10-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r-dependencies@v2</span></span>
+<span id="annotated-cell-10-30"><a href="#annotated-cell-10-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-31"><a href="#annotated-cell-10-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">cache</span><span class="kw">:</span><span class="at"> always</span></span>
+<span id="annotated-cell-10-32"><a href="#annotated-cell-10-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">packages</span><span class="kw">:</span></span>
+<span id="annotated-cell-10-33"><a href="#annotated-cell-10-33" aria-hidden="true" tabindex="-1"></a><span class="at">          any::glue</span></span>
+<span id="annotated-cell-10-34"><a href="#annotated-cell-10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-35"><a href="#annotated-cell-10-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download CMEMS data</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-10-36" class="code-annotation-target"><a href="#annotated-cell-10-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">env</span><span class="kw">:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-10-37" class="code-annotation-target"><a href="#annotated-cell-10-37" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">COPERNICUSMARINE_SERVICE_USERNAME</span><span class="kw">:</span><span class="at"> ${{ secrets.COPERNICUSMARINE_SERVICE_USERNAME }}</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-10-38" class="code-annotation-target"><a href="#annotated-cell-10-38" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">COPERNICUSMARINE_SERVICE_PASSWORD</span><span class="kw">:</span><span class="at"> ${{ secrets.COPERNICUSMARINE_SERVICE_PASSWORD }}</span></span>
+<span id="annotated-cell-10-39"><a href="#annotated-cell-10-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
+<span id="annotated-cell-10-40"><a href="#annotated-cell-10-40" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-10-41" class="code-annotation-target"><a href="#annotated-cell-10-41" aria-hidden="true" tabindex="-1"></a>        source("Complex_GHAs/src/acquire_cmems.R")</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="22" data-code-annotation="1">Install <code>copernicusmarine</code> on VM</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="22" data-code-annotation="1">Install <code>copernicusmarine</code> on VM</span>
 </dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="23" data-code-annotation="2">Also need to install <code>scipy</code> dependency for <code>copernicusmarine</code> since not already installed</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="23" data-code-annotation="2">Also need to install <code>scipy</code> dependency for <code>copernicusmarine</code> since not already installed</span>
 </dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="36" data-code-annotation="3">The <code>env</code> argument let’s you specify different environment variables for this <code>step</code>; alternatively can be specified at higher level for entire <code>job</code>.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="36" data-code-annotation="3">The <code>env</code> argument let’s you specify different environment variables for this <code>step</code>; alternatively can be specified at higher level for entire <code>job</code>.</span>
 </dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="37" data-code-annotation="4">The environment variable defined for the username applied when accessing the <code>copernicusmarine</code> API, where <code>secrets.COPERNICUSMARINE_SERVICE_USERNAME</code> refers to the username stored previously.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="37" data-code-annotation="4">The environment variable defined for the username applied when accessing the <code>copernicusmarine</code> API, where <code>secrets.COPERNICUSMARINE_SERVICE_USERNAME</code> refers to the username stored previously.</span>
 </dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="38" data-code-annotation="5">The environment variable defined for the password applied when accessing the <code>copernicusmarine</code> API, where <code>secrets.COPERNICUSMARINE_SERVICE_PASSWORD</code> refers to the password stored previously.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="38" data-code-annotation="5">The environment variable defined for the password applied when accessing the <code>copernicusmarine</code> API, where <code>secrets.COPERNICUSMARINE_SERVICE_PASSWORD</code> refers to the password stored previously.</span>
 </dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="6">6</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="41" data-code-annotation="6">The R script running code to download CMEMS data</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="41" data-code-annotation="6">The R script running code to download CMEMS data</span>
 </dd>
 </dl>
 </div>
@@ -901,78 +935,78 @@ Figure&nbsp;9: Screenshot showing that the PAT value is no longer visible, but e
 <div class="code-with-filename-file">
 <pre><strong>use_pat.yml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9" data-filename="use_pat.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and push ERDDAP data</span></span>
-<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
-<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
-<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_python</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-8" class="code-annotation-target"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> write</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-10" class="code-annotation-target"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">GITHUB_PAT</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span><span class="at">  </span></span>
-<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository  </span></span>
-<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v5  </span></span>
-<span id="annotated-cell-9-15"><a href="#annotated-cell-9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-9-16"><a href="#annotated-cell-9-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Conda</span></span>
-<span id="annotated-cell-9-17"><a href="#annotated-cell-9-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> conda-incubator/setup-miniconda@v3</span></span>
-<span id="annotated-cell-9-18"><a href="#annotated-cell-9-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="annotated-cell-9-19"><a href="#annotated-cell-9-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">auto-update-conda</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="annotated-cell-9-20"><a href="#annotated-cell-9-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="fl">3.12</span></span>
-<span id="annotated-cell-9-21"><a href="#annotated-cell-9-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
-<span id="annotated-cell-9-22"><a href="#annotated-cell-9-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Python packages</span></span>
-<span id="annotated-cell-9-23"><a href="#annotated-cell-9-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install -r requirements.txt</span></span>
-<span id="annotated-cell-9-24"><a href="#annotated-cell-9-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
-<span id="annotated-cell-9-25"><a href="#annotated-cell-9-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and export SST</span></span>
-<span id="annotated-cell-9-26"><a href="#annotated-cell-9-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python Complex_GHAs/src/download_export_sst2.py</span></span>
-<span id="annotated-cell-9-27"><a href="#annotated-cell-9-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
-<span id="annotated-cell-9-28"><a href="#annotated-cell-9-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit and Push Changes</span></span>
-<span id="annotated-cell-9-29"><a href="#annotated-cell-9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-9-30" class="code-annotation-target"><a href="#annotated-cell-9-30" aria-hidden="true" tabindex="-1"></a>        git config --global user.name "${{ github.actor }}"</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-9-31" class="code-annotation-target"><a href="#annotated-cell-9-31" aria-hidden="true" tabindex="-1"></a>        git config --global user.email "${{ github.actor }}@users.noreply.github.com"</span>
-<span id="annotated-cell-9-32"><a href="#annotated-cell-9-32" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-9-33" class="code-annotation-target"><a href="#annotated-cell-9-33" aria-hidden="true" tabindex="-1"></a>        git add .</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-9-34" class="code-annotation-target"><a href="#annotated-cell-9-34" aria-hidden="true" tabindex="-1"></a>        git commit -m 'Added new ERDDAP SST file'</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-9-35" class="code-annotation-target"><a href="#annotated-cell-9-35" aria-hidden="true" tabindex="-1"></a>        git push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11" data-filename="use_pat.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and push ERDDAP data</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_python</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-8" class="code-annotation-target"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-11-9" class="code-annotation-target"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> write</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-11-10" class="code-annotation-target"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-11-11" class="code-annotation-target"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">GITHUB_PAT</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span><span class="at">  </span></span>
+<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository  </span></span>
+<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v5  </span></span>
+<span id="annotated-cell-11-15"><a href="#annotated-cell-11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-16"><a href="#annotated-cell-11-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Conda</span></span>
+<span id="annotated-cell-11-17"><a href="#annotated-cell-11-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> conda-incubator/setup-miniconda@v3</span></span>
+<span id="annotated-cell-11-18"><a href="#annotated-cell-11-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="annotated-cell-11-19"><a href="#annotated-cell-11-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">auto-update-conda</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="annotated-cell-11-20"><a href="#annotated-cell-11-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="fl">3.12</span></span>
+<span id="annotated-cell-11-21"><a href="#annotated-cell-11-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="annotated-cell-11-22"><a href="#annotated-cell-11-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Python packages</span></span>
+<span id="annotated-cell-11-23"><a href="#annotated-cell-11-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install -r requirements.txt</span></span>
+<span id="annotated-cell-11-24"><a href="#annotated-cell-11-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="annotated-cell-11-25"><a href="#annotated-cell-11-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Download and export SST</span></span>
+<span id="annotated-cell-11-26"><a href="#annotated-cell-11-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python Complex_GHAs/src/download_export_sst2.py</span></span>
+<span id="annotated-cell-11-27"><a href="#annotated-cell-11-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="annotated-cell-11-28"><a href="#annotated-cell-11-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit and Push Changes</span></span>
+<span id="annotated-cell-11-29"><a href="#annotated-cell-11-29" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-11-30" class="code-annotation-target"><a href="#annotated-cell-11-30" aria-hidden="true" tabindex="-1"></a>        git config --global user.name "${{ github.actor }}"</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-11-31" class="code-annotation-target"><a href="#annotated-cell-11-31" aria-hidden="true" tabindex="-1"></a>        git config --global user.email "${{ github.actor }}@users.noreply.github.com"</span>
+<span id="annotated-cell-11-32"><a href="#annotated-cell-11-32" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-11-33" class="code-annotation-target"><a href="#annotated-cell-11-33" aria-hidden="true" tabindex="-1"></a>        git add .</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-11-34" class="code-annotation-target"><a href="#annotated-cell-11-34" aria-hidden="true" tabindex="-1"></a>        git commit -m 'Added new ERDDAP SST file'</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="9" onclick="event.preventDefault();">9</a><span id="annotated-cell-11-35" class="code-annotation-target"><a href="#annotated-cell-11-35" aria-hidden="true" tabindex="-1"></a>        git push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="8" data-code-annotation="1">The <code>permissions</code> argument may need to be specified for the workflow in order to allow users to modify the repo (such as by committing and pushing files)</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="1">The <code>permissions</code> argument may need to be specified for the workflow in order to allow users to modify the repo (such as by committing and pushing files)</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="2">Under <code>permission</code>, we need to specify that we need to be able to <code>write</code> files to the repo. Otherwise, in this particular case, the workflow will fail.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="9" data-code-annotation="2">Under <code>permission</code>, we need to specify that we need to be able to <code>write</code> files to the repo. Otherwise, in this particular case, the workflow will fail.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="10" data-code-annotation="3">The <code>env</code> argument here specifies environment variables defined for the entire workflow, including use of tokens or <em>secrets</em></span>
+<span data-code-cell="annotated-cell-11" data-code-lines="10" data-code-annotation="3">The <code>env</code> argument here specifies environment variables defined for the entire workflow, including use of tokens or <em>secrets</em></span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="4">Assigning the PAT I generated (named <code>GITHUB_TOKEN</code>) to environment variable named <code>GITHUB_PAT</code>. By default, GitHub Actions is able to auto-detect a PAT that you’ve created without explictly specifying it, but it is good practice to do so.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="4">Assigning the PAT I generated (named <code>GITHUB_TOKEN</code>) to environment variable named <code>GITHUB_PAT</code>. By default, GitHub Actions is able to auto-detect a PAT that you’ve created without explictly specifying it, but it is good practice to do so.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="30" data-code-annotation="5">Defining the <code>user.name</code> associated with the account committing and pushing this file. There are a number of ways you can specify this, but the <code>github.actor</code> variable uses the username associated with your account.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="30" data-code-annotation="5">Defining the <code>user.name</code> associated with the account committing and pushing this file. There are a number of ways you can specify this, but the <code>github.actor</code> variable uses the username associated with your account.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="31" data-code-annotation="6">Defining the <code>user.email</code> associated with the account committing and pushing this file. There are a number of ways you can specify this, but the <code>github.actor</code> variable uses the email associated with your account.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="31" data-code-annotation="6">Defining the <code>user.email</code> associated with the account committing and pushing this file. There are a number of ways you can specify this, but the <code>github.actor</code> variable uses the email associated with your account.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="7">7</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="33" data-code-annotation="7">The Git syntax to <code>add</code> (or stage) all new or modified files in the repo. It’s also possible to specify a certain directory, filetype, and specific file if preferable.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="33" data-code-annotation="7">The Git syntax to <code>add</code> (or stage) all new or modified files in the repo. It’s also possible to specify a certain directory, filetype, and specific file if preferable.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="8">8</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="34" data-code-annotation="8">The Git syntax to <code>commit</code> files, as well as providing a message associated with this <code>commit</code>.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="34" data-code-annotation="8">The Git syntax to <code>commit</code> files, as well as providing a message associated with this <code>commit</code>.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="9">9</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="9">9</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="35" data-code-annotation="9">The Git syntax to <code>push</code> the <code>commit</code> to the remote repo location (i.e., on GitHub).</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="35" data-code-annotation="9">The Git syntax to <code>push</code> the <code>commit</code> to the remote repo location (i.e., on GitHub).</span>
 </dd>
 </dl>
 </div>

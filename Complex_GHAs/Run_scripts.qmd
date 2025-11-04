@@ -28,6 +28,15 @@ other-links:
   - text: "summarize_sst.py"
     href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst.py"
     icon: "file-earmark-code"
+  - text: "complex_matlab_script2.yml"
+    href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/complex_matlab_script2.yml"
+    icon: "github"
+  - text: "download_export_sst.m"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/download_export_sst.m"
+    icon: "file-earmark-code"
+  - text: "summarize_sst.m"
+    href: "https://github.com/joshcullen/github_actions_workshop/blob/main/Complex_GHAs/src/summarize_sst.m"
+    icon: "file-earmark-code"
   - text: "use_cmems_secrets.yml"
     href: "https://github.com/joshcullen/github_actions_workshop/actions/workflows/use_cmems_secrets.yml"
     icon: "github"
@@ -194,9 +203,7 @@ jobs:
 
     - name: Set up MATLAB
       uses: matlab-actions/setup-matlab@v2
-      with:
-        release: R2024a
-    
+
     - name: Download and export SST
       uses: matlab-actions/run-command@v2  # <1>
       with:

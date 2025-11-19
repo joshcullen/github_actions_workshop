@@ -8,7 +8,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "⚠️**Note** - this workshop will be rescheduled once the government shutdown ends⚠️"
+    content: "⚠️**Note** - this workshop is in the process of being rescheduled for December⚠️"
     type: danger
     position: below-navbar
   sidebar:
@@ -49,6 +49,8 @@ website:
           text: Data validation
         - href: https://joshcullen.github.io/CEG_operationalization/lbst_cmems
           text: Operationalized species distribution model
+        - href: https://cciea-esr.github.io/CCIEA-uploader/
+          text: CCIEA Uploader
   back-to-top-navigation: true
   page-footer:
     left: |

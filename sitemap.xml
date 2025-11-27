@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/RAMP_example_dash.html</loc>
-    <lastmod>2025-11-26T10:40:36.435Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.361Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Anatomy_of_GHA_YAML.html</loc>
-    <lastmod>2025-11-26T10:40:36.436Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.361Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/index.html</loc>
-    <lastmod>2025-11-26T10:40:36.452Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.377Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/R_pkg_check.html</loc>
-    <lastmod>2025-11-26T10:40:36.216Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.142Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_scripts.html</loc>
-    <lastmod>2025-11-26T10:40:36.216Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.142Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/basics.html</loc>
-    <lastmod>2025-11-26T10:40:36.461Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.385Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/LICENSE.html</loc>
-    <lastmod>2025-11-26T10:40:36.435Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.361Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/std_report.html</loc>
-    <lastmod>2025-11-26T10:40:36.461Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.385Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/validate_example.html</loc>
-    <lastmod>2025-11-26T10:40:36.461Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.385Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/index.html</loc>
-    <lastmod>2025-11-26T10:40:36.461Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.385Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/index.html</loc>
-    <lastmod>2025-11-26T10:40:36.247Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.172Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_multiple_jobs.html</loc>
-    <lastmod>2025-11-26T10:40:36.216Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.142Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Workflow_artifacts.html</loc>
-    <lastmod>2025-11-26T10:40:36.217Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.142Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Config_events.html</loc>
-    <lastmod>2025-11-26T10:40:36.436Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.361Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Adding_more_steps.html</loc>
-    <lastmod>2025-11-26T10:40:36.435Z</lastmod>
+    <lastmod>2025-11-27T10:40:48.361Z</lastmod>
   </url>
 </urlset>

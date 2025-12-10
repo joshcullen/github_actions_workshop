@@ -136,7 +136,7 @@ jobs:
 ```
 
 <br>
-As you can see in the workflow YAML, we really haven't done anything new other than adding a second job to the workflow. So in this example, we have separate jobs nmaed `download_cmems` and `download_roms` that are each working on different `runners` (`ubuntu` and `windows`). In this example, running these jobs concurrently makes sense since they are not dependent on one another. This may not be the case for all workflows, however.
+As you can see in the workflow YAML, we really haven't done anything new other than adding a second job to the workflow. So in this example, we have separate jobs named `download_cmems` and `download_roms` that are each working on different `runners` (`ubuntu` and `windows`). In this example, running these jobs concurrently makes sense since they are not dependent on one another. This may not be the case for all workflows, however.
 
 
 # Sequential `jobs`

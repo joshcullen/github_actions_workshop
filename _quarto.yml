@@ -14,6 +14,9 @@ website:
   sidebar:
     style: "docked"
     search: true
+    tools:
+      - icon: github
+        href: https://github.com/joshcullen/github_actions_workshop
     contents:
       - href: index.qmd
         text: Home

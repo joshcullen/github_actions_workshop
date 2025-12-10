@@ -333,8 +333,8 @@ cookieconsent.run({
       </button>
     </div>
   </nav>
-  <div id="quarto-announcement" data-announcement-id="a36462f7d43ac42a83c6d1374ef7895d" class="alert alert-danger hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>⚠️<strong>Note</strong> - this workshop is in the process of being rescheduled for December⚠️</p>
+  <div id="quarto-announcement" data-announcement-id="a06658dc42028c65504b96410ea335fb" class="alert alert-danger hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>⚠️<strong>Note</strong> - recordings will be added after completion of workshop⚠️</p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -345,6 +345,7 @@ cookieconsent.run({
     <div class="sidebar-title mb-0 py-0">
       <a href="../">GitHub Actions Workshop</a> 
         <div class="sidebar-tools-main">
+    <a href="https://github.com/joshcullen/github_actions_workshop" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -741,7 +742,7 @@ cookieconsent.run({
 </section>
 <section id="use-secrets-and-tokens" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Use secrets and tokens</h1>
-<p>While running scripts, users may wish to connect to a database, use and API, or push files to their own GitHub repository. Each of these applications often requires authorization of some kind through your own account credentials. These credentials and other sensitive information associated with your GitHub account or organization are called “<a href="https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/security/secrets"><em>secrets</em></a>”. These <em>secrets</em> can only be read if explictly included in a GitHub Actions workflow and are encrypted, which helps minimize security risks. Similarly, a personal access token (PAT) is often required to authorize your GitHub account during normal activities (e.g., pushing to repo, installing R package from GitHub). This PAT can then be used within the <code>GITHUB_TOKEN</code> secret during a GitHub Action workflow to authorize changes to your repo (such as pushing newly created files).</p>
+<p>While running scripts, users may wish to connect to a database, use an API, or push files to their own GitHub repository. Each of these applications often requires authorization of some kind through your own account credentials. These credentials and other sensitive information associated with your GitHub account or organization are called “<a href="https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/security/secrets"><em>secrets</em></a>”. These <em>secrets</em> can only be read if explictly included in a GitHub Actions workflow and are encrypted, which helps minimize security risks. Similarly, a personal access token (PAT) is often required to authorize your GitHub account during normal activities (e.g., pushing to repo, installing R package from GitHub). This PAT can then be used within the <code>GITHUB_TOKEN</code> secret during a GitHub Action workflow to authorize changes to your repo (such as pushing newly created files).</p>
 <section id="secrets" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="secrets"><span class="header-section-number">3.1</span> Secrets</h2>
 <section id="create-a-secret" class="level3" data-number="3.1.1">
@@ -919,7 +920,7 @@ Figure&nbsp;8: Screenshot showing options for defining scope of PAT.
 </figcaption>
 </figure>
 </div>
-<p><br> Once you chosen the scope of the PAT, scroll down to the bottom of the page and click the green “Generate token” button. You’ll then be brought to a page that shows your generated PAT. You need to copy and store this token somewhere safe if wanting to use it in other environments (such as RStudio, Positron, VS Code, etc) because it will not be visible again once you leave this page. If you refresh or revisit this page, you’ll only see that the PAT exists and the expiration date. If needed, you can always delete and generate a new token.</p>
+<p><br> Once you’ve chosen the scope of the PAT, scroll down to the bottom of the page and click the green “Generate token” button. You’ll then be brought to a page that shows your generated PAT. You need to copy and store this token somewhere safe if wanting to use it in other environments (such as RStudio, Positron, VS Code, etc) because it will not be visible again once you leave this page. If you refresh or revisit this page, you’ll only see that the PAT exists and the expiration date. If needed, you can always delete and generate a new token.</p>
 <div id="fig-new-token" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-new-token-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

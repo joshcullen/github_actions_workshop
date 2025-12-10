@@ -335,8 +335,8 @@ cookieconsent.run({
       </button>
     </div>
   </nav>
-  <div id="quarto-announcement" data-announcement-id="a36462f7d43ac42a83c6d1374ef7895d" class="alert alert-danger hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>⚠️<strong>Note</strong> - this workshop is in the process of being rescheduled for December⚠️</p>
+  <div id="quarto-announcement" data-announcement-id="a06658dc42028c65504b96410ea335fb" class="alert alert-danger hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>⚠️<strong>Note</strong> - recordings will be added after completion of workshop⚠️</p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -347,6 +347,7 @@ cookieconsent.run({
     <div class="sidebar-title mb-0 py-0">
       <a href="../">GitHub Actions Workshop</a> 
         <div class="sidebar-tools-main">
+    <a href="https://github.com/joshcullen/github_actions_workshop" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -620,7 +621,7 @@ linkStyle 0,1,2,3 stroke:grey
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">      run</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        source("Complex_GHAs/src/acquire_roms.R")</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><br> As you can see in the workflow YAML, we really haven’t done anything new other than adding a second job to the workflow. So in this example, we have separate jobs nmaed <code>download_cmems</code> and <code>download_roms</code> that are each working on different <code>runners</code> (<code>ubuntu</code> and <code>windows</code>). In this example, running these jobs concurrently makes sense since they are not dependent on one another. This may not be the case for all workflows, however.</p>
+<p><br> As you can see in the workflow YAML, we really haven’t done anything new other than adding a second job to the workflow. So in this example, we have separate jobs named <code>download_cmems</code> and <code>download_roms</code> that are each working on different <code>runners</code> (<code>ubuntu</code> and <code>windows</code>). In this example, running these jobs concurrently makes sense since they are not dependent on one another. This may not be the case for all workflows, however.</p>
 </section>
 <section id="sequential-jobs" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Sequential <code>jobs</code></h1>

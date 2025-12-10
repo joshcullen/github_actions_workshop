@@ -8,7 +8,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "⚠️**Note** - this workshop is in the process of being rescheduled for December⚠️"
+    content: "⚠️**Note** - recordings will be added after completion of workshop⚠️"
     type: danger
     position: below-navbar
   sidebar:

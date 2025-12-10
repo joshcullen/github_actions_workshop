@@ -240,7 +240,7 @@ jobs:
 
 # Use secrets and tokens
 
-While running scripts, users may wish to connect to a database, use and API, or push files to their own GitHub repository. Each of these applications often requires authorization of some kind through your own account credentials. These credentials and other sensitive information associated with your GitHub account or organization are called "[*secrets*](https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/security/secrets)". These *secrets* can only be read if explictly included in a GitHub Actions workflow and are encrypted, which helps minimize security risks. Similarly, a personal access token (PAT) is often required to authorize your GitHub account during normal activities (e.g., pushing to repo, installing R package from GitHub). This PAT can then be used within the `GITHUB_TOKEN` secret during a GitHub Action workflow to authorize changes to your repo (such as pushing newly created files).
+While running scripts, users may wish to connect to a database, use an API, or push files to their own GitHub repository. Each of these applications often requires authorization of some kind through your own account credentials. These credentials and other sensitive information associated with your GitHub account or organization are called "[*secrets*](https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/security/secrets)". These *secrets* can only be read if explictly included in a GitHub Actions workflow and are encrypted, which helps minimize security risks. Similarly, a personal access token (PAT) is often required to authorize your GitHub account during normal activities (e.g., pushing to repo, installing R package from GitHub). This PAT can then be used within the `GITHUB_TOKEN` secret during a GitHub Action workflow to authorize changes to your repo (such as pushing newly created files).
 
 ## Secrets
 
@@ -347,7 +347,7 @@ After doing this, we now need to define the scope of this token, which specifies
 ![Screenshot showing options for defining scope of PAT.](img/gh_pat_scope.png){#fig-pat-scope}
 
 <br>
-Once you chosen the scope of the PAT, scroll down to the bottom of the page and click the green "Generate token" button. You'll then be brought to a page that shows your generated PAT. You need to copy and store this token somewhere safe if wanting to use it in other environments (such as RStudio, Positron, VS Code, etc) because it will not be visible again once you leave this page. If you refresh or revisit this page, you'll only see that the PAT exists and the expiration date. If needed, you can always delete and generate a new token.
+Once you've chosen the scope of the PAT, scroll down to the bottom of the page and click the green "Generate token" button. You'll then be brought to a page that shows your generated PAT. You need to copy and store this token somewhere safe if wanting to use it in other environments (such as RStudio, Positron, VS Code, etc) because it will not be visible again once you leave this page. If you refresh or revisit this page, you'll only see that the PAT exists and the expiration date. If needed, you can always delete and generate a new token.
 
 ![Screenshot showing that the PAT value is no longer visible, but exists.](img/gh_new_token.png){#fig-new-token}
 

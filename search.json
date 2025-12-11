@@ -140,7 +140,7 @@
     "href": "validate_example.html#report-for-pixel-level-data",
     "title": "Data validation example",
     "section": "Report for pixel-level data",
-    "text": "Report for pixel-level data\n\n\n\n\n\n\n\n\nPointblank Validation\n\n\n\n\n[2025-12-11|14:58:57]\n\n\ndata frame Gulf state daily Chl-a valuesWARN 0.01 STOP 0.25 NOTIFY 0.05\n\n\n\n\n\n\nSTEP\nCOLUMNS\nVALUES\nTBL\nEVAL\nUNITS\nPASS\nFAIL\nW\nS\nN\nEXT\n\n\n\n\n\n\n1\n\n\n\n\ncol_vals_not_null\n\n       \n\n\n col_vals_not_null()\n\n\n▮chla\n\n—\n\n\n      \n\n\n✓\n29504\n3904\n0.13232\n25600\n0.86768\n●\n●\n●\n\n\nCSV\n\n\n\n\n\n\n2\n\n\n\n\ncol_vals_between\n\n     \n\n\n col_vals_between()\n\n\n▮chla\n\n\n[0.001, 100]\n\n\n\n      \n\n\n✓\n29504\n29504\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n3\n\n\n\n\ncol_vals_lt\n\n     \n\n\n col_vals_lt()\n\n\n▮chla\n\n\n30\n\n\n\n      \n\n\n✓\n29504\n29460\n0.99\n44\n0.01\n○\n○\n○\n\n\nCSV\n\n\n\n\n\n2025-12-11 14:58:57 EST &lt; 1 s 2025-12-11 14:58:57 EST",
+    "text": "Report for pixel-level data\n\n\n\n\n\n\n\n\nPointblank Validation\n\n\n\n\n[2025-12-11|16:28:57]\n\n\ndata frame Gulf state daily Chl-a valuesWARN 0.01 STOP 0.25 NOTIFY 0.05\n\n\n\n\n\n\nSTEP\nCOLUMNS\nVALUES\nTBL\nEVAL\nUNITS\nPASS\nFAIL\nW\nS\nN\nEXT\n\n\n\n\n\n\n1\n\n\n\n\ncol_vals_not_null\n\n       \n\n\n col_vals_not_null()\n\n\n▮chla\n\n—\n\n\n      \n\n\n✓\n29504\n3904\n0.13232\n25600\n0.86768\n●\n●\n●\n\n\nCSV\n\n\n\n\n\n\n2\n\n\n\n\ncol_vals_between\n\n     \n\n\n col_vals_between()\n\n\n▮chla\n\n\n[0.001, 100]\n\n\n\n      \n\n\n✓\n29504\n29504\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n3\n\n\n\n\ncol_vals_lt\n\n     \n\n\n col_vals_lt()\n\n\n▮chla\n\n\n30\n\n\n\n      \n\n\n✓\n29504\n29460\n0.99\n44\n0.01\n○\n○\n○\n\n\nCSV\n\n\n\n\n\n2025-12-11 16:28:57 EST &lt; 1 s 2025-12-11 16:28:58 EST",
     "crumbs": [
       "Examples",
       "Data validation"
@@ -151,7 +151,7 @@
     "href": "validate_example.html#report-for-state-level-data",
     "title": "Data validation example",
     "section": "Report for state-level data",
-    "text": "Report for state-level data\n\n\n\n\n\n\n\n\nPointblank Validation\n\n\n\n\n[2025-12-11|14:58:57]\n\n\ndata frame Gulf state means for daily Chl-a dataWARN 0.20 STOP 0.25 NOTIFY 0.20\n\n\n\n\n\n\nSTEP\nCOLUMNS\nVALUES\nTBL\nEVAL\nUNITS\nPASS\nFAIL\nW\nS\nN\nEXT\n\n\n\n\n\n\n1\n\n\n\n\ncol_vals_not_null\n\n       \n\n\n col_vals_not_null()\n\n\n▮chla\n\n—\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n2\n\n\n\n\ncol_vals_between\n\n     \n\n\n col_vals_between()\n\n\n▮chla\n\n\n[2, 20]\n\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n3\n\n\n\n\ncol_vals_lt\n\n     \n\n\n col_vals_lt()\n\n\n▮chla\n\n\n20\n\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n2025-12-11 14:58:57 EST &lt; 1 s 2025-12-11 14:58:58 EST",
+    "text": "Report for state-level data\n\n\n\n\n\n\n\n\nPointblank Validation\n\n\n\n\n[2025-12-11|16:28:58]\n\n\ndata frame Gulf state means for daily Chl-a dataWARN 0.20 STOP 0.25 NOTIFY 0.20\n\n\n\n\n\n\nSTEP\nCOLUMNS\nVALUES\nTBL\nEVAL\nUNITS\nPASS\nFAIL\nW\nS\nN\nEXT\n\n\n\n\n\n\n1\n\n\n\n\ncol_vals_not_null\n\n       \n\n\n col_vals_not_null()\n\n\n▮chla\n\n—\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n2\n\n\n\n\ncol_vals_between\n\n     \n\n\n col_vals_between()\n\n\n▮chla\n\n\n[2, 20]\n\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n\n3\n\n\n\n\ncol_vals_lt\n\n     \n\n\n col_vals_lt()\n\n\n▮chla\n\n\n20\n\n\n\n      \n\n\n✓\n5\n5\n1\n0\n0\n○\n○\n○\n—\n\n\n\n2025-12-11 16:28:58 EST &lt; 1 s 2025-12-11 16:28:58 EST",
     "crumbs": [
       "Examples",
       "Data validation"
@@ -162,7 +162,7 @@
     "href": "basics.html",
     "title": "Basics",
     "section": "",
-    "text": "GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.1 Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).",
+    "text": "GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.1 Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).\n\n\n\n\n\n\nNote\n\n\n\nGitHub Actions run in the cloud on a fresh virtual machine (VM) each time it’s triggered. While this is very useful for ensuring code reproducibility, the lack of persistent storage means that all software and files need to be installed or loaded every time prior to performing any tasks. Keep this in mind when creating your own workflows and treat your GitHub repo (or some external database or cloud bucket) as your sources of file storage since the VM will be wiped at the completion of every GitHub Actions workflow.",
     "crumbs": [
       "Basics"
     ]
@@ -172,7 +172,7 @@
     "href": "basics.html#summary",
     "title": "Basics",
     "section": "",
-    "text": "GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.1 Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).",
+    "text": "GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.1 Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).\n\n\n\n\n\n\nNote\n\n\n\nGitHub Actions run in the cloud on a fresh virtual machine (VM) each time it’s triggered. While this is very useful for ensuring code reproducibility, the lack of persistent storage means that all software and files need to be installed or loaded every time prior to performing any tasks. Keep this in mind when creating your own workflows and treat your GitHub repo (or some external database or cloud bucket) as your sources of file storage since the VM will be wiped at the completion of every GitHub Actions workflow.",
     "crumbs": [
       "Basics"
     ]

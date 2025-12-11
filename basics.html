@@ -492,6 +492,19 @@ cookieconsent.run({
 <section id="summary" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="summary"><span class="header-section-number">1</span> Summary</h2>
 <p>GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>GitHub Actions run in the cloud on a fresh virtual machine (VM) each time it’s triggered. While this is very useful for ensuring code reproducibility, the lack of persistent storage means that all software and files need to be installed or loaded every time prior to performing any tasks. Keep this in mind when creating your own workflows and treat your GitHub repo (or some external database or cloud bucket) as your sources of file storage since the VM will be wiped at the completion of every GitHub Actions workflow.</p>
+</div>
+</div>
 </section>
 <section id="features" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="features"><span class="header-section-number">2</span> Features</h2>

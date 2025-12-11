@@ -297,8 +297,8 @@ cookieconsent.run({
       </button>
     </div>
   </nav>
-  <div id="quarto-announcement" data-announcement-id="a06658dc42028c65504b96410ea335fb" class="alert alert-danger hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>⚠️<strong>Note</strong> - recordings will be added after completion of workshop⚠️</p>
+  <div id="quarto-announcement" data-announcement-id="02947e4cdde71b5afb355d088ecfbd5b" class="alert alert-success hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Recording of the workshop is now available.</p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -469,7 +469,7 @@ cookieconsent.run({
 </header>
 
 
-<p>This website provides instructional materials for understanding and implementing GitHub Actions workflows to automate tasks in the cloud across different programming languages.</p>
+<p>This website provides instructional materials for understanding and implementing GitHub Actions workflows to automate tasks in the cloud across different programming languages. <span style="color: #e95420;"><strong>The recording of this workshop can be found <a href="https://youtu.be/WMwLGE_DxC0">here</a> on YouTube.</strong></span></p>
 <p><img src="GitHub Actions diagram.png" class="img-fluid"></p>
 <p>This workshop assumes (at minimum):</p>
 <ol type="1">
@@ -569,7 +569,7 @@ cookieconsent.run({
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/joshcullen\.github\.io\/github_actions_workshop\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

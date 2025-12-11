@@ -8,8 +8,8 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "⚠️**Note** - recordings will be added after completion of workshop⚠️"
-    type: danger
+    content: "Recording of the workshop is now available."
+    type: success
     position: below-navbar
   sidebar:
     style: "docked"

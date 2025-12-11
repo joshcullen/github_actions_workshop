@@ -2,18 +2,16 @@
 title: "Automate Tasks with GitHub Actions"
 ---
 
-This website provides instructional materials for understanding and implementing GitHub Actions workflows to automate tasks in the cloud across different programming languages.
+This website provides instructional materials for understanding and implementing GitHub Actions workflows to automate tasks in the cloud across different programming languages. [**The recording of this workshop can be found [here](https://youtu.be/WMwLGE_DxC0) on YouTube.**]{style="color: #e95420;"}
 
-![](GitHub Actions diagram.png)
+![](GitHub%20Actions%20diagram.png)
 
-This workshop assumes (at minimum): 
+This workshop assumes (at minimum):
 
-1. you have basic coding experience (regardless of programming language)
-2. you have already created a GitHub account
-3. you have basic experience using Git and GitHub for version control
+1.  you have basic coding experience (regardless of programming language)
+2.  you have already created a GitHub account
+3.  you have basic experience using Git and GitHub for version control
 
 For more information on using Git and GitHub (particularly for R users), I recommend the [Happy Git and GitHub for the useR](https://happygitwithr.com) e-book created by Jenny Bryan. While there are R-specific suggestions for using Git from RStudio, much of the material is agnostic of programming language. Additionally, you may refer to this recording of a [Git and GitHub with RStudio workshop](https://www.youtube.com/watch?v=6TTo6CAx7mk) I led in 2022.
 
 Please submit any questions on the [Discussions](https://github.com/joshcullen/github_actions_workshop/discussions) page of the GitHub repo hosting this website and associated materials, which may serve as a forum to ask questions not covered in these materials.
-
-

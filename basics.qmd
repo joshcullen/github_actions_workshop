@@ -11,6 +11,10 @@ number-sections: true
 
 GitHub Actions is a platform comprised of modular elements to automate workflows for a range of tasks, from project management in a GitHub repository to operationalized tools that run on a schedule.^[More information can be found on [GitHub's website](https://docs.github.com/en/actions/get-started/understand-github-actions).] Moreover, GitHub Actions workflows can be triggered by different events in your repo (e.g., a pushed commit, the completion of another workflow, a successful software build).
 
+::: {.callout-note}
+GitHub Actions run in the cloud on a fresh virtual machine (VM) each time it's triggered. While this is very useful for ensuring code reproducibility, the lack of persistent storage means that all software and files need to be installed or loaded every time prior to performing any tasks. Keep this in mind when creating your own workflows and treat your GitHub repo (or some external database or cloud bucket) as your sources of file storage since the VM will be wiped at the completion of every GitHub Actions workflow.
+:::
+
 ## Features
 
 Here's a list of nice features that are available within GitHub Actions that can improve software development (via continuous integration/continuous deployment; CI/CD) but also ensure reproducible and open science:

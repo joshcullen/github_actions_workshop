@@ -19,9 +19,10 @@ jobs:
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache: always
+        cache-version: 2  # Bump this number to invalidate the old cache
         packages: |
           any::glue
-          any::terra@1.9.1
+          any::terra@1.9-1
           any::ncdf4
       
     - name: Download and export SST

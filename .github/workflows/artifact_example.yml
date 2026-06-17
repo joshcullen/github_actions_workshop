@@ -22,7 +22,7 @@ jobs:
         cache-version: 3  # Bump this number to invalidate the old cache
         packages: |
           any::glue
-          rspatial/terra
+          cran::terra@1.9-1
           any::ncdf4
       
     - name: Download and export SST

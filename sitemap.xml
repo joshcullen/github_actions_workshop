@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/basics.html</loc>
-    <lastmod>2026-09-20T14:20:50.433Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Anatomy_of_GHA_YAML.html</loc>
-    <lastmod>2026-09-20T14:20:50.409Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Config_events.html</loc>
-    <lastmod>2026-09-20T14:20:50.409Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/std_report.html</loc>
-    <lastmod>2026-09-20T14:20:50.433Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_scripts.html</loc>
-    <lastmod>2026-09-20T14:20:49.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/R_pkg_check.html</loc>
-    <lastmod>2026-09-20T14:20:49.935Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/index.html</loc>
-    <lastmod>2026-09-20T14:20:49.963Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/index.html</loc>
-    <lastmod>2026-09-20T14:20:50.433Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/RAMP_example_dash.html</loc>
-    <lastmod>2026-09-20T14:20:50.408Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_multiple_jobs.html</loc>
-    <lastmod>2026-09-20T14:20:49.936Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Workflow_artifacts.html</loc>
-    <lastmod>2026-09-20T14:20:49.936Z</lastmod>
-  </url>
-  <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/validate_example.html</loc>
-    <lastmod>2026-09-20T14:20:50.433Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/index.html</loc>
-    <lastmod>2026-09-20T14:20:50.422Z</lastmod>
+    <lastmod>2026-09-22T15:06:50.793Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Adding_more_steps.html</loc>
-    <lastmod>2026-09-20T14:20:50.408Z</lastmod>
+    <lastmod>2026-09-22T15:06:50.773Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/index.html</loc>
+    <lastmod>2026-09-22T15:06:50.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/RAMP_example_dash.html</loc>
+    <lastmod>2026-09-22T15:06:50.773Z</lastmod>
   </url>
   <url>
     <loc>https://joshcullen.github.io/github_actions_workshop/LICENSE.html</loc>
-    <lastmod>2026-09-20T14:20:50.407Z</lastmod>
+    <lastmod>2026-09-22T15:06:50.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Workflow_artifacts.html</loc>
+    <lastmod>2026-09-22T15:06:50.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_multiple_jobs.html</loc>
+    <lastmod>2026-09-22T15:06:50.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/index.html</loc>
+    <lastmod>2026-09-22T15:06:50.398Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/Run_scripts.html</loc>
+    <lastmod>2026-09-22T15:06:50.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Complex_GHAs/R_pkg_check.html</loc>
+    <lastmod>2026-09-22T15:06:50.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/index.html</loc>
+    <lastmod>2026-09-22T15:06:50.793Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/basics.html</loc>
+    <lastmod>2026-09-22T15:06:50.793Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/std_report.html</loc>
+    <lastmod>2026-09-22T15:06:50.793Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Config_events.html</loc>
+    <lastmod>2026-09-22T15:06:50.773Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joshcullen.github.io/github_actions_workshop/Simple_GHAs/Anatomy_of_GHA_YAML.html</loc>
+    <lastmod>2026-09-22T15:06:50.773Z</lastmod>
   </url>
 </urlset>
